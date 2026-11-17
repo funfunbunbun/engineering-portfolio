@@ -1,4 +1,5 @@
 import type { ProjectId } from "./projects";
+import { advancedContext } from "./advancedContext";
 export type Figure = {
   file: string;
   alt: string;
@@ -13,6 +14,7 @@ export type ProjectContext = {
   figures: Figure[];
 };
 export const projectContext: Record<ProjectId, ProjectContext> = {
+  ...advancedContext,
   "vehicle-velocity": {
     setting: "Final-year computer-vision project",
     background:

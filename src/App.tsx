@@ -14,6 +14,8 @@ import Classroom from "./components/Classroom";
 import GuidedTour from "./components/GuidedTour";
 import VehicleDemo from "./components/VehicleDemo";
 import DemoEmbed from "./components/DemoEmbed";
+import { WeatherLab, NeuralLab } from "./components/IntelligentLabs";
+import AlgorithmExcerpt from "./components/AlgorithmExcerpt";
 import AdditionalDemo from "./components/AdditionalDemos";
 import ProjectEvidence, {
   ProjectBackground,
@@ -120,6 +122,8 @@ function ProjectCards({ all = false }: { all?: boolean }) {
             "Mechanical Design",
             "Software",
             "Experimental Science",
+            "Robotics",
+            "Intelligent Systems",
           ].map((c) => (
             <button
               key={c}
@@ -437,6 +441,12 @@ function DetailContent({ project }: { project: Project }) {
       </div>
       <GuidedTour project={project} />
       <div className="demo-shell">
+        {project.id === "weather-expert" && (
+          <WeatherLab engineering={engineering} />
+        )}
+        {project.id === "neural-classifiers" && (
+          <NeuralLab engineering={engineering} />
+        )}
         <AdditionalDemo id={project.id} engineering={engineering} />
         {project.status === "Documented project" && (
           <div className="documented-intro">
@@ -511,6 +521,7 @@ function DetailContent({ project }: { project: Project }) {
         )}
       </div>
       <ProjectEvidence id={project.id} />
+      <AlgorithmExcerpt id={project.id} />
       <div className="project-explanation">
         <div>
           <span className="eyebrow">THE QUESTION</span>

@@ -391,6 +391,123 @@ export function ProjectVisual({
           </text>
         </g>
       )}
+      {(id === "robot-recycling" || id === "planting-trajectory") && (
+        <g stroke="currentColor" strokeWidth="3">
+          <path d="M95 260h130m-65 0V140l100-70 100 90-35 50" fill="none" />
+          <circle cx="160" cy="140" r="17" fill="#24465d" />
+          <circle cx="260" cy="70" r="17" fill="#24465d" />
+          <circle cx="360" cy="160" r="13" fill="#24465d" />
+          <path
+            d="m315 205 18 20 24-20m-24 20v18"
+            stroke="#a6d2df"
+            fill="none"
+          />
+          {id === "robot-recycling" ? (
+            <>
+              <rect x="400" y="210" width="65" height="55" fill="#284b60" />
+              <rect x="480" y="210" width="65" height="55" fill="#35584f" />
+              <text
+                x="405"
+                y="192"
+                stroke="none"
+                fill="currentColor"
+                fontSize="9"
+                fontFamily="monospace"
+              >
+                SORT / MATERIAL
+              </text>
+            </>
+          ) : (
+            <>
+              <path
+                d="M240 250q65-170 150-100t140 95"
+                stroke="#add1bb"
+                strokeDasharray="6 7"
+                fill="none"
+              />
+              <path d="M390 245V140h35v105" fill="#5d705e" opacity=".6" />
+            </>
+          )}
+          <text
+            x="75"
+            y="36"
+            stroke="none"
+            fill="currentColor"
+            fontSize="10"
+            fontFamily="monospace"
+          >
+            SENSE / PLAN / MOVE
+          </text>
+        </g>
+      )}
+      {id === "weather-expert" && (
+        <g stroke="currentColor">
+          <path
+            d="M170 165c-45 0-40-62 4-64 9-55 95-50 103-5 50-25 92 49 47 69H170Z"
+            fill="#385b72"
+            strokeWidth="2"
+          />
+          <path
+            d="m190 190-13 25m54-25-13 25m54-25-13 25m54-25-13 25"
+            stroke="#a6d3e9"
+            strokeWidth="3"
+          />
+          <rect x="390" y="80" width="115" height="150" rx="5" fill="#173144" />
+          <path
+            d="M407 110h75m-75 26h55m-55 26h70m-70 26h44"
+            opacity=".7"
+            strokeWidth="2"
+          />
+          <path d="M340 145h35m-8-8 8 8-8 8" />
+          <text
+            x="95"
+            y="280"
+            fill="currentColor"
+            stroke="none"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            OFFLINE / EXPLAINABLE RULE SUPPORT
+          </text>
+        </g>
+      )}
+      {(id === "sentiment-analysis" || id === "neural-classifiers") && (
+        <g stroke="currentColor">
+          <g opacity=".4">
+            {[80, 160, 240].map((y) =>
+              [60, 130, 200, 270].map((end) => (
+                <path key={`${y}-${end}`} d={`M175 ${y} 300 ${end}`} />
+              )),
+            )}
+            {[60, 130, 200, 270].map((y) =>
+              [110, 220].map((end) => (
+                <path key={`${y}-${end}`} d={`M300 ${y} 440 ${end}`} />
+              )),
+            )}
+          </g>
+          {[80, 160, 240].map((y) => (
+            <circle key={y} cx="175" cy={y} r="16" fill="#6b98b3" />
+          ))}
+          {[60, 130, 200, 270].map((y) => (
+            <circle key={y} cx="300" cy={y} r="17" fill="#82a8bf" />
+          ))}
+          {[110, 220].map((y) => (
+            <circle key={y} cx="440" cy={y} r="20" fill="#91b6a8" />
+          ))}
+          <text
+            x="85"
+            y="30"
+            fill="currentColor"
+            stroke="none"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            {id === "sentiment-analysis"
+              ? "TEXT → FEATURES → CLASSIFIER"
+              : "INPUTS → WEIGHTS → DECISION"}
+          </text>
+        </g>
+      )}
       {id === "battery-study" && (
         <g stroke="currentColor" strokeWidth="2">
           <rect x="180" y="90" width="240" height="155" rx="9" fill="#1e3b50" />

@@ -49,7 +49,7 @@ try {
     .fill("zzzz-no-match");
   await page.getByRole("heading", { name: "No matching projects." }).waitFor();
   await page.getByRole("button", { name: "Clear filters" }).click();
-  assert.equal(await page.locator(".project-card").count(), 11);
+  assert.equal(await page.locator(".project-card").count(), 16);
   await open("projects/smart-classroom");
   await page.getByRole("slider", { name: /Temperature/ }).press("End");
   await page.getByText("Running", { exact: true }).waitFor();
@@ -166,6 +166,11 @@ try {
       "projects/atm-interface",
       "projects/spring-study",
       "projects/battery-study",
+      "projects/robot-recycling",
+      "projects/planting-trajectory",
+      "projects/weather-expert",
+      "projects/sentiment-analysis",
+      "projects/neural-classifiers",
       "experience",
       "teaching",
       "about",

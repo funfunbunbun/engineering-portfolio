@@ -1,4 +1,5 @@
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
+import { contentRisks } from "./public-policy.mjs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -33,7 +34,13 @@ async function check(directory) {
         failures.push(`Unexpected public file: ${path.relative(root, file)}`);
         continue;
       }
+      if ((await stat(file)).size > 2_000_000) {
+        failures.push(`Oversized public text asset: ${relative}`);
+        continue;
+      }
       const content = await readFile(file, "utf8");
+      for (const risk of contentRisks(content))
+        failures.push(`${risk}: ${relative}`);
       if (
         /[A-Z]:[\\/]|OneDrive|Projects Folder|BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[A-Z0-9]{16}/.test(
           content,

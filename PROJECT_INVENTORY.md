@@ -4,7 +4,7 @@ The user identified the academic report folder and explicitly expanded the portf
 
 Independent browser demos have been implemented at `projects/fpga-pwm-fan-controller/` and `projects/plc-hmi-sorting-machine/`. Each has its own Git history and model tests; neither contains original project material. The portfolio includes explicit snapshots of only four demo files from each repository.
 
-The website now includes eleven academic project pages. The original illustration style is retained, with report-derived figures added separately to the detail pages. Proposed applications are distinguished from documented laboratory use.
+The website now includes sixteen academic project pages. The original illustration style is retained, with report-derived figures added separately to the detail pages. Proposed applications are distinguished from documented laboratory use.
 
 | Allowed project | Status |
 | --- | --- |
@@ -30,3 +30,15 @@ The website now includes eleven academic project pages. The original illustratio
 | Aluminium–alkaline battery | Pre-university chemistry report; research context without construction instructions |
 
 PROTON achievement, tutoring, clubs, and industrial training appear in separate experience/tutoring sections. The user confirmed the PROTON 3rd-place result and contributor role; no award year is inferred. The [publication review](./PUBLICATION_REVIEW.md) records the exact public scope and media selection.
+
+## Robotics and intelligent-systems additions
+
+| Project | Evidence and public presentation |
+| --- | --- |
+| Robotic recycling cell | Robotics mini-project report; two high-level diagrams; symbolic transform example without real robot values |
+| Paddy-planting trajectory | Robotics assignment report; academic simulation plot; generic interpolation example |
+| Weather expert system | Expert-system report; offline positive certainty-factor combination demo; no API access or original application screenshots |
+| Sentiment analysis | Report plus bounded static model/preprocessing inspection; pipeline pseudocode; no review records, models, or data |
+| Neural classifiers | Mini-project report; perceptron architecture; fixed-weight AND demo; no original training data or learned parameters |
+
+The five new independent repositories contain only safe summaries, selected figures, and adapted algorithm examples. They do not contain the original applications or their histories. See [the code-publication policy](./CODE_PUBLICATION_POLICY.md).

@@ -50,6 +50,26 @@
       "file": "assets/reviewed/atm-flowchart.webp",
       "sha256": "94f961edbe53321c6efe2fe2da9a12bb3c86e4cb5adeecfd0ff270cf2fd57408",
       "bytes": 15976
+    },
+    {
+      "file": "assets/reviewed/robot-sorting-flow.webp",
+      "sha256": "1ac84c3a5ae5e4283b884ae918b982e03dca2aa330982c0939c7f133709ed75b",
+      "bytes": 29818
+    },
+    {
+      "file": "assets/reviewed/robot-system-diagram.webp",
+      "sha256": "b7f986365f5cd25f52ee040f9b5102808ce297e69ae1e8e0a2ed4420d91115f5",
+      "bytes": 14650
+    },
+    {
+      "file": "assets/reviewed/planting-simulation.webp",
+      "sha256": "79246f882f50422558a7cd574bf19389bb13de9b1d8f20219b6fac1718ae674a",
+      "bytes": 28664
+    },
+    {
+      "file": "assets/reviewed/perceptron-architecture.webp",
+      "sha256": "8a549d4d75d79d22ee5732b21f54b9c4c8bcc24c9c8556445fec2c33e04c8c52",
+      "bytes": 7590
     }
   ]
 }

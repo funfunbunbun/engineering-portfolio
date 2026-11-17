@@ -97,8 +97,8 @@ export default function Experience() {
           </p>
           <p>
             Contributed to a team case-study effort connecting engineering
-            context with automotive strategy. Our case studies explored
-            EV adoption and digital transformation in automotive retail.
+            context with automotive strategy. Our case studies explored EV
+            adoption and digital transformation in automotive retail.
           </p>
           <div className="tags">
             <span>Case analysis</span>
@@ -197,9 +197,8 @@ export function Teaching() {
             why an answer works.
           </p>
           <p>
-            My subject focus includes
-            secondary-school mathematics, additional mathematics, science, and
-            STPM Mathematics (T).
+            My subject focus includes secondary-school mathematics, additional
+            mathematics, science, and STPM Mathematics (T).
           </p>
         </div>
         <div

@@ -1,4 +1,5 @@
 import { additionalProjects } from "./additionalProjects";
+import { advancedProjects } from "./advancedProjects";
 
 export type ProjectId =
   | "vehicle-velocity"
@@ -11,7 +12,12 @@ export type ProjectId =
   | "trolley-cad"
   | "atm-interface"
   | "spring-study"
-  | "battery-study";
+  | "battery-study"
+  | "robot-recycling"
+  | "planting-trajectory"
+  | "weather-expert"
+  | "sentiment-analysis"
+  | "neural-classifiers";
 export type Project = {
   id: ProjectId;
   number: string;
@@ -153,4 +159,8 @@ const coreProjects: Project[] = [
   },
 ];
 
-export const projects: Project[] = [...coreProjects, ...additionalProjects];
+export const projects: Project[] = [
+  ...coreProjects,
+  ...additionalProjects,
+  ...advancedProjects,
+];

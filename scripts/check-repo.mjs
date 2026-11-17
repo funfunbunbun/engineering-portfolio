@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { contentRisks, prohibitedFile } from "./public-policy.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const repos = [root];
@@ -44,6 +45,8 @@ for (const repo of repos) {
     .filter(Boolean);
   for (const name of names) {
     count++;
+    if (prohibitedFile.test(name))
+      problems.push(`Prohibited original/data/model file: ${name}`);
     if (
       /(?:^|\/)(?:\.env(?:\..*)?|\.tools|node_modules|private|unapproved)(?:\/|$)|\.(?:pdf|mp4|pem|key|log)$/i.test(
         name,
@@ -59,6 +62,7 @@ for (const repo of repos) {
       continue;
     }
     const text = data.toString("utf8");
+    for (const risk of contentRisks(text)) problems.push(`${risk}: ${name}`);
     if (
       /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[A-Z0-9]{16}|sk-[A-Za-z0-9_-]{35,}/.test(
         text,

@@ -1,0 +1,324 @@
+.confidence-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  padding: 0 30px 30px;
+  align-items: center;
+}
+.confidence-control {
+  margin: 18px 0 25px;
+}
+.confidence-control label {
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.confidence-control output {
+  font-family: monospace;
+  color: #235d82;
+}
+.confidence-control > span {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--muted);
+}
+.confidence-inputs > p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+.confidence-result {
+  background: #1b3345;
+  color: #c4e2f5;
+  padding: 30px;
+  text-align: center;
+  border-radius: 4px;
+}
+.confidence-result .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.confidence-result > strong {
+  font-size: 75px;
+  font-family: monospace;
+  font-weight: 400;
+  display: block;
+  margin: 20px 0;
+  letter-spacing: -5px;
+}
+.confidence-result > p {
+  font-size: 10px;
+  color: #adc8da;
+  margin: 20px 0 0;
+}
+.confidence-meter {
+  height: 5px;
+  background: #3f5b6d;
+  text-align: left;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.confidence-meter > span {
+  display: block;
+  background: #a0d2bb;
+  height: 100%;
+}
+.neural-layout {
+  display: grid;
+  grid-template-columns: 110px 1fr 100px;
+  align-items: center;
+  gap: 25px;
+  padding: 0 30px 25px;
+}
+.binary-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.binary-input {
+  background: #edf3f7;
+  border: 1px solid #c4d5e1;
+  border-radius: 3px;
+  color: #2b5169;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 7px;
+}
+.binary-input span {
+  font-size: 10px;
+}
+.binary-input strong {
+  font-family: monospace;
+  font-size: 28px;
+  font-weight: 400;
+}
+.binary-input small {
+  font-size: 8px;
+  color: #5a798e;
+}
+.binary-input.on {
+  background: #d9eade;
+  border-color: #a5cbb2;
+}
+.neural-network {
+  display: block;
+  width: 100%;
+  background: #1a3245;
+  border-radius: 4px;
+  color: #8ebbd4;
+  min-height: 215px;
+  padding: 15px;
+}
+.neural-network circle {
+  fill: #244d69;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.neural-result {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.neural-result > span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.neural-result strong {
+  font-family: monospace;
+  font-size: 55px;
+  color: #376b56;
+  font-weight: 400;
+}
+.neural-result small {
+  font-size: 9px;
+  color: var(--muted);
+}
+.lab-explanation {
+  padding: 0 30px 25px;
+  margin: 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.algorithm-section {
+  margin-top: 45px;
+  border-top: 1px solid var(--line);
+  padding-top: 35px;
+}
+.algorithm-section h2 {
+  font-size: 29px;
+  max-width: 500px;
+  line-height: 1.2;
+}
+.algorithm-section .section-heading > p {
+  font-size: 11px;
+  max-width: 410px;
+}
+.algorithm-section .eyebrow {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.algorithm-block {
+  background: #172c3d;
+  color: #c4deef;
+  border: 1px solid #335469;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.algorithm-block > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #ffffff16;
+  padding: 13px 22px;
+}
+.algorithm-block > div > span {
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+.algorithm-block button {
+  font-size: 10px;
+  color: #c8dfed;
+  border: 1px solid #526f84;
+  background: transparent;
+  border-radius: 3px;
+  padding: 8px 12px;
+}
+.algorithm-block button:hover {
+  background: #294b62;
+}
+.algorithm-block pre {
+  font-size: 12px;
+  line-height: 1.9;
+  padding: 25px;
+  margin: 0;
+  overflow-x: auto;
+  max-width: 100%;
+  tab-size: 2;
+}
+.algorithm-note {
+  font-size: 10px;
+  color: var(--muted);
+  margin: 15px 0 0;
+  max-width: 850px;
+  line-height: 1.8;
+}
+.filters {
+  row-gap: 5px;
+}
+@media (max-width: 800px) {
+  .confidence-layout {
+    gap: 25px;
+  }
+  .neural-layout {
+    grid-template-columns: 85px 1fr 80px;
+    gap: 15px;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .neural-network {
+    padding: 10px;
+    min-height: 200px;
+  }
+  .algorithm-section h2 {
+    font-size: 27px;
+  }
+  .algorithm-section .section-heading {
+    gap: 30px;
+  }
+  .algorithm-block pre {
+    font-size: 11px;
+  }
+  .confidence-result {
+    padding: 25px;
+  }
+}
+@media (max-width: 620px) {
+  .confidence-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 0 20px 25px;
+  }
+  .confidence-control {
+    margin-top: 10px;
+  }
+  .confidence-result {
+    padding: 23px;
+  }
+  .confidence-result > strong {
+    font-size: 62px;
+    margin: 15px 0;
+  }
+  .confidence-result > p {
+    margin-top: 15px;
+  }
+  .neural-layout {
+    grid-template-columns: 1fr 90px;
+    padding: 0 20px 20px;
+    gap: 20px;
+  }
+  .binary-inputs {
+    grid-column: 1/-1;
+    flex-direction: row;
+    gap: 15px;
+  }
+  .binary-input {
+    flex: 1;
+    padding: 12px;
+  }
+  .binary-input strong {
+    font-size: 25px;
+  }
+  .neural-network {
+    min-height: 170px;
+    padding: 5px;
+  }
+  .neural-result strong {
+    font-size: 47px;
+  }
+  .neural-result {
+    gap: 12px;
+  }
+  .lab-explanation {
+    padding: 0 20px 22px;
+    font-size: 10px;
+  }
+  .algorithm-section {
+    margin-top: 30px;
+    padding-top: 25px;
+  }
+  .algorithm-section h2 {
+    font-size: 27px;
+    margin-top: 14px;
+  }
+  .algorithm-section .section-heading > p {
+    font-size: 11px;
+  }
+  .algorithm-block > div {
+    padding: 12px 15px;
+    gap: 10px;
+  }
+  .algorithm-block > div > span {
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+  .algorithm-block button {
+    font-size: 9px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+  .algorithm-block pre {
+    font-size: 10px;
+    padding: 18px;
+    line-height: 1.9;
+  }
+  .algorithm-note {
+    font-size: 9px;
+  }
+}
