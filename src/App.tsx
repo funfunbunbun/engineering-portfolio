@@ -86,7 +86,7 @@ function Footer() {
         <span>
           © {new Date().getFullYear()} {profile.name}
         </span>
-        <span>University projects · Educational simulations</span>
+        <span>Academic projects · Educational simulations</span>
         <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
           LinkedIn ↗
         </a>
@@ -221,7 +221,7 @@ function Home() {
             are better.
           </h1>
           <p>
-            I’m {profile.name}. Explore engineering through university projects
+            I’m {profile.name}. Explore engineering through academic projects
             you can see, understand, and interact with.
           </p>
           <div className="hero-actions">

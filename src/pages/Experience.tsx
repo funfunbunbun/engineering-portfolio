@@ -97,7 +97,7 @@ export default function Experience() {
           </p>
           <p>
             Contributed to a team case-study effort connecting engineering
-            context with automotive strategy. The supplied presentations explore
+            context with automotive strategy. Our case studies explored
             EV adoption and digital transformation in automotive retail.
           </p>
           <div className="tags">
@@ -105,11 +105,6 @@ export default function Experience() {
             <span>Teamwork</span>
             <span>Technical communication</span>
           </div>
-          <p className="source-note">
-            Placing and contributor role confirmed by Vinay. Presentation
-            materials cover the 2024 and 2025 challenges; the placing is not
-            assigned to a specific year here.
-          </p>
         </div>
       </section>
       <div className="experience-heading">
@@ -127,10 +122,8 @@ export default function Experience() {
             <h3>Digital design & verification learning</h3>
             <p className="timeline-subtitle">MOHE–Intel ELITE programme</p>
             <p>
-              The supplied training logbook records learning in Verilog,
-              simulation, testbenches, timing, verification, and teamwork. This
-              section describes the training themes rather than internal
-              assignments or company systems.
+              Structured technical learning in Verilog, simulation, testbenches,
+              timing, and verification, with teamwork throughout the training.
             </p>
             <div className="tags">
               <span>Verilog</span>
@@ -158,9 +151,9 @@ export default function Experience() {
           <div>
             <h3>EICC & STEM club involvement</h3>
             <p>
-              The supplied résumé records EICC membership and earlier Form 6
-              STEM Club involvement as a monitor and committee member. These are
-              historical activities; no current appointment is implied.
+              EICC membership and earlier Form 6 STEM Club involvement as a
+              monitor and committee member brought opportunities to contribute
+              to student activities and work with others.
             </p>
             <div className="tags">
               <span>Student community</span>
@@ -204,7 +197,7 @@ export function Teaching() {
             why an answer works.
           </p>
           <p>
-            The supplied tutoring archive includes materials for
+            My subject focus includes
             secondary-school mathematics, additional mathematics, science, and
             STPM Mathematics (T).
           </p>
