@@ -1,0 +1,18 @@
+node_modules/
+dist/
+coverage/
+.env*
+!.env.example
+*.pem
+*.key
+*.log
+Thumbs.db
+.DS_Store
+# Independent repositories are managed and committed separately.
+projects/
+# Local instructions and original brief are not public site content.
+AGENTS.md
+CODEX_UNIVERSITY_PORTFOLIO_BRIEF.md
+.agents/
+.codex/
+.aws/
