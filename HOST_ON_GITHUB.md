@@ -2,12 +2,15 @@
 
 GitHub Pages can serve this built HTML/CSS/JavaScript website. A public repository can use GitHub Free; a paid domain is unnecessary. See [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
 
-## Prepared destination
+## Published destination
 
 - Account: `funfunbunbun` (verified through the existing signed-in GitHub CLI).
 - New public repository: `engineering-portfolio`.
-- Expected website: `https://funfunbunbun.github.io/engineering-portfolio/` after successful publication.
-- The repository has not yet been created or uploaded. The site is not yet live.
+- Website: https://funfunbunbun.github.io/engineering-portfolio/
+- Demos: https://funfunbunbun.github.io/engineering-portfolio/#/demos
+- Public repository: https://github.com/funfunbunbun/engineering-portfolio
+- Published and verified on 2026-11-18. HTTPS is enforced; all 14 image checksums and all 16 demo-page layouts passed live checks.
+- Successful workflow: https://github.com/funfunbunbun/engineering-portfolio/actions/runs/44194757221
 
 Free Pages hosting uses a public repository, so both the source code and included images will be publicly readable. The original reports, ignored review tools, local source paths, and independent repositories are excluded.
 

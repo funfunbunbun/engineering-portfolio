@@ -2,6 +2,8 @@
 
 Vinay Vyraveraja's interactive university engineering portfolio.
 
+**[Live portfolio](https://funfunbunbun.github.io/engineering-portfolio/)** · **[Try all 16 demos](https://funfunbunbun.github.io/engineering-portfolio/#/demos)** · [Public source](https://github.com/funfunbunbun/engineering-portfolio)
+
 Contact: v.vinayx@outlook.com
 
 ## Run locally on this machine
@@ -74,7 +76,7 @@ npm run test:browser
 
 `test:browser` requires a running local preview and Microsoft Edge. Set `PORTFOLIO_URL` to test another local URL. It uses headless Edge and stores QA screenshots in the ignored tools folder.
 
-Validated on 2026-11-17 using Node.js v26.13.1:
+Validated and published on 2026-11-18 using Node.js v26.13.1:
 
 - TypeScript: passed.
 - Vitest: 23 tests passed, including the original interactions plus terminal validation, robot release accounting, trajectory/obstacle geometry, CAD reset, model unit conversions, and transparent word scoring. Five additional Node tests validate publication policy using synthetic values.
@@ -91,5 +93,7 @@ For a production preview after building, run `.\dev.ps1 -Preview` and open the U
 The selected route is free GitHub Pages on the user's own account. See [GitHub hosting instructions](./HOST_ON_GITHUB.md) and [the exact publication review](./PUBLICATION_REVIEW.md). The prepared workflow requires a manual trigger; a push alone does not publish. No remote upload or deployment occurs until the reviewed public scope is approved.
 
 Public publication was approved on 2026-11-18. Run `npm run check:history` before pushing; this reviews the text/image blobs in Git history without printing matched credential values. Original academic applications and independent repositories are excluded from publication.
+
+The first GitHub Pages deployment passed both build and deploy jobs. The live HTTPS page, compiled assets, all 14 image checksums, and all 16 demo pages were verified. The eight new workbenches and resets also passed on the live site. [Successful deployment](https://github.com/funfunbunbun/engineering-portfolio/actions/runs/44194757221). Future frontend changes require another manual workflow run; ordinary source pushes do not change the live site.
 
 Read [the selected-code policy](./CODE_PUBLICATION_POLICY.md) before adding more source. The original project applications, credentials/configuration, datasets, saved models, personal records, and hardware parameters remain private. The code shown publicly is an adapted explanation, not a bulk source export. Run `node scripts/browser-new-projects.mjs` against the production preview for focused robotics/intelligent-systems validation.

@@ -1,6 +1,6 @@
 # Deployment preparation — approval required
 
-The user selected GitHub Pages for a free personal portfolio. Follow [HOST_ON_GITHUB.md](./HOST_ON_GITHUB.md) for the current route. A manual-only Pages workflow has been prepared; no push or deployment has occurred yet.
+The user selected GitHub Pages for a free personal portfolio. The first public deployment completed successfully on 2026-11-18. Follow [HOST_ON_GITHUB.md](./HOST_ON_GITHUB.md) for the live links and future deployment steps. The workflow remains manual-only.
 
 ## Before either hosting option
 
