@@ -13,7 +13,7 @@ I’m Vinay Vyraveraja. I enjoy building practical engineering projects and expl
 - This repository holds the portfolio website and shared public content.
 - `src/data/profile.json` holds the approved display name, email, and short biography.
 - `projects/<project-slug>/` will hold independent Git repositories for confirmed university projects. This directory is ignored by the portfolio repository; each project has its own history and commits.
-- Project folders will be created after their academic source folders are identified. No original project files or media have been copied.
+- Independent project scaffolds now exist at `projects/fpga-pwm-fan-controller/` and `projects/plc-hmi-sorting-machine/`. Other source mappings are pending. No original project files or media have been copied.
 
 ## Current status
 
