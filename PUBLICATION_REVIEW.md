@@ -14,4 +14,15 @@
 - Review academic origin, rights, and privacy for each proposed asset. Listing a project does not approve publication of its source, report, data, or media.
 - Obtain explicit approval before configuring remotes, uploading, pushing, or deploying.
 
-No source material has been copied or published.
+## Current media manifest
+
+- Original SVG/CSS illustrations created for this portfolio.
+- Original browser simulation code and four-file snapshots from each of the two independent local demo repositories.
+- No academic reports, original firmware/programs, videos, photographs, recordings, measured results, or third-party media.
+- FYP recording and overlay integration remains disabled until individual approval.
+
+## Local validation completed
+
+TypeScript, six React/core tests, six standalone model tests, production build, and responsive browser checks passed. Public bundle and tracked-file pattern scans supplement review; they do not establish ownership or guarantee detection of every sensitive item.
+
+No original source material has been copied or published. No remotes, hosting, analytics, or deployment workflows are configured. See [deployment preparation](./DEPLOYMENT.md) for the human approval checklist and hosting options.

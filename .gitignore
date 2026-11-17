@@ -1,11 +1,17 @@
 node_modules/
 dist/
 coverage/
+.tools/
+test-results/
+playwright-report/
+.vite/
 .env*
 !.env.example
 *.pem
 *.key
 *.log
+*.pdf
+*.mp4
 Thumbs.db
 .DS_Store
 # Independent repositories are managed and committed separately.

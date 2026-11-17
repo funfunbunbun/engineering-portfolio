@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An educational PWM fan simulation by Vinay Vyraveraja."
+    />
+    <title>PWM Fan Signal Lab</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="heading">
+        <div>
+          <h1>Control the pulse.</h1>
+          <p>A digital signal. A different duty cycle.</p>
+        </div>
+        <button id="reset" class="ghost">Reset simulation</button>
+      </div>
+      <div class="lab">
+        <section class="fan-panel" aria-label="Conceptual fan illustration">
+          <div class="fan-housing">
+            <svg viewBox="0 0 220 220" aria-hidden="true">
+              <rect
+                x="12"
+                y="12"
+                width="196"
+                height="196"
+                rx="22"
+                fill="#233b4e"
+                stroke="#6c8da3"
+              />
+              <g fill="#91b3c8">
+                <circle cx="30" cy="30" r="4" />
+                <circle cx="190" cy="30" r="4" />
+                <circle cx="30" cy="190" r="4" />
+                <circle cx="190" cy="190" r="4" />
+              </g>
+              <circle
+                cx="110"
+                cy="110"
+                r="82"
+                fill="#122736"
+                stroke="#52758d"
+              />
+              <g id="fan-blades" fill="#96bfd5" transform-origin="110 110">
+                <path d="M108 104C65 80 72 22 111 42c30 16 15 48-3 62Z" />
+                <path d="M116 108c24-43 82-36 62 3-16 30-48 15-62-3Z" />
+                <path d="M112 116c43 24 36 82-3 62-30-16-15-48 3-62Z" />
+                <path d="M104 112c-24 43-82 36-62-3 16-30 48-15 62 3Z" />
+              </g>
+              <circle
+                cx="110"
+                cy="110"
+                r="19"
+                fill="#304f65"
+                stroke="#a7cadf"
+              />
+              <circle cx="110" cy="110" r="5" fill="#b9dcf0" />
+            </svg>
+          </div>
+          <span class="fan-label">CONCEPTUAL FAN · NO MEASURED RPM</span>
+          <p id="response" aria-live="polite">Medium illustrative drive</p>
+        </section>
+        <section class="control-panel" aria-label="PWM controls">
+          <label for="duty"
+            >Duty cycle <output id="duty-value" for="duty">50%</output></label
+          ><input
+            id="duty"
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value="50"
+          />
+          <div class="ends"><span>0% / off</span><span>100% / high</span></div>
+          <div class="presets" role="group" aria-label="Preset duty cycles">
+            <button data-duty="25">25%</button
+            ><button data-duty="50" aria-pressed="true">50%</button
+            ><button data-duty="75">75%</button
+            ><button data-duty="100">100%</button>
+          </div>
+          <div class="readings">
+            <div>
+              <span>ILLUSTRATIVE PERIOD</span
+              ><strong>10 <small>ms</small></strong>
+            </div>
+            <div>
+              <span>HIGH TIME</span
+              ><strong id="high-time">5.0 <small>ms</small></strong>
+            </div>
+          </div>
+          <p class="note">
+            Animation is a visual cue. Real fan RPM depends on the motor,
+            driver, load, and operating conditions.
+          </p>
+        </section>
+      </div>
+      <section class="wave-panel" aria-label="PWM waveform">
+        <div class="wave-heading">
+          <span>OUTPUT / PWM WAVEFORM</span
+          ><span id="wave-caption">50% duty · 5.0 ms high / 10 ms period</span>
+        </div>
+        <svg viewBox="0 0 800 100" role="img" aria-labelledby="wave-title">
+          <title id="wave-title">PWM signal at 50 percent duty cycle</title>
+          <path
+            d="M20 20H780M20 80H780"
+            stroke="#cedce4"
+            stroke-dasharray="3 5"
+          />
+          <text x="0" y="25">1</text>
+          <text x="0" y="85">0</text>
+          <path
+            id="wave"
+            fill="none"
+            stroke="#2a709d"
+            stroke-width="2.5"
+            d="M20 20H115V80H210V20H305V80H400V20H495V80H590V20H685V80H780"
+          />
+        </svg>
+        <p class="note">
+          Duty cycle = high time ÷ period × 100%. These demonstration timings
+          are not verified FPGA settings.
+        </p>
+      </section>
+    </main>
+    <script type="module" src="./demo.js"></script>
+  </body>
+</html>

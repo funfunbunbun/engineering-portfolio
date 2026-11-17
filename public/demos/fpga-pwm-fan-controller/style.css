@@ -1,0 +1,295 @@
+:root {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #1b3040;
+  font-synthesis: none;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: white;
+}
+main {
+  padding: 14px 28px 24px;
+  max-width: 1100px;
+  margin: auto;
+}
+h1 {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  margin: 0 0 8px;
+}
+p {
+  line-height: 1.6;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  border: 1px solid #c4d4df;
+  border-radius: 3px;
+  background: #f0f5f8;
+  color: #28495f;
+  font-size: 12px;
+  padding: 10px 15px;
+  min-height: 42px;
+}
+button:hover {
+  background: #dceaf3;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #397eac;
+  outline-offset: 4px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+.heading p {
+  font-size: 12px;
+  color: #657e8e;
+  margin: 0;
+}
+.ghost {
+  background: white;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.lab {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 42px;
+}
+.fan-panel {
+  background: #ecf2f6;
+  text-align: center;
+  border-radius: 3px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.fan-housing {
+  max-width: 200px;
+  width: 100%;
+}
+.fan-housing svg {
+  display: block;
+  width: 100%;
+}
+#fan-blades {
+  animation: spin 1.75s linear infinite;
+  transform-box: view-box;
+  transform-origin: 110px 110px;
+}
+.fan-label {
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-top: 14px;
+  color: #58778c;
+}
+.fan-panel p {
+  font-size: 12px;
+  color: #365f79;
+  margin: 10px 0 0;
+}
+.control-panel {
+  padding: 10px 0;
+}
+.control-panel label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  align-items: center;
+}
+.control-panel output {
+  font-family: monospace;
+  font-size: 25px;
+  color: #245f87;
+}
+.control-panel input {
+  width: 100%;
+  accent-color: #2a709d;
+  margin: 18px 0 8px;
+  min-height: 25px;
+}
+.ends {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #647f90;
+}
+.presets {
+  display: flex;
+  gap: 8px;
+  margin-top: 22px;
+}
+.presets button {
+  flex: 1;
+  padding: 8px;
+  font-size: 11px;
+}
+.presets button[aria-pressed="true"] {
+  background: #1e3c50;
+  color: white;
+  border-color: #1e3c50;
+}
+.readings {
+  display: flex;
+  gap: 35px;
+  border-top: 1px solid #dbe3e9;
+  margin-top: 22px;
+  padding-top: 18px;
+}
+.readings > div > span {
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: 0.7px;
+  color: #658093;
+  display: block;
+}
+.readings strong {
+  font-weight: 400;
+  font-size: 27px;
+  display: block;
+  margin-top: 7px;
+}
+.readings small {
+  font-size: 12px;
+}
+.note {
+  font-size: 10px;
+  color: #60798a;
+  line-height: 1.8;
+}
+.control-panel .note {
+  margin-top: 15px;
+}
+.wave-panel {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #dce5ea;
+}
+.wave-heading {
+  font-family: monospace;
+  font-size: 9px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #55768c;
+  letter-spacing: 0.6px;
+}
+.wave-panel svg {
+  width: 100%;
+  display: block;
+  max-height: 100px;
+  margin: 8px 0 0;
+}
+.wave-panel svg text {
+  font-family: monospace;
+  font-size: 10px;
+  fill: #7591a4;
+}
+.wave-panel .note {
+  margin-bottom: 0;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  main {
+    padding: 15px 20px 20px;
+  }
+  .heading {
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-size: 25px;
+  }
+  .heading p {
+    font-size: 11px;
+  }
+  .ghost {
+    font-size: 10px;
+    padding: 8px 11px;
+    min-height: 36px;
+  }
+  .lab {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .fan-panel {
+    padding: 15px;
+  }
+  .fan-housing {
+    max-width: 145px;
+  }
+  .fan-label {
+    font-size: 7px;
+    margin-top: 10px;
+  }
+  .fan-panel p {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+  .control-panel {
+    padding-top: 0;
+  }
+  .control-panel output {
+    font-size: 23px;
+  }
+  .control-panel input {
+    margin-top: 12px;
+  }
+  .presets {
+    margin-top: 15px;
+  }
+  .presets button {
+    min-height: 39px;
+  }
+  .readings {
+    margin-top: 17px;
+    padding-top: 14px;
+  }
+  .readings strong {
+    font-size: 24px;
+  }
+  .control-panel .note {
+    font-size: 9px;
+    margin-top: 10px;
+  }
+  .wave-panel {
+    margin-top: 13px;
+    padding-top: 15px;
+  }
+  .wave-heading {
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 8px;
+  }
+  .wave-panel .note {
+    font-size: 9px;
+  }
+  .wave-panel svg {
+    margin-top: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #fan-blades {
+    animation: none !important;
+  }
+}

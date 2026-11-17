@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="An educational conveyor sorting simulation by Vinay Vyraveraja."
+    />
+    <title>PLC Conveyor Sequence Lab</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="heading">
+        <div>
+          <h1>Follow the sequence.</h1>
+          <p>An illustrative sensor-to-sorter state machine.</p>
+        </div>
+        <button id="reset" class="ghost">Reset simulation</button>
+      </div>
+      <div class="conveyor-scene">
+        <div class="scene-top">
+          <span>CONVEYOR / EDUCATIONAL MODEL</span
+          ><span id="sensor" class="sensor">SENSOR: CLEAR</span>
+        </div>
+        <svg viewBox="0 0 800 230" role="img" aria-labelledby="conveyor-title">
+          <title id="conveyor-title">
+            Conveyor with a sensor and three sorting destinations
+          </title>
+          <path
+            d="M55 145H595"
+            stroke="#6b8ca3"
+            stroke-width="48"
+            stroke-linecap="round"
+          />
+          <path
+            d="M55 145H595"
+            stroke="#203a4d"
+            stroke-width="40"
+            stroke-linecap="round"
+          />
+          <g stroke="#67899e" fill="none">
+            <circle cx="65" cy="145" r="14" />
+            <circle cx="110" cy="145" r="14" />
+            <circle cx="155" cy="145" r="14" />
+            <circle cx="200" cy="145" r="14" />
+            <circle cx="245" cy="145" r="14" />
+            <circle cx="290" cy="145" r="14" />
+            <circle cx="335" cy="145" r="14" />
+            <circle cx="380" cy="145" r="14" />
+            <circle cx="425" cy="145" r="14" />
+            <circle cx="470" cy="145" r="14" />
+            <circle cx="515" cy="145" r="14" />
+            <circle cx="560" cy="145" r="14" />
+          </g>
+          <path
+            d="M305 120V50h45v30"
+            stroke="#a7cde5"
+            stroke-width="4"
+            fill="none"
+          />
+          <path
+            id="sensor-beam"
+            d="M350 85v48"
+            stroke="#7998ad"
+            stroke-width="2"
+            stroke-dasharray="4 5"
+          />
+          <path
+            d="m590 120 70-70m-65 95h65m-70 25 70 45"
+            stroke="#63879d"
+            fill="none"
+          />
+          <g fill="#234b63" stroke="#92b5cd">
+            <rect x="668" y="27" width="90" height="40" rx="3" />
+            <rect x="668" y="125" width="90" height="40" rx="3" />
+            <rect x="668" y="190" width="90" height="33" rx="3" />
+          </g>
+          <g
+            fill="#d2e6f2"
+            font-family="monospace"
+            font-size="10"
+            text-anchor="middle"
+          >
+            <text x="713" y="51">METAL</text>
+            <text x="713" y="149">PLASTIC</text>
+            <text x="713" y="211">OTHER</text>
+          </g>
+          <g id="object" transform="translate(100 110)">
+            <rect
+              x="-17"
+              y="-30"
+              width="34"
+              height="31"
+              rx="4"
+              fill="#a4cfe6"
+              stroke="#d0e8f6"
+            />
+            <text
+              x="0"
+              y="-10"
+              text-anchor="middle"
+              fill="#1b3f56"
+              font-family="monospace"
+              font-size="11"
+            >
+              M
+            </text>
+          </g>
+          <text
+            x="45"
+            y="207"
+            fill="#a2bdce"
+            font-family="monospace"
+            font-size="10"
+          >
+            SIMULATED SIGNALS · NO LIVE PLC
+          </text>
+        </svg>
+      </div>
+      <div class="controls">
+        <div>
+          <label for="category">Object category</label
+          ><select id="category">
+            <option value="metal">Metal</option>
+            <option value="plastic">Plastic</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="buttons">
+          <button id="step" class="primary">Next step →</button
+          ><button id="run">Run sequence</button>
+        </div>
+      </div>
+      <div class="state-strip" aria-label="Sequence states">
+        <span data-state="idle" class="active">01 Idle</span
+        ><span data-state="sense">02 Sense</span
+        ><span data-state="route">03 Route</span
+        ><span data-state="delivered">04 Delivered</span>
+      </div>
+      <div class="status-row">
+        <p id="status" role="status">
+          Ready. Choose an object and advance the sequence.
+        </p>
+        <div class="counters" aria-label="Delivered totals">
+          <span>Metal <b id="count-metal">0</b></span
+          ><span>Plastic <b id="count-plastic">0</b></span
+          ><span>Other <b id="count-other">0</b></span>
+        </div>
+      </div>
+      <p class="note">
+        Categories and timing are illustrative. No original PLC logic, machine
+        performance, or safety behavior is represented. Reset clears the
+        sequence and totals.
+      </p>
+    </main>
+    <script type="module" src="./demo.js"></script>
+  </body>
+</html>
