@@ -229,6 +229,194 @@ export function ProjectVisual({
           </text>
         </g>
       )}
+      {id === "heart-monitor" && (
+        <g stroke="currentColor">
+          <rect
+            x="105"
+            y="65"
+            width="390"
+            height="185"
+            rx="12"
+            fill="#1c3748"
+          />
+          <path
+            d="M130 165h70l18-20 18 20h30l20-65 25 110 25-65 20 20h85"
+            stroke="#a9dcce"
+            strokeWidth="3"
+          />
+          <text
+            x="130"
+            y="95"
+            stroke="none"
+            fill="currentColor"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            SENSE → PROCESS → DISPLAY
+          </text>
+          <text
+            x="130"
+            y="232"
+            stroke="none"
+            fill="currentColor"
+            fontFamily="monospace"
+            fontSize="9"
+          >
+            ILLUSTRATIVE SIGNAL · NOT A READING
+          </text>
+        </g>
+      )}
+      {id === "traffic-light" && (
+        <g>
+          <path d="M0 235h600M0 140h600" stroke="currentColor" opacity=".3" />
+          {[0, 1, 2, 3, 4].map((i) => (
+            <rect
+              key={i}
+              x={240 + i * 24}
+              y="145"
+              width="15"
+              height="85"
+              fill="#9fb9c9"
+              opacity=".6"
+            />
+          ))}
+          <rect
+            x="120"
+            y="50"
+            width="52"
+            height="140"
+            rx="10"
+            fill="#173144"
+            stroke="currentColor"
+          />
+          <circle cx="146" cy="78" r="13" fill="#c48b85" />
+          <circle cx="146" cy="119" r="13" fill="#d4bd85" />
+          <circle cx="146" cy="160" r="13" fill="#9aceaf" />
+          <path d="M146 190v65" stroke="currentColor" strokeWidth="4" />
+          <text
+            x="225"
+            y="280"
+            fill="currentColor"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            REQUEST / WAIT / CROSS
+          </text>
+        </g>
+      )}
+      {id === "flood-control" && (
+        <g>
+          <path d="M165 65v185h230V65" stroke="currentColor" strokeWidth="2" />
+          <path
+            d="M167 160q40-15 80 0t80 0 66 0v88H167Z"
+            fill="#69a3c2"
+            opacity=".5"
+          />
+          <path d="M140 130h280" stroke="#b2d7e9" strokeDasharray="6 6" />
+          <path d="M395 225h65v-50h55" stroke="currentColor" strokeWidth="3" />
+          <circle
+            cx="460"
+            cy="225"
+            r="20"
+            fill="#28485f"
+            stroke="currentColor"
+          />
+          <text
+            x="166"
+            y="285"
+            fill="currentColor"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            LEVEL → DECISION → PUMP
+          </text>
+        </g>
+      )}
+      {id === "trolley-cad" && (
+        <g stroke="currentColor" strokeWidth="2">
+          <path d="m135 100 305 25-45 100H180l-45-125-30-35H70m110 160-15 30h225M180 225l-15-125m65 125-5-120m55 120 5-115m45 115 20-110m30 110 30-105" />
+          <path d="m145 135 280 20m-265 20 250 15m-235 20 220 5" opacity=".5" />
+          <circle cx="190" cy="270" r="14" />
+          <circle cx="365" cy="270" r="14" />
+          <text
+            x="145"
+            y="52"
+            fill="currentColor"
+            stroke="none"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            PARTS / MATES / ASSEMBLY
+          </text>
+        </g>
+      )}
+      {id === "atm-interface" && (
+        <g stroke="currentColor">
+          <rect x="170" y="45" width="260" height="230" rx="8" fill="#203c50" />
+          <rect x="195" y="70" width="210" height="105" fill="#132a39" />
+          <path
+            d="m215 95 15 12-15 12m30 0h70M205 197h75m-75 18h110m-110 18h70m65-35h55m-55 20h55m-55 20h55"
+            stroke="#abd1e7"
+            strokeWidth="2"
+          />
+          <text
+            x="217"
+            y="153"
+            fill="currentColor"
+            stroke="none"
+            fontFamily="monospace"
+            fontSize="10"
+          >
+            C++ / CONSOLE LOGIC
+          </text>
+        </g>
+      )}
+      {id === "spring-study" && (
+        <g stroke="currentColor" strokeWidth="2">
+          <path d="M230 45h140m-70 0v25l-45 15 90 20-90 20 90 20-90 20 90 20-45 15v20" />
+          <rect x="270" y="220" width="60" height="45" fill="#88b0c7" />
+          <path
+            d="M410 70v190m-10-180 10-10 10 10m-20 170 10 10 10-10"
+            opacity=".5"
+          />
+          <text
+            x="90"
+            y="160"
+            fill="currentColor"
+            stroke="none"
+            fontSize="26"
+            fontFamily="monospace"
+          >
+            F = kx
+          </text>
+        </g>
+      )}
+      {id === "battery-study" && (
+        <g stroke="currentColor" strokeWidth="2">
+          <rect x="180" y="90" width="240" height="155" rx="9" fill="#1e3b50" />
+          <path d="M225 90V60h40v30m70 0V60h40v30" />
+          <path
+            d="M205 143h40m-20-20v40m130-20h40m-135 65h70"
+            stroke="#b8dded"
+            strokeWidth="3"
+          />
+          <path
+            d="m290 115-25 55h35l-20 55 55-80h-40l20-30"
+            fill="#a5c4b9"
+            stroke="none"
+          />
+          <text
+            x="180"
+            y="280"
+            fill="currentColor"
+            stroke="none"
+            fontSize="10"
+            fontFamily="monospace"
+          >
+            ELECTROCHEMISTRY / INVESTIGATION
+          </text>
+        </g>
+      )}
     </svg>
   );
 }

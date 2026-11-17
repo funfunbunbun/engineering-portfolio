@@ -1,5 +1,17 @@
+import { additionalProjects } from "./additionalProjects";
+
 export type ProjectId =
-  "vehicle-velocity" | "smart-classroom" | "fpga-fan" | "plc-sorting";
+  | "vehicle-velocity"
+  | "smart-classroom"
+  | "fpga-fan"
+  | "plc-sorting"
+  | "heart-monitor"
+  | "traffic-light"
+  | "flood-control"
+  | "trolley-cad"
+  | "atm-interface"
+  | "spring-study"
+  | "battery-study";
 export type Project = {
   id: ProjectId;
   number: string;
@@ -7,7 +19,8 @@ export type Project = {
   subtitle: string;
   category: string;
   tags: string[];
-  status: "Interactive simulation" | "Concept illustration";
+  status:
+    "Interactive simulation" | "Concept illustration" | "Documented project";
   description: string;
   problem: string;
   approach: string;
@@ -15,7 +28,7 @@ export type Project = {
   tour: { title: string; text: string }[];
 };
 
-export const projects: Project[] = [
+const coreProjects: Project[] = [
   {
     id: "vehicle-velocity",
     number: "01",
@@ -139,3 +152,5 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const projects: Project[] = [...coreProjects, ...additionalProjects];

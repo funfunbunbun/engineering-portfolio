@@ -49,7 +49,7 @@ try {
     .fill("zzzz-no-match");
   await page.getByRole("heading", { name: "No matching projects." }).waitFor();
   await page.getByRole("button", { name: "Clear filters" }).click();
-  assert.equal(await page.locator(".project-card").count(), 4);
+  assert.equal(await page.locator(".project-card").count(), 11);
   await open("projects/smart-classroom");
   await page.getByRole("slider", { name: /Temperature/ }).press("End");
   await page.getByText("Running", { exact: true }).waitFor();
@@ -113,6 +113,40 @@ try {
   await page.getByRole("heading", { name: /Vinay Vyraveraja/ }).waitFor();
   await page.reload();
   await page.getByRole("heading", { name: /Vinay Vyraveraja/ }).waitFor();
+  await open("projects/heart-monitor");
+  await page.getByRole("checkbox", { name: "Visitor present" }).check();
+  await page.getByRole("checkbox", { name: "Finger on sensor" }).check();
+  await page.getByRole("button", { name: "Simulate capture" }).click();
+  await page
+    .getByText("Illustrative capture complete", { exact: true })
+    .waitFor();
+  await open("projects/traffic-light");
+  await page.getByRole("button", { name: "Request crossing" }).click();
+  await page.getByRole("button", { name: "Next phase" }).click();
+  await page.getByRole("button", { name: "Next phase" }).click();
+  await page.getByText("Pedestrian: Cross", { exact: true }).waitFor();
+  await page
+    .getByRole("button", { name: /Enlarge:.*physical crossing/ })
+    .click();
+  await page.getByRole("dialog", { name: "Enlarged project figure" }).waitFor();
+  await page.keyboard.press("Escape");
+  assert.equal(await page.getByRole("dialog").count(), 0);
+  await open("projects/flood-control");
+  await page.getByRole("slider", { name: /Water level/ }).press("End");
+  await page.getByText("Pump on", { exact: true }).waitFor();
+  await open("experience");
+  await page.getByRole("heading", { name: /3rd place/ }).waitFor();
+  assert.equal(
+    await page
+      .getByRole("link", { name: /Find me on LinkedIn/ })
+      .getAttribute("href"),
+    "https://www.linkedin.com/in/vinayegam-panjacharam-948b30112/",
+  );
+  await open("teaching");
+  await page.getByRole("heading", { name: /A little clarity/ }).waitFor();
+  console.log(
+    "PASS additional simulations, figure dialog/Escape, PROTON achievement, tutoring, and LinkedIn",
+  );
   console.log(
     "PASS navigation, filters/search, keyboard sliders, resets, guided tour, embedded fan, PLC stepping/auto-run, FYP placeholder, profile, route refresh",
   );
@@ -125,11 +159,32 @@ try {
       "projects/fpga-fan",
       "projects/plc-sorting",
       "projects/vehicle-velocity",
+      "projects/heart-monitor",
+      "projects/traffic-light",
+      "projects/flood-control",
+      "projects/trolley-cad",
+      "projects/atm-interface",
+      "projects/spring-study",
+      "projects/battery-study",
+      "experience",
+      "teaching",
       "about",
       "contact",
     ]) {
       await open(route);
       await noOverflow(`${width}px /${route}`);
+      const missing = await page
+        .locator("main img")
+        .evaluateAll(async (images) => {
+          images.forEach((image) => (image.loading = "eager"));
+          await Promise.all(
+            images.map((image) => image.decode().catch(() => {})),
+          );
+          return images
+            .filter((image) => !image.naturalWidth)
+            .map((image) => image.getAttribute("src"));
+        });
+      assert.deepEqual(missing, [], `Missing images at ${width}px /${route}`);
       if (await page.locator("iframe").count()) {
         const frame = page.frames()[1];
         await frame.locator("main").waitFor();

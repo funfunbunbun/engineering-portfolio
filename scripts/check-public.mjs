@@ -1,14 +1,34 @@
 import { readdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { createHash } from "node:crypto";
 
 const root = fileURLToPath(new URL("../dist/", import.meta.url));
 const failures = [];
+const manifest = JSON.parse(
+  await readFile(new URL("../media-manifest.json", import.meta.url), "utf8"),
+);
+const reviewed = new Map(manifest.assets.map((asset) => [asset.file, asset]));
+const seen = new Set();
 async function check(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const file = path.join(directory, entry.name);
     if (entry.isDirectory()) await check(file);
     else {
+      const relative = path.relative(root, file).split(path.sep).join("/");
+      if (entry.name.endsWith(".webp")) {
+        const bytes = await readFile(file);
+        const asset = reviewed.get(relative);
+        if (
+          !asset ||
+          createHash("sha256").update(bytes).digest("hex") !== asset.sha256 ||
+          bytes.toString("ascii", 0, 4) !== "RIFF" ||
+          bytes.toString("ascii", 8, 12) !== "WEBP"
+        )
+          failures.push(`Unreviewed or modified image: ${relative}`);
+        else seen.add(relative);
+        continue;
+      }
       if (!/\.(?:html|css|js|json|svg|txt)$/i.test(entry.name)) {
         failures.push(`Unexpected public file: ${path.relative(root, file)}`);
         continue;
@@ -31,10 +51,13 @@ async function check(directory) {
   }
 }
 await check(root);
+for (const file of reviewed.keys())
+  if (!seen.has(file))
+    failures.push(`Reviewed image missing from build: ${file}`);
 if (failures.length) {
   console.error(failures.join("\n"));
   process.exit(1);
 }
 console.log(
-  "Public build check passed: expected text assets only; no Windows source paths, checked credential patterns, or known tracking references.",
+  `Public build check passed: text assets and ${seen.size} checksum-matched reviewed images; no Windows source paths, checked credential patterns, or known tracking references.`,
 );

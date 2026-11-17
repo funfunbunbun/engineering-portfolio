@@ -1,28 +1,52 @@
 # Publication review
 
-## Confirmed profile content
+## Current scope — expanded by the user on 2026-11-17
 
-- Display name: Vinay Vyraveraja. Do not expand it to a longer name.
-- Contact email: v.vinayx@outlook.com.
-- Keep the biography short and simple. Initial wording is editable in `src/data/profile.json`.
-- Separate local repositories and commits are authorized for the academic projects.
+The user explicitly expanded the original university-only MVP to include the other academic reports, PROTON achievement, tutoring experience, clubs, industrial training, LinkedIn, and selected report pictures/figures. The public site is a personal educational portfolio; it does not process sales, payments, bookings, or student data.
 
-## Pending
+## Confirmed personal content
 
-- The user identified the academic report folder. FPGA fan-controller and PLC/HMI sorting-machine candidates match by title, and independent repository scaffolds have been created. Review their contents and confirm academic origin before making evidence-based claims.
-- Confirm source locations for the remaining allowlisted projects. Other report titles have not been added to the portfolio or given repositories because they fall outside the current allowlist.
-- Review academic origin, rights, and privacy for each proposed asset. Listing a project does not approve publication of its source, report, data, or media.
-- Obtain explicit approval before configuring remotes, uploading, pushing, or deploying.
+- Display name: **Vinay Vyraveraja**. Do not expand the name elsewhere in the site.
+- Contact: **v.vinayx@outlook.com**; short biography retained.
+- The LinkedIn profile URL was supplied by the user. It is linked without importing unverified profile content.
+- PROTON result: **3rd place, team contributor**, directly confirmed by the user. The award is not assigned to a year because that was not confirmed. Presentation files cover 2024 and 2025.
+- Career Fair 2023 ceremony/protocol involvement, historical EICC membership, and earlier STEM Club involvement are supported by the supplied résumé.
+- Industrial training is described only through public-facing learning themes: digital design, Verilog, simulation, timing, verification, and teamwork.
+- Tutoring is presented as experience and subject focus. No rates, booking flow, testimonials, or invented student outcomes are included.
 
-## Current media manifest
+## Public project list
 
-- Original SVG/CSS illustrations created for this portfolio.
-- Original browser simulation code and four-file snapshots from each of the two independent local demo repositories.
-- No academic reports, original firmware/programs, videos, photographs, recordings, measured results, or third-party media.
-- FYP recording and overlay integration remains disabled until individual approval.
+Eleven academic projects are described in [the inventory](./PROJECT_INVENTORY.md). Documented builds, proposed use cases, educational simulations, and unverified brief-only concepts are distinguished. No real deployment, clinical accuracy, hardware performance, or commercial results are invented.
 
-## Local validation completed
+## Exact media selection
 
-TypeScript, six React/core tests, six standalone model tests, production build, and responsive browser checks passed. Public bundle and tracked-file pattern scans supplement review; they do not establish ownership or guarantee detection of every sensitive item.
+The ten compressed figure extracts in [the checksum manifest](./media-manifest.json) are the only report-derived images prepared for publication:
 
-No original source material has been copied or published. No remotes, hosting, analytics, or deployment workflows are configured. See [deployment preparation](./DEPLOYMENT.md) for the human approval checklist and hosting options.
+| Figure | Source |
+| --- | --- |
+| Heart-monitor block diagram | Heartbeat/SpO₂ report, PDF page 18 |
+| Fan controller block diagram | Fan report, page 6 |
+| Fan prototype photograph, cropped | Fan report, page 20 |
+| Traffic model isometric photograph | Traffic-light report, page 20 |
+| Traffic model top-view photograph | Traffic-light report, page 20 |
+| Conveyor sensor photograph | Sorting report, page 27 |
+| Conveyor diverter photograph | Sorting report, page 27 |
+| Flood-control circuit photograph, cropped | Flood report, page 19 |
+| Trolley CAD rendering | CAD report, PDF page 44 |
+| ATM menu flowchart | ATM interface report, PDF page 9 |
+
+Selections exclude cover sheets, student names and IDs, contact details, device-identifier photos, full reports, original firmware, logbooks, class recordings, payment data, rosters, textbook pages, and question banks. Images are re-encoded without source metadata. No PROTON logos or third-party stock images are copied from the presentations. Figures are attributed to their academic report and page on the site.
+
+The user requested use of their document figures. Final approval must confirm that these selected team-project images may be made public; local review cannot establish all coauthor or third-party rights.
+
+## Validation and hosting review
+
+- TypeScript, nine React/core interaction tests, production build, and checksum verification of all ten images pass.
+- Browser validation covers existing and additional demos, image enlargement and Escape, achievements, tutoring, LinkedIn, static route refresh, and responsive layouts.
+- Public text and tracked-file scans check for local source paths, prohibited originals, and common credential patterns. Scans supplement human review.
+- Prepared destination: a new **public** `funfunbunbun/engineering-portfolio` repository, on the GitHub account already signed into the local CLI.
+- Expected website after successful deployment: `https://funfunbunbun.github.io/engineering-portfolio/`. This is a proposed address, not a claim that it is live.
+- The prepared Pages workflow runs only by manual dispatch. A normal push does not deploy automatically.
+- The website repository source and Git history will also be public on the free plan. The independent project repositories remain local unless separately approved.
+
+**Pending final approval:** create that public repository, upload the reviewed source and ten images, enable GitHub Pages, and run the manual deployment. No external publication has occurred yet.

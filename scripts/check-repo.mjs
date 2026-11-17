@@ -2,16 +2,31 @@ import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { createHash } from "node:crypto";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const repos = [root];
-if (process.argv.includes("--projects"))
-  repos.push(
-    path.join(root, "projects/fpga-pwm-fan-controller"),
-    path.join(root, "projects/plc-hmi-sorting-machine"),
+if (process.argv.includes("--projects")) {
+  const entries = JSON.parse(
+    await readFile(
+      new URL("../project-repositories.json", import.meta.url),
+      "utf8",
+    ),
   );
+  for (const entry of entries) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.slug))
+      throw new Error("Invalid project slug");
+    repos.push(path.join(root, "projects", entry.slug));
+  }
+}
 let count = 0;
 const problems = [];
+const manifest = JSON.parse(
+  await readFile(new URL("../media-manifest.json", import.meta.url), "utf8"),
+);
+const allowedImageHashes = new Set(
+  manifest.assets.map((asset) => asset.sha256),
+);
 for (const repo of repos) {
   const names = execFileSync(
     "git",
@@ -35,7 +50,15 @@ for (const repo of repos) {
       )
     )
       problems.push(`Unexpected tracked material: ${name}`);
-    const text = await readFile(path.join(repo, name), "utf8");
+    const data = await readFile(path.join(repo, name));
+    if (name.endsWith(".webp")) {
+      if (
+        !allowedImageHashes.has(createHash("sha256").update(data).digest("hex"))
+      )
+        problems.push(`Image not in review manifest: ${name}`);
+      continue;
+    }
+    const text = data.toString("utf8");
     if (
       /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}|AKIA[A-Z0-9]{16}|sk-[A-Za-z0-9_-]{35,}/.test(
         text,

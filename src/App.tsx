@@ -14,6 +14,12 @@ import Classroom from "./components/Classroom";
 import GuidedTour from "./components/GuidedTour";
 import VehicleDemo from "./components/VehicleDemo";
 import DemoEmbed from "./components/DemoEmbed";
+import AdditionalDemo from "./components/AdditionalDemos";
+import ProjectEvidence, {
+  ProjectBackground,
+} from "./components/ProjectEvidence";
+import { projectContext } from "./data/projectContext";
+import Experience, { Teaching, BeyondProjects } from "./pages/Experience";
 
 function Header() {
   const [menu, setMenu] = useState(false);
@@ -52,6 +58,8 @@ function Header() {
           Home
         </NavLink>
         <NavLink to="/projects">Projects</NavLink>
+        <NavLink to="/experience">Experience</NavLink>
+        <NavLink to="/teaching">Tutoring</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink className="nav-contact" to="/contact">
           Let’s talk <Arrow diagonal />
@@ -79,6 +87,9 @@ function Footer() {
           © {new Date().getFullYear()} {profile.name}
         </span>
         <span>University projects · Educational simulations</span>
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+          LinkedIn ↗
+        </a>
         <Link to="/projects">Back to the work ↑</Link>
       </div>
     </footer>
@@ -106,6 +117,9 @@ function ProjectCards({ all = false }: { all?: boolean }) {
             "Computer Vision",
             "Automation",
             "Control Systems",
+            "Mechanical Design",
+            "Software",
+            "Experimental Science",
           ].map((c) => (
             <button
               key={c}
@@ -133,7 +147,7 @@ function ProjectCards({ all = false }: { all?: boolean }) {
         {filtered.length} projects shown
       </p>
       <div className="project-grid">
-        {filtered.map((p) => (
+        {(all ? filtered : filtered.slice(0, 6)).map((p) => (
           <Link
             to={`/projects/${p.id}`}
             className={`project-card visual-${p.id}`}
@@ -180,6 +194,11 @@ function ProjectCards({ all = false }: { all?: boolean }) {
             Clear filters
           </button>
         </div>
+      )}
+      {!all && (
+        <Link className="text-link all-projects-link" to="/projects">
+          Explore all {projects.length} projects <Arrow />
+        </Link>
       )}
     </>
   );
@@ -320,6 +339,7 @@ function Home() {
           ))}
         </div>
       </section>
+      <BeyondProjects />
       <ContactBanner />
     </>
   );
@@ -394,6 +414,7 @@ function DetailContent({ project }: { project: Project }) {
           ))}
         </div>
       </div>
+      <ProjectBackground id={project.id} />
       <div className="mode-bar">
         <div>
           <span className="eyebrow">EXPLORE THE SYSTEM</span>
@@ -416,6 +437,21 @@ function DetailContent({ project }: { project: Project }) {
       </div>
       <GuidedTour project={project} />
       <div className="demo-shell">
+        <AdditionalDemo id={project.id} engineering={engineering} />
+        {project.status === "Documented project" && (
+          <div className="documented-intro">
+            <ProjectVisual id={project.id} />
+            <div>
+              <span className="eyebrow">DOCUMENTED ACADEMIC WORK</span>
+              <h3>Explore the design and the reasoning.</h3>
+              <p>
+                This project is presented through its background, methods, and
+                available report figures. No interactive hardware model is
+                claimed.
+              </p>
+            </div>
+          </div>
+        )}
         {project.id === "smart-classroom" && (
           <Classroom engineering={engineering} />
         )}
@@ -474,6 +510,7 @@ function DetailContent({ project }: { project: Project }) {
           </>
         )}
       </div>
+      <ProjectEvidence id={project.id} />
       <div className="project-explanation">
         <div>
           <span className="eyebrow">THE QUESTION</span>
@@ -484,11 +521,7 @@ function DetailContent({ project }: { project: Project }) {
           <p>{project.approach}</p>
           <h3>Assumptions & evidence</h3>
           <p>{project.limitations}</p>
-          <p className="evidence-note">
-            Project context comes from the portfolio brief. Original reports,
-            media, and implementation details have not been approved for
-            publication.
-          </p>
+          <p className="evidence-note">{projectContext[project.id].evidence}</p>
         </div>
       </div>
       <div className="next-project">
@@ -608,6 +641,14 @@ function Contact() {
             ? "Email address copied to your clipboard."
             : "Your mail app handles the message. This website does not collect or store it."}
       </p>
+      <a
+        className="text-link linkedin-contact"
+        href={profile.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Connect on LinkedIn <Arrow diagonal />
+      </a>
       <div className="contact-signoff">
         <span className="brand-mark">
           VM<span>↗</span>
@@ -668,6 +709,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:id" element={<ProjectPage />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/teaching" element={<Teaching />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

@@ -1,0 +1,55 @@
+{
+  "review": "Selected technical figures from user-supplied academic reports. Prepared for final publication review; no full documents or metadata included.",
+  "assets": [
+    {
+      "file": "assets/reviewed/heart-block-diagram.webp",
+      "sha256": "f5923f9dade818854b92f83512fcdb8bf2c27229107291dc5c255639ec83bdd2",
+      "bytes": 5486
+    },
+    {
+      "file": "assets/reviewed/fan-control-diagram.webp",
+      "sha256": "de3a708586f67b07024b313056b8bbcc79abbc9f580657a05bca0c3fce0aea4a",
+      "bytes": 8834
+    },
+    {
+      "file": "assets/reviewed/fan-prototype.webp",
+      "sha256": "309e9525a80afe8ac9b6cdcea53ad46b96e2504fdb611582ff920b771c994a36",
+      "bytes": 158392
+    },
+    {
+      "file": "assets/reviewed/traffic-prototype.webp",
+      "sha256": "107176d95e9a460b7f41152d845e3c4a23a7ac9289820c07d7bc5f4337708d98",
+      "bytes": 5162
+    },
+    {
+      "file": "assets/reviewed/traffic-top-view.webp",
+      "sha256": "c403c059d830f0688d426811e4d24fc9482e093e3b8615420be6fcf81976401d",
+      "bytes": 4758
+    },
+    {
+      "file": "assets/reviewed/sorting-metal-detection.webp",
+      "sha256": "a370648603c3044f2a95829e8dd8fa8b5cdcd16aeb99e6f26e42a5cc970a82d9",
+      "bytes": 4944
+    },
+    {
+      "file": "assets/reviewed/sorting-diverter.webp",
+      "sha256": "2973b7e46b01d31f164b121490aff30030f3fcacf943c32df5e589a37aa77233",
+      "bytes": 5466
+    },
+    {
+      "file": "assets/reviewed/flood-prototype.webp",
+      "sha256": "52f1fcc4798dae0788aef7b6a098aca06df27762a71aefd8d095b15824e47052",
+      "bytes": 191030
+    },
+    {
+      "file": "assets/reviewed/trolley-assembly.webp",
+      "sha256": "a7b80985610a235397a0364c88c836c635a337c1bff560baba8ec7ab56e32491",
+      "bytes": 26444
+    },
+    {
+      "file": "assets/reviewed/atm-flowchart.webp",
+      "sha256": "94f961edbe53321c6efe2fe2da9a12bb3c86e4cb5adeecfd0ff270cf2fd57408",
+      "bytes": 15976
+    }
+  ]
+}
