@@ -17,7 +17,7 @@ export const advancedProjects: Project[] = [
     subtitle: "Robotic recycling cell",
     category: "Robotics",
     tags: ["Robotics", "MATLAB", "Sensing"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "A university recycling-cell project connecting material sensing, robot motion, and sorting logic.",
     problem:
@@ -34,7 +34,7 @@ export const advancedProjects: Project[] = [
     subtitle: "Paddy-planting robot trajectory",
     category: "Robotics",
     tags: ["Robotics", "MATLAB", "Motion Planning"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "A robotics assignment exploring a planting path through via points around a modeled obstacle.",
     problem:
@@ -68,7 +68,7 @@ export const advancedProjects: Project[] = [
     subtitle: "TF-IDF & MLP sentiment analysis",
     category: "Intelligent Systems",
     tags: ["Intelligent Systems", "Python", "PyTorch", "NLP"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "A text-classification assignment using TF-IDF features and a multilayer perceptron to distinguish positive and negative reviews.",
     problem: "How can text become numerical input to a trainable classifier?",

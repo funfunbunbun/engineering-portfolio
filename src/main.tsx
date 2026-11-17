@@ -5,6 +5,7 @@ import App from "./App";
 import "./styles.css";
 import "./expanded.css";
 import "./intelligent.css";
+import "./workbenches.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

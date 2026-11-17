@@ -49,7 +49,7 @@ Five short algorithm explanations were written for the portfolio; none is a full
 
 ## Validation and hosting review
 
-- TypeScript, fifteen React/core interaction tests, five publication-policy tests, production build, and checksum verification of all fourteen images pass.
+- TypeScript, 23 React/core interaction tests, five publication-policy tests, production build, and checksum verification of all fourteen images pass. All 16 projects now have educational interactions, listed in [the demo guide](./DEMO_GUIDE.md).
 - Browser validation covers existing and additional demos, image enlargement and Escape, achievements, tutoring, LinkedIn, static route refresh, and responsive layouts.
 - Public text and tracked-file scans check for local source paths, prohibited originals, and common credential patterns. Scans supplement human review.
 - Prepared destination: a new **public** `funfunbunbun/engineering-portfolio` repository, on the GitHub account already signed into the local CLI.
@@ -57,4 +57,4 @@ Five short algorithm explanations were written for the portfolio; none is a full
 - The prepared Pages workflow runs only by manual dispatch. A normal push does not deploy automatically.
 - The newly written website frontend source and existing local Git history will also be public on the free plan. Original project applications and histories are excluded. The fourteen independent project repositories remain local unless separately approved.
 
-**Pending updated final approval:** create that public repository, upload the reviewed website frontend, fourteen images, and five adapted algorithm examples, enable GitHub Pages, and run the manual deployment. The earlier request described eleven projects and ten images; this expanded review supersedes it. No external publication has occurred yet.
+**Publication approved on 2026-11-18:** the user approved the current portfolio and requested more demos followed by publication to the public repository. Approval covers the reviewed frontend, fourteen selected images, five adapted algorithm examples, and the new educational browser models. Original software, secrets, private records, datasets, calibration, and independent repositories remain excluded. Deployment will be recorded after successful verification.

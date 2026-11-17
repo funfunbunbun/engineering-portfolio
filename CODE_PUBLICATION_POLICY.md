@@ -34,4 +34,4 @@ The public website contains its new frontend source so GitHub Pages can build it
 
 ## Status
 
-No original project source has been uploaded. The expanded version contains **16 project pages, 14 report-derived figures, and five adapted algorithm examples**. It requires an updated final review; approval referring to the earlier eleven-project/ten-image version does not automatically approve the additional material.
+The user approved public publication of the current portfolio on **2026-11-18**, including a request for additional educational demos. The version contains 16 project pages with educational interactions, 14 report-derived figures, and five adapted algorithm examples. Original project applications and their secrets remain excluded. The public website exposes only its newly written frontend and curated content.

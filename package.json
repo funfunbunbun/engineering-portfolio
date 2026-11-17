@@ -12,7 +12,8 @@
     "sync:demos": "node scripts/sync-demos.mjs",
     "test:browser": "node scripts/browser-check.mjs",
     "test:models": "node --test projects/fpga-pwm-fan-controller/model.test.js projects/plc-hmi-sorting-machine/model.test.js",
-    "check:repo": "node scripts/check-repo.mjs"
+    "check:repo": "node scripts/check-repo.mjs",
+    "check:history": "node scripts/check-history.mjs"
   },
   "dependencies": {
     "react": "^19.3.1",

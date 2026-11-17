@@ -14,6 +14,8 @@ import Classroom from "./components/Classroom";
 import GuidedTour from "./components/GuidedTour";
 import VehicleDemo from "./components/VehicleDemo";
 import DemoEmbed from "./components/DemoEmbed";
+import ProjectWorkbench from "./components/ProjectWorkbench";
+import Demos from "./pages/Demos";
 import { WeatherLab, NeuralLab } from "./components/IntelligentLabs";
 import AlgorithmExcerpt from "./components/AlgorithmExcerpt";
 import AdditionalDemo from "./components/AdditionalDemos";
@@ -60,6 +62,7 @@ function Header() {
           Home
         </NavLink>
         <NavLink to="/projects">Projects</NavLink>
+        <NavLink to="/demos">Demos</NavLink>
         <NavLink to="/experience">Experience</NavLink>
         <NavLink to="/teaching">Tutoring</NavLink>
         <NavLink to="/about">About</NavLink>
@@ -180,6 +183,9 @@ function ProjectCards({ all = false }: { all?: boolean }) {
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+              <span className="card-demo-cta">
+                Try interactive demo <Arrow />
+              </span>
             </div>
           </Link>
         ))}
@@ -232,8 +238,8 @@ function Home() {
             <Link className="button" to="/projects">
               Explore the projects <Arrow />
             </Link>
-            <Link className="text-link" to="/about">
-              Meet the engineer <Arrow diagonal />
+            <Link className="text-link" to="/demos">
+              Try the demos <Arrow diagonal />
             </Link>
           </div>
           <div className="hero-note">
@@ -389,6 +395,13 @@ function ProjectsPage() {
 
 function DetailContent({ project }: { project: Project }) {
   const [engineering, setEngineering] = useState(false);
+  const location = useLocation();
+  useEffect(() => {
+    if (new URLSearchParams(location.search).get("demo") === "1")
+      requestAnimationFrame(() =>
+        document.getElementById("interactive-demo")?.scrollIntoView(),
+      );
+  }, [location.search]);
   const embed =
     project.id === "fpga-fan"
       ? "fpga-pwm-fan-controller"
@@ -418,6 +431,21 @@ function DetailContent({ project }: { project: Project }) {
           ))}
         </div>
       </div>
+      <button
+        className="detail-demo-link"
+        onClick={() =>
+          document
+            .getElementById("interactive-demo")
+            ?.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                .matches
+                ? "instant"
+                : "smooth",
+            })
+        }
+      >
+        Jump to interactive demo ↓
+      </button>
       <ProjectBackground id={project.id} />
       <div className="mode-bar">
         <div>
@@ -440,7 +468,8 @@ function DetailContent({ project }: { project: Project }) {
         </div>
       </div>
       <GuidedTour project={project} />
-      <div className="demo-shell">
+      <div className="demo-shell" id="interactive-demo">
+        <ProjectWorkbench id={project.id} />
         {project.id === "weather-expert" && (
           <WeatherLab engineering={engineering} />
         )}
@@ -448,20 +477,6 @@ function DetailContent({ project }: { project: Project }) {
           <NeuralLab engineering={engineering} />
         )}
         <AdditionalDemo id={project.id} engineering={engineering} />
-        {project.status === "Documented project" && (
-          <div className="documented-intro">
-            <ProjectVisual id={project.id} />
-            <div>
-              <span className="eyebrow">DOCUMENTED ACADEMIC WORK</span>
-              <h3>Explore the design and the reasoning.</h3>
-              <p>
-                This project is presented through its background, methods, and
-                available report figures. No interactive hardware model is
-                claimed.
-              </p>
-            </div>
-          </div>
-        )}
         {project.id === "smart-classroom" && (
           <Classroom engineering={engineering} />
         )}
@@ -719,6 +734,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/demos" element={<Demos />} />
           <Route path="/projects/:id" element={<ProjectPage />} />
           <Route path="/experience" element={<Experience />} />
           <Route path="/teaching" element={<Teaching />} />

@@ -68,7 +68,7 @@ export const additionalProjects: Project[] = [
     subtitle: "Miniature trolley CAD assembly",
     category: "Mechanical Design",
     tags: ["CAD", "Mechanical Design"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "Individual features, matching parts, and assembly mates come together in a miniature trolley.",
     problem: "How do individually modeled parts become a coherent assembly?",
@@ -84,7 +84,7 @@ export const additionalProjects: Project[] = [
     subtitle: "C++ ATM terminal interface",
     category: "Software",
     tags: ["C++", "Software"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "An ATM-style console interface for practicing menus, program structure, and account-operation flow.",
     problem:
@@ -101,7 +101,7 @@ export const additionalProjects: Project[] = [
     subtitle: "Spring material & deformation study",
     category: "Experimental Science",
     tags: ["Physics", "Experimental Science"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "A physics investigation into how springs of different materials respond to load.",
     problem:
@@ -118,7 +118,7 @@ export const additionalProjects: Project[] = [
     subtitle: "Aluminium–alkaline battery study",
     category: "Experimental Science",
     tags: ["Chemistry", "Experimental Science"],
-    status: "Documented project",
+    status: "Interactive simulation",
     description:
       "An electrochemistry investigation connecting cell materials, electrolyte conditions, and electrical output.",
     problem:

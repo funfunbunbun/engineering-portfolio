@@ -25,6 +25,7 @@ VS Code also has tasks named **Portfolio: local preview**, **Project: PWM demo**
 ## What works
 
 - Home, searchable/filterable Projects, sixteen project-detail pages, Experience, Tutoring, About, and Contact.
+- A dedicated **Demos** index and direct links to all 16 project interactions. See [the demo guide](./DEMO_GUIDE.md) for controls and model limits.
 - Classroom simulation: temperature, light, occupancy, CO2, fan/lighting decisions, ventilation alert, event log, and Reset.
 - PWM simulation: duty-cycle slider and presets, high-time readout, waveform, conceptual fan animation, and Reset.
 - PLC/HMI sorting simulation: selectable illustrative object, step/run/pause/reset sequence, sensor state, and delivery totals.
@@ -76,7 +77,7 @@ npm run test:browser
 Validated on 2026-11-17 using Node.js v26.13.1:
 
 - TypeScript: passed.
-- Vitest: 15 tests passed, including classroom rules, guided-tour consent/cleanup, presence/finger gating, crossing states, pump thresholds, bounded certainty-factor combination, and the AND truth table. Five additional Node tests validate the publication policy using synthetic values.
+- Vitest: 23 tests passed, including the original interactions plus terminal validation, robot release accounting, trajectory/obstacle geometry, CAD reset, model unit conversions, and transparent word scoring. Five additional Node tests validate publication policy using synthetic values.
 - Standalone Node model tests: 6 passed, including PWM boundary signals and conveyor delivery accounting.
 - Browser: navigation, search/filter, sliders via keyboard, all demo resets, PLC stepping/automatic sequence, tour controls, FYP placeholder, contact link, and hash-route refresh passed.
 - Layout: 320, 390, 768, 1024, and 1440 px widths passed without page horizontal overflow or clipped embedded documents; mobile menu and reduced motion passed.
@@ -88,5 +89,7 @@ For a production preview after building, run `.\dev.ps1 -Preview` and open the U
 ## Deployment preparation
 
 The selected route is free GitHub Pages on the user's own account. See [GitHub hosting instructions](./HOST_ON_GITHUB.md) and [the exact publication review](./PUBLICATION_REVIEW.md). The prepared workflow requires a manual trigger; a push alone does not publish. No remote upload or deployment occurs until the reviewed public scope is approved.
+
+Public publication was approved on 2026-11-18. Run `npm run check:history` before pushing; this reviews the text/image blobs in Git history without printing matched credential values. Original academic applications and independent repositories are excluded from publication.
 
 Read [the selected-code policy](./CODE_PUBLICATION_POLICY.md) before adding more source. The original project applications, credentials/configuration, datasets, saved models, personal records, and hardware parameters remain private. The code shown publicly is an adapted explanation, not a bulk source export. Run `node scripts/browser-new-projects.mjs` against the production preview for focused robotics/intelligent-systems validation.
