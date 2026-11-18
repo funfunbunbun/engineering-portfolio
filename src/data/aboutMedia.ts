@@ -1,4 +1,4 @@
-export type PhotoTopic = "training" | "clubs" | "events" | "activities";
+export type PhotoTopic = "training" | "clubs" | "events" | "activities" | "capstone" | "proton" | "ppsl";
 export type AboutPhoto = {
   file: string;
   alt: string;
@@ -48,9 +48,9 @@ export const aboutPhotos: AboutPhoto[] = [
   {
     file: "school-stem-demonstration.webp",
     alt: "Students watching an engineering model demonstration at a school.",
-    caption: "School STEM demonstration.",
+    caption: "Smart classroom capstone demonstration at a school.",
     group: "experience",
-    topic: "clubs",
+    topic: "capstone",
   },
   {
     file: "career-fair-gala-2024.webp",
@@ -92,21 +92,21 @@ export const aboutPhotos: AboutPhoto[] = [
     alt: "Vinay with the PPSL group for the 2023 student intake.",
     caption: "PPSL, 2023 intake.",
     group: "experience",
-    topic: "activities",
+    topic: "ppsl",
   },
   {
     file: "school-outreach-parit-buntar.webp",
     alt: "Vinay and the outreach team outside SMK Methodist ACS Parit Buntar.",
     caption: "School outreach in Parit Buntar.",
     group: "experience",
-    topic: "activities",
+    topic: "clubs",
   },
   {
     file: "mathematics-outreach.webp",
     alt: "A group photo after a mathematics outreach session in a classroom.",
     caption: "Mathematics outreach session.",
     group: "experience",
-    topic: "activities",
+    topic: "clubs",
   },
   {
     file: "deepavali-celebration.webp",
@@ -125,8 +125,8 @@ export const aboutPhotos: AboutPhoto[] = [
   {
     file: "team-gathering.webp",
     alt: "Vinay at a group dinner.",
-    caption: "Group dinner.",
+    caption: "PROTON team dinner.",
     group: "experience",
-    topic: "activities",
+    topic: "proton",
   },
 ];

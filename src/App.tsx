@@ -42,7 +42,7 @@ function Header() {
     <header className="header">
       <Link to="/" className="brand" aria-label="Vinay home">
         <span className="brand-mark">
-          V<span>↗</span>
+          VM<span>↗</span>
         </span>
         <span>
           Vinay
@@ -78,26 +78,7 @@ function Header() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="footer">
-      <div>
-        <Link to="/" className="footer-brand">
-          Vinay<span>Mechatronics graduate · Universiti Sains Malaysia</span>
-        </Link>
-        <a href={"mailto:" + profile.email} className="footer-email">
-          {profile.email}
-          <Arrow diagonal />
-        </a>
-      </div>
-      <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Vinay</span>
-        <AboutLinks />
-        <Link to="/projects">Projects ↑</Link>
-      </div>
-    </footer>
-  );
-}
+function Footer(){return <footer className="footer"><a className="footer-email" href={"mailto:"+profile.email}>{profile.email}<Arrow diagonal/></a><div className="footer-bottom"><AboutLinks/><Link to="/projects">Projects ↑</Link></div></footer>;}
 
 function ProjectCards({ all = false }: { all?: boolean }) {
   const [category, setCategory] = useState("All projects");
