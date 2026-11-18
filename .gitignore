@@ -39,9 +39,10 @@ CODEX_UNIVERSITY_PORTFOLIO_BRIEF.md
 .codex/
 .aws/
 
-# Exact reviewed project clip and pinned browser runtime only.
+# Exact reviewed project recordings only.
 !public/assets/reviewed/vehicle-speed-demo.mp4
-!public/assets/runtime/ort-wasm-simd-threaded.wasm
+!public/assets/reviewed/plc-sorting-demo.mp4
+!public/assets/reviewed/pump-control-demo.mp4
 
 # Unreviewed incoming photos remain private.
 incoming-photos/

@@ -1,47 +1,7 @@
-import { useRef } from "react";
-import NativeVehicle from "./NativeVehicle";
 export default function VehicleDemo({ engineering }: { engineering: boolean }) {
-  const video = useRef<HTMLVideoElement>(null);
+  if (!engineering) return null;
   return (
     <div className="vehicle-demo">
-      <div className="demo-heading">
-        <div>
-          <span className="eyebrow">Final-year project</span>
-          <h3>Vehicle detection and speed estimation</h3>
-        </div>
-        <span className="badge outline">Recorded demonstration</span>
-      </div>
-      <p>
-        A car passes through the scene with the project’s tracking and speed
-        annotations. Use the video controls to pause and examine the output.
-      </p>
-      <div className="video-stage">
-        <video
-          ref={video}
-          controls
-          muted
-          playsInline
-          preload="metadata"
-          poster={
-            import.meta.env.BASE_URL +
-            "assets/reviewed/vehicle-demo-poster.webp"
-          }
-          aria-label="Recorded vehicle detection with speed annotations"
-        >
-          <source
-            src={
-              import.meta.env.BASE_URL +
-              "assets/reviewed/vehicle-speed-demo.mp4"
-            }
-            type="video/mp4"
-          />
-        </video>
-      </div>
-      <p className="muted">
-        Silent project recording. Boxes, track IDs and speed estimates are part
-        of the original video, not live browser measurements.
-      </p>
-      <NativeVehicle video={video} />
       {engineering && (
         <div className="engineering-panel">
           <div>

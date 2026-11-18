@@ -1,5 +1,6 @@
 import ProjectMechanism from "./components/ProjectMechanism";
 import ProjectDeck from "./components/ProjectDeck";
+import ProjectCover from "./components/ProjectCover";
 import { projectYears, yearGroups } from "./data/projectYears";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -12,7 +13,7 @@ import {
 } from "react-router-dom";
 import profile from "./data/profile.json";
 import { projects, type Project } from "./data/projects";
-import { Arrow, ProjectVisual } from "./components/Visual";
+import { Arrow } from "./components/Visual";
 import Classroom from "./components/Classroom";
 import GuidedTour from "./components/GuidedTour";
 import VehicleDemo from "./components/VehicleDemo";
@@ -172,7 +173,7 @@ function ProjectCards({ all = false }: { all?: boolean }) {
                     <span className="card-index">{projectYears[p.id]}</span>
                   )}
                   <span className="card-category">{p.category}</span>
-                  <ProjectVisual id={p.id} />
+                  <ProjectCover id={p.id} />
                   <span className="card-open">
                     <Arrow diagonal />
                   </span>
@@ -354,14 +355,7 @@ function DetailContent({ project }: { project: Project }) {
         </div>
         <span className="badge">{project.status}</span>
       </div>
-      <div className="detail-intro">
-        <p>{project.description}</p>
-        <div className="tags">
-          {project.tags.map((t) => (
-            <span key={t}>{t}</span>
-          ))}
-        </div>
-      </div>
+      <ProjectEvidence id={project.id} />
       <button
         className="detail-demo-link"
         onClick={() =>
@@ -375,8 +369,11 @@ function DetailContent({ project }: { project: Project }) {
       >
         Jump to interactive demo ↓
       </button>
-      <ProjectBackground id={project.id} />
-      <ProjectMechanism id={project.id} />
+      <details className="project-notes">
+        <summary>Project background and components</summary>
+        <ProjectBackground id={project.id} />
+        <ProjectMechanism id={project.id} />
+      </details>
       <div className="mode-bar">
         <div>
           <span className="eyebrow">Project demo</span>
@@ -475,7 +472,6 @@ function DetailContent({ project }: { project: Project }) {
         )}
       </div>
       <ProjectFlowchart id={project.id} />
-      <ProjectEvidence id={project.id} />
       <AlgorithmExcerpt id={project.id} />
       <div className="project-explanation">
         <div>

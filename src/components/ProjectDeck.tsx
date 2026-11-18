@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { projects, type ProjectId } from "../data/projects";
-import { Arrow, ProjectVisual } from "./Visual";
+import { Arrow } from "./Visual";
+import ProjectCover from "./ProjectCover";
 
 const featuredIds: ProjectId[] = [
   "fpga-fan",
@@ -57,7 +58,7 @@ export default function ProjectDeck() {
           <span>Featured project</span>
           <span>{project.category}</span>
         </div>
-        <div className="lab-figure"><ProjectVisual id={project.id} hero /></div>
+        <div className="lab-figure"><ProjectCover id={project.id} hero /></div>
         <div className="deck-copy">
           <h2>{project.title}</h2>
           <p>{summaries[project.id]}</p>

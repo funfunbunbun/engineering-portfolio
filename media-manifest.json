@@ -1,5 +1,5 @@
 {
-  "review": "Curated report figures, teaching excerpts, user-supplied event and achievement photos, a metadata-stripped project clip, and pinned runtime assets. Visible badge/certificate identifiers are masked. Original documents, model weights and private applications remain excluded.",
+  "review": "Curated technical figures, prototypes, project outputs, teaching/event photographs and three metadata-stripped project recordings. Identifiers and private settings are excluded or masked. Original documents, source applications and model weights remain private; retired runtime hashes are retained only for history review.",
   "assets": [
     {
       "file": "assets/reviewed/heart-block-diagram.webp",
@@ -101,13 +101,15 @@
       "file": "assets/runtime/ort-wasm-simd-threaded.mjs",
       "kind": "runtime",
       "sha256": "30ed0b5cd1182ede931fea448afb567d4dc705ec957af09f108a2be5f770dac3",
-      "bytes": 24738
+      "bytes": 24738,
+      "historical": true
     },
     {
       "file": "assets/runtime/ort-wasm-simd-threaded.wasm",
       "kind": "runtime",
       "sha256": "4b884c203b0fa48d057be3332c65513ff85aa3c5bddd6946acc0fab7ecda001d",
-      "bytes": 14848852
+      "bytes": 14848852,
+      "historical": true
     },
     {
       "file": "assets/reviewed/maths-t-worked-example.webp",
@@ -259,6 +261,111 @@
       "kind": "image",
       "sha256": "a2aa14f79520d13a02ed308d0e9dc559942fc5701a57fdb288148ceb729fcebe",
       "bytes": 56806
+    },
+    {
+      "file": "assets/reviewed/classroom-prototype.webp",
+      "sha256": "9770099c22c4eae22befb17d610f5a56bafca80028e4266acfdc7d9342047bbf",
+      "bytes": 26646
+    },
+    {
+      "file": "assets/reviewed/classroom-circuit.webp",
+      "sha256": "8cc6aa66ad2cdad1dcd5725c366cbce734d4f77cf6e54c7579185a4e00fdd15a",
+      "bytes": 15720
+    },
+    {
+      "file": "assets/reviewed/classroom-lcd-ready.webp",
+      "sha256": "8db6d2d20fe5cd0bcbe58556d432362d8677c0f43c5a206a8c3389f6481025a8",
+      "bytes": 8452
+    },
+    {
+      "file": "assets/reviewed/heart-circuit-schematic.webp",
+      "sha256": "10de6f2b33ffd0d8f29197b2d7ab0a00a7a141c14571acd967e6ca605deab12d",
+      "bytes": 144876
+    },
+    {
+      "file": "assets/reviewed/heart-lcd-guidance.webp",
+      "sha256": "d038aea25831c4fefbe0e570db3e50741aa1f73059dedcf1bd8d9bc3697c8af4",
+      "bytes": 68512
+    },
+    {
+      "file": "assets/reviewed/trolley-front-board-model.webp",
+      "sha256": "42f4abe31fe4b3380126d5b10ad94cbd2f60b32919ce92072b4aa5d7cb9161ec",
+      "bytes": 25564
+    },
+    {
+      "file": "assets/reviewed/trolley-front-board-drawing.webp",
+      "sha256": "a83db7bd19091e8123dca495a0e3266841050e7c2f9c90a1504a94bf49e281c3",
+      "bytes": 92336
+    },
+    {
+      "file": "assets/reviewed/sorting-hmi-status.webp",
+      "sha256": "d96df8f8a6f586108d731d800052a8ea5596b431baf57b0e4ca7e0393b4e6af6",
+      "bytes": 55972
+    },
+    {
+      "file": "assets/reviewed/sorting-control-panel.webp",
+      "sha256": "12c5bf80b56b2e98a8b213ef71380b690923976b8d2054c76d3ff8331f742812",
+      "bytes": 47548
+    },
+    {
+      "file": "assets/reviewed/sorting-pneumatic-electrical.webp",
+      "sha256": "c1f081baf24c989f13aa8ae105e864241fc101d23164e7ef503198274b59e3f9",
+      "bytes": 53768
+    },
+    {
+      "file": "assets/reviewed/weather-main-menu.webp",
+      "sha256": "3670cc2aaef754465baf33aaf274e92e4afa815953b155eb7e3ba9e4ecdd0ed4",
+      "bytes": 7558
+    },
+    {
+      "file": "assets/reviewed/sentiment-network-diagram.webp",
+      "sha256": "c6358c498ec71c81110ac7ee1e990dba7a64978439576ee00b1fcfc0f5e20d0f",
+      "bytes": 54150
+    },
+    {
+      "file": "assets/reviewed/perceptron-matlab-architecture.webp",
+      "sha256": "2228ddbe5d285ccdd42f0d71aa41825b956c5beef1d45c5b2ea5ce13c5a5a12f",
+      "bytes": 7740
+    },
+    {
+      "file": "assets/reviewed/perceptron-and-boundaries.webp",
+      "sha256": "a708e6e13e13fddde48bcbf13ca9f38e2a75d5e7c27f2c33c33f60a52815e004",
+      "bytes": 24670
+    },
+    {
+      "file": "assets/reviewed/vehicle-roadside-deployment.webp",
+      "sha256": "7aefc09f79460db5ad689015c22e84fd6f040e9087aa1cc235ed075dfd16221a",
+      "bytes": 68070
+    },
+    {
+      "file": "assets/reviewed/vehicle-system-architecture.webp",
+      "sha256": "00fa660f272e1fc564213e6de884036fd0724f61268dcc2827035dc217e81407",
+      "bytes": 35404
+    },
+    {
+      "file": "assets/reviewed/plc-video-poster.webp",
+      "sha256": "0f1dd539c1e2922dbeb8c73093484e8e75efa824450de9ec699b59c6453e888b",
+      "bytes": 46494
+    },
+    {
+      "file": "assets/reviewed/pump-video-poster.webp",
+      "sha256": "dc0714a3bfc9a8a7deb9c5dfc0fba878978a9f3f45e909b989c488813be08fa2",
+      "bytes": 96586
+    },
+    {
+      "file": "assets/reviewed/plc-sorting-demo.mp4",
+      "sha256": "6f27012efb29962e46f29d768c415824a505c1da16e4058438628b18e5e2ceac",
+      "bytes": 281241
+    },
+    {
+      "file": "assets/reviewed/pump-control-demo.mp4",
+      "sha256": "7446ff3369d40fddb0480a41f2ca16f4ae2ee7705a57689433127bf6695801c9",
+      "bytes": 599662
+    },
+    {
+      "file": "assets/reviewed/spring-setup-diagram.webp",
+      "sha256": "a70c43625ad861b12e14c819f1dd17328e4cb4fd0d4cef26b6e8b071e8f137fa",
+      "bytes": 6644
     }
   ]
 }

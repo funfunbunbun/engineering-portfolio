@@ -154,27 +154,7 @@ try {
       (element) => element.videoWidth > 0 && element.duration >= 5,
     ),
   );
-  if (process.env.PORTFOLIO_MODEL) {
-    await page
-      .getByText("Try vehicle detection on your device", { exact: true })
-      .click();
-    await page
-      .getByLabel("ONNX model", { exact: true })
-      .setInputFiles(process.env.PORTFOLIO_MODEL);
-    await page.getByText(/Model ready\./).waitFor({ timeout: 90000 });
-    await page.getByRole("button", { name: "Detect current frame" }).click();
-    await page
-      .getByText(/vehicles? detected in this frame/)
-      .waitFor({ timeout: 90000 });
-    assert.ok(
-      await page
-        .locator(".native-model canvas")
-        .evaluate((canvas) => canvas.width > 0),
-    );
-    console.log(
-      "Native ONNX inference passed with a private local test model; model was not uploaded.",
-    );
-  }
+  assert.equal(await page.getByText("Try vehicle detection on your device", { exact: true }).count(), 0);
   await page.screenshot({
     path: fileURLToPath(new URL("vehicle-demo.png", screenshots)),
     fullPage: true,
@@ -207,6 +187,10 @@ try {
       await open(route);
       await overflow(width + " " + route);
       if (route.startsWith("projects/")) {
+        const showcase = page.getByRole("region", { name: "Project photos and outputs" });
+        assert.equal(await showcase.count(), 1);
+        assert.ok(await showcase.evaluate((element) => Boolean(element.compareDocumentPosition(document.querySelector("#interactive-demo")) & Node.DOCUMENT_POSITION_FOLLOWING)));
+        assert.equal(await page.locator(".project-notes").getAttribute("open"), null);
         for (const selector of [
           ".demo-shell",
           ".vehicle-demo",

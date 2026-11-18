@@ -6,4 +6,4 @@ The site includes project summaries, selected report figures, photographs, recor
 
 [View the portfolio](https://funfunbunbun.github.io/engineering-portfolio/)
 
-Browser simulations are labelled separately from recordings and model inference. Original reports, private project applications and credentials are excluded.
+Browser simulations are labelled separately from original project recordings and report figures. Original reports, private project applications and credentials are excluded.

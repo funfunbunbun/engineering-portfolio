@@ -49,7 +49,7 @@ const coreProjects: Project[] = [
     approach:
       "The system processes camera footage, detects vehicles, follows tracks over time and uses perspective mapping to estimate road-plane motion. Results are presented through a web dashboard. The project investigated YOLOv8 and YOLO26.",
     limitations:
-      "The embedded clip shows recorded project output. Local ONNX inference detects vehicles in one frame; it does not calculate speed or reproduce the full Raspberry Pi system. Estimates depend on camera geometry, calibration, timestamps and tracking quality.",
+      "The embedded clip shows recorded project output. The browser animation explains line-crossing timing with fictional inputs. Real estimates depend on camera geometry, calibration, timestamps and tracking quality.",
     tour: [
       {
         title: "Camera input",

@@ -1,5 +1,6 @@
 import type { ProjectId } from "./projects";
 import { advancedContext } from "./advancedContext";
+import { showcaseFigures } from "./showcaseFigures";
 export type Figure = {
   file: string;
   alt: string;
@@ -243,3 +244,21 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     figures: [],
   },
 };
+
+for (const [id, figures] of Object.entries(showcaseFigures)) {
+  const context = projectContext[id as ProjectId];
+  context.figures = [...figures, ...context.figures.filter((old) => !figures.some((item) => item.file === old.file))];
+}
+const leadImages: Partial<Record<ProjectId, string[]>> = {
+  "fpga-fan": ["fan-prototype.webp", "fan-control-diagram.webp"],
+  "heart-monitor": ["heart-prototype-board.webp", "heart-circuit-schematic.webp", "heart-lcd-guidance.webp", "heart-lcd-states.webp"],
+  "plc-sorting": ["sorting-control-panel.webp", "sorting-hmi-status.webp", "sorting-pneumatic-electrical.webp"],
+  "trolley-cad": ["trolley-assembly.webp", "trolley-front-board-drawing.webp", "trolley-front-board-model.webp", "trolley-bill-of-materials.webp"],
+  "neural-classifiers": ["perceptron-and-boundaries.webp", "perceptron-matlab-architecture.webp"],
+};
+for (const [id, order] of Object.entries(leadImages)) {
+  projectContext[id as ProjectId].figures.sort((a, b) => {
+    const rank = (file: string) => order.includes(file) ? order.indexOf(file) : order.length;
+    return rank(a.file) - rank(b.file);
+  });
+}
