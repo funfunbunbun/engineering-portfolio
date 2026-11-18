@@ -92,7 +92,7 @@ const coreProjects: Project[] = [
       },
       {
         title: "Inspect the decision",
-        text: "Engineering Mode shows the demo rules and an event history. Emptying the room disables the fan and lights. High simulated air-quality readings trigger an alert and open the window while the room is occupied.",
+        text: "Watch the fan, lights and window respond to the inputs. Emptying the room disables the fan and lights. High simulated air-quality readings trigger an alert and open the window while the room is occupied.",
       },
     ],
   },

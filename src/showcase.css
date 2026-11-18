@@ -12,24 +12,29 @@
 }
 .showcase-gallery, .showcase-feature { min-width: 0; margin: 0; }
 .showcase-stage {
-  height: clamp(320px, 33vw, 460px);
+  position: relative;
+  aspect-ratio: 16 / 9;
   background: var(--soft);
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 0;
+  border-radius: 5px;
   overflow: hidden;
 }
 .showcase-stage video { width: 100%; height: 100%; object-fit: contain; display: block; background: #0e1b24; }
-.showcase-enlarge { display: block; position: relative; width: 100%; height: 100%; border: 0; padding: 10px; background: transparent; cursor: zoom-in; }
+.showcase-enlarge { display: block; position: relative; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: zoom-in; }
 .showcase-enlarge img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.photo-stage .showcase-enlarge img { object-fit: cover; }
+.showcase-arrows { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; pointer-events: none; padding-inline: 8px; }
+.showcase-arrows button { pointer-events: auto; display: grid; place-items: center; width: 44px; height: 54px; border: 1px solid #ffffff55; border-radius: 5px; background: #132b3ecc; color: #fff; font-size: 36px; line-height: 1; }
+.showcase-arrows button:hover { background: #132b3e; }
 .showcase-enlarge > span { position: absolute; right: 12px; bottom: 12px; border-radius: 5px; padding: 7px 10px; background: #132b3eec; color: #f0f5f9; font-size: 12px; }
 .showcase-feature figcaption { display: flex; flex-direction: column; gap: 5px; padding: 14px 0; line-height: 1.6; }
 .showcase-feature figcaption strong { font-size: 14px; font-weight: 500; }
 .showcase-feature figcaption > span { font-size: 12px; color: var(--muted); }
 .showcase-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding: 5px 3px 12px; }
-.showcase-thumbnails button { flex: 0 0 98px; border: 2px solid var(--line); border-radius: 6px; padding: 4px; background: var(--surface); color: var(--ink); }
+.showcase-thumbnails button { flex: 0 0 144px; border: 2px solid var(--line); border-radius: 5px; padding: 4px; background: var(--surface); color: var(--ink); text-align: left; }
 .showcase-thumbnails button[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-.showcase-thumbnails img { width: 100%; height: 60px; object-fit: contain; display: block; background: #eff3f6; border-radius: 2px; }
-.showcase-thumbnails span { font-size: 12px; display: block; margin-top: 5px; }
+.showcase-thumbnails img { width: 100%; height: 76px; object-fit: cover; display: block; background: #eff3f6; border-radius: 2px; }
+.showcase-thumbnails span { font-size: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.45; min-height: 2.9em; margin: 8px 3px 3px; }
 .showcase-brief { padding: 8px 0; }
 .showcase-brief .eyebrow { color: var(--muted); margin-bottom: 22px; }
 .showcase-brief h2 { font-size: 29px; margin-bottom: 14px; }
@@ -41,23 +46,19 @@
 .project-notes[open] > summary { border-bottom: 1px solid var(--line); margin-bottom: 24px; }
 .project-notes > :is(.project-background, .project-mechanism) { margin: 24px; }
 .project-notes .project-background { grid-template-columns: 1fr 2fr; gap: 35px; }
-.project-cover { display: block; width: 100%; height: 100%; object-fit: cover; }
-.project-cover.diagram-cover { object-fit: contain; padding: 24px; background: #eff3f6; }
 .project-deck .lab-figure { padding: 0; }
-.project-deck .hero-cover { height: 240px; }
+.demo-title { font-size: 28px; margin: 32px 0 24px; }
+html[data-theme="dark"] .project-tools { background: transparent; }
 .card-category { background: #132b3eec; border-radius: 4px; padding: 6px 9px; color: #e3edf3; }
 .card-index { background: #132b3eec; padding: 6px 9px; border-radius: 4px; }
 @media (max-width: 900px) {
   .project-showcase { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .showcase-stage { height: clamp(280px, 54vw, 460px); }
   .showcase-brief { padding: 0; }
   .showcase-brief .eyebrow { margin-bottom: 14px; }
   .project-notes .project-background { grid-template-columns: 1fr; gap: 20px; }
 }
 @media (max-width: 600px) {
   .detail-heading { margin-bottom: 24px; }
-  .showcase-stage { height: 290px; }
-  .showcase-thumbnails button { flex-basis: 85px; }
+  .showcase-thumbnails button { flex-basis: 134px; }
   .project-notes > :is(.project-background, .project-mechanism) { margin: 20px 16px; }
-  .project-deck .hero-cover { height: 210px; }
 }

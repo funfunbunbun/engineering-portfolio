@@ -11,6 +11,10 @@ it("leads with the actual prototype and lets visitors select its circuit diagram
   expect(within(gallery).getByRole("button", { name: /Enlarge:/ }).querySelector("img"))
     .toHaveAttribute("src", expect.stringContaining("fan-control-diagram.webp"));
   expect(within(gallery).getByRole("heading", { name: "Use case" })).toBeInTheDocument();
+  expect(within(gallery).queryByText(/^Image \d+$/)).not.toBeInTheDocument();
+  fireEvent.click(within(gallery).getByRole("button", { name: "Previous project media" }));
+  expect(within(gallery).getByRole("button", { name: /Enlarge:/ }).querySelector("img"))
+    .toHaveAttribute("src", expect.stringContaining("fan-prototype.webp"));
 });
 
 it("offers the real PLC recording before the simulated sequence", () => {

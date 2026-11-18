@@ -14,9 +14,11 @@ export default function ProjectShowcase({ id }: { id: ProjectId }) {
     ...context.figures.map((figure) => ({ ...figure, image: figure.file, video: "", label: figure.caption })),
   ];
   const [active, setActive] = useState(0);
+  const move = (direction: number) => setActive((index) => (index + direction + media.length) % media.length);
   const [enlarged, setEnlarged] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const current = media[active];
+  const isPhoto = Boolean(current && /prototype|photo|deployment|control-panel|physical-model|school-stem|traffic-top-view|metal-detection|sorting-diverter/.test(current.image));
   const asset = (file: string) => `${import.meta.env.BASE_URL}assets/reviewed/${file}`;
   const imageSrc = current ? asset(current.image) : `${import.meta.env.BASE_URL}assets/flows/${id}.svg`;
   const caption = current?.caption ?? "Illustrated project workflow. Original source and private records are not included.";
@@ -32,19 +34,25 @@ export default function ProjectShowcase({ id }: { id: ProjectId }) {
     <section className="project-showcase" aria-label="Project photos and outputs">
       <div className="showcase-gallery">
         <figure className="showcase-feature">
-          <div className="showcase-stage">
+          <div className={`showcase-stage${isPhoto && !current?.video ? " photo-stage" : ""}`}>
             {current?.video ? (
               <video key={current.video} controls muted playsInline loop={id !== "vehicle-velocity"} preload="metadata" poster={imageSrc} aria-label={current.label}>
                 <source src={asset(current.video)} type="video/mp4" />
               </video>
             ) : (
               <button className="showcase-enlarge" onClick={() => setEnlarged(true)} aria-label={`Enlarge: ${caption}`}>
-                <img src={imageSrc} alt={current?.alt ?? `${project.title}: illustrated project workflow`} fetchPriority="high" />
+                <img src={imageSrc} alt={current?.alt ?? `${project.title}: illustrated project workflow`} fetchPriority="high" style={current?.image === "vehicle-roadside-deployment.webp" ? { objectPosition: "50% 0%" } : undefined} />
                 <span>Enlarge image ↗</span>
               </button>
             )}
+            {media.length > 1 && (
+              <div className="showcase-arrows">
+                <button onClick={() => move(-1)} aria-label="Previous project media">‹</button>
+                <button onClick={() => move(1)} aria-label="Next project media">›</button>
+              </div>
+            )}
           </div>
-          <figcaption>
+          <figcaption aria-live="polite">
             <strong>{caption}</strong>
             <span>{current?.source ?? "Portfolio diagram"}</span>
           </figcaption>
@@ -52,9 +60,9 @@ export default function ProjectShowcase({ id }: { id: ProjectId }) {
         {media.length > 1 && (
           <div className="showcase-thumbnails" role="group" aria-label="Choose project photo or recording">
             {media.map((item, index) => (
-              <button key={item.image} aria-label={`Show: ${item.label}`} aria-pressed={active === index} onClick={() => setActive(index)}>
+              <button key={item.image} aria-label={`Show: ${item.label}`} title={item.caption} aria-pressed={active === index} onClick={() => setActive(index)}>
                 <img loading="lazy" src={asset(item.image)} alt="" />
-                <span>{item.video ? "▶ Video" : `Image ${index + 1 - (recording ? 1 : 0)}`}</span>
+                <span>{item.video ? `▶ ${item.caption}` : item.caption}</span>
               </button>
             ))}
           </div>

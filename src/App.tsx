@@ -16,7 +16,7 @@ import { projects, type Project } from "./data/projects";
 import { Arrow } from "./components/Visual";
 import Classroom from "./components/Classroom";
 import GuidedTour from "./components/GuidedTour";
-import VehicleDemo from "./components/VehicleDemo";
+
 import DemoEmbed from "./components/DemoEmbed";
 import ProjectWorkbench from "./components/ProjectWorkbench";
 import { WeatherLab, NeuralLab } from "./components/IntelligentLabs";
@@ -316,7 +316,6 @@ function ProjectsPage() {
 }
 
 function DetailContent({ project }: { project: Project }) {
-  const [engineering, setEngineering] = useState(false);
   const location = useLocation();
   useEffect(() => {
     if (new URLSearchParams(location.search).get("demo") === "1")
@@ -330,15 +329,6 @@ function DetailContent({ project }: { project: Project }) {
       : project.id === "plc-sorting"
         ? "plc-hmi-sorting-machine"
         : null;
-  const hasEngineeringDetails = [
-    "fpga-fan",
-    "plc-sorting",
-    "vehicle-velocity",
-    "smart-classroom",
-    "heart-monitor",
-    "traffic-light",
-    "weather-expert",
-  ].includes(project.id);
   return (
     <section className="section-wrap detail-page">
       <Link to="/projects" className="back-link">
@@ -374,50 +364,19 @@ function DetailContent({ project }: { project: Project }) {
         <ProjectBackground id={project.id} />
         <ProjectMechanism id={project.id} />
       </details>
-      <div className="mode-bar">
-        <div>
-          <span className="eyebrow">Project demo</span>
-          <p>Your inputs stay in this browser.</p>
-        </div>
-        {hasEngineeringDetails && (
-          <div className="mode-switch" role="group" aria-label="Display mode">
-            <button
-              aria-pressed={!engineering}
-              onClick={() => setEngineering(false)}
-            >
-              Overview
-            </button>
-            <button
-              aria-pressed={engineering}
-              onClick={() => setEngineering(true)}
-            >
-              Engineering Mode
-            </button>
-          </div>
-        )}
-      </div>
-      <p className="mode-description" role="status">
-        {!hasEngineeringDetails
-          ? "Use the demo controls below. Technical details are included on this page."
-          : engineering
-            ? "Engineering Mode is on. The demo includes additional rules, equations or state details."
-            : "Use the demo controls below. Choose Engineering Mode for rules, equations or state details."}
-      </p>
+      <h2 className="demo-title">Interactive demo</h2>
       <GuidedTour project={project} />
       <div className="demo-shell" id="interactive-demo">
         <ProjectWorkbench id={project.id} />
         {project.id === "weather-expert" && (
-          <WeatherLab engineering={engineering} />
+          <WeatherLab engineering={false} />
         )}
         {project.id === "neural-classifiers" && (
-          <NeuralLab engineering={engineering} />
+          <NeuralLab engineering={false} />
         )}
-        <AdditionalDemo id={project.id} engineering={engineering} />
+        <AdditionalDemo id={project.id} engineering={false} />
         {project.id === "smart-classroom" && (
-          <Classroom engineering={engineering} />
-        )}
-        {project.id === "vehicle-velocity" && (
-          <VehicleDemo engineering={engineering} />
+          <Classroom engineering={false} />
         )}
         {embed && (
           <>
@@ -432,42 +391,6 @@ function DetailContent({ project }: { project: Project }) {
               </span>
             </div>
             <DemoEmbed slug={embed} title={project.subtitle} />
-            {engineering && (
-              <div className="engineering-panel">
-                <div>
-                  <h4>
-                    {project.id === "fpga-fan"
-                      ? "Signal relationship"
-                      : "Illustrative state sequence"}
-                  </h4>
-                  <code>
-                    {project.id === "fpga-fan"
-                      ? "D = t_high / T × 100%"
-                      : "IDLE → SENSE → ROUTE → DELIVERED"}
-                  </code>
-                  <p>
-                    {project.id === "fpga-fan"
-                      ? "The period remains fixed at an illustrative 10 ms (100 Hz). Only high-time changes. These are demonstration values, not verified FPGA settings."
-                      : "Start sorting repeats the selected material. Changing the selection applies to the next object. Pause holds the current position; Next step advances one stage."}
-                  </p>
-                </div>
-                <div>
-                  <h4>Independent demo</h4>
-                  <p>
-                    The demo also works as a standalone page. Its source has its
-                    own local project repository.
-                  </p>
-                  <a
-                    className="text-link"
-                    href={`${import.meta.env.BASE_URL}demos/${embed}/index.html`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open standalone demo <Arrow diagonal />
-                  </a>
-                </div>
-              </div>
-            )}
           </>
         )}
       </div>

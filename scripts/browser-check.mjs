@@ -56,8 +56,7 @@ try {
   assert.match(await deck.getByRole("heading").innerText(), /Smart classroom/);
   await deck.getByRole("link", { name: "View project" }).click();
   await page.locator(".room-demo").waitFor();
-  await page.getByRole("button", { name: "Engineering Mode", exact: true }).click();
-  assert.match(await page.locator(".mode-description").innerText(), /Engineering Mode is on/);
+  assert.equal(await page.getByRole("button", { name: "Engineering Mode", exact: true }).count(), 0);
   await open();
   await open("projects/robot-recycling");
   assert.equal(await page.getByRole("group", { name: "Display mode" }).count(), 0);
@@ -88,6 +87,7 @@ try {
   await open("projects");
   const cards = page.locator(".project-card");
   assert.equal(await cards.count(), 16);
+  assert.equal(await cards.locator(".project-visual").count(), 16);
   const links = await cards.evaluateAll((elements) =>
     elements.map((element) => element.getAttribute("href").replace(/^#\//, "")),
   );
@@ -191,6 +191,8 @@ try {
         assert.equal(await showcase.count(), 1);
         assert.ok(await showcase.evaluate((element) => Boolean(element.compareDocumentPosition(document.querySelector("#interactive-demo")) & Node.DOCUMENT_POSITION_FOLLOWING)));
         assert.equal(await page.locator(".project-notes").getAttribute("open"), null);
+        assert.equal(await page.getByRole("group", { name: "Display mode" }).count(), 0);
+        assert.equal(await page.locator(".showcase-thumbnails span").filter({ hasText: /^Image \d+$/ }).count(), 0);
         for (const selector of [
           ".demo-shell",
           ".vehicle-demo",
