@@ -136,6 +136,17 @@ body {
   margin: 0;
   min-width: 0;
 }
+.about-photo-grid.single {
+  grid-template-columns: minmax(0, 360px);
+}
+.about-photo-grid a {
+  display: block;
+}
+.about-photo-grid a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
 .about-photo-grid img {
   width: 100%;
   height: 300px;

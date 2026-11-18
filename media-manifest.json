@@ -1,5 +1,5 @@
 {
-  "review": "Curated technical figures, a metadata-stripped project clip and portrait extracted from user-supplied documents. Runtime binaries match the pinned ONNX Runtime Web package. Original reports, models and private applications are excluded.",
+  "review": "Curated report figures, teaching excerpts, user-supplied event and achievement photos, a metadata-stripped project clip, and pinned runtime assets. Visible badge/certificate identifiers are masked. Original documents, model weights and private applications remain excluded.",
   "assets": [
     {
       "file": "assets/reviewed/heart-block-diagram.webp",
@@ -125,6 +125,102 @@
       "kind": "image",
       "bytes": 187460,
       "sha256": "9aa04c584168bfe393af64849bba11f0a6963aa03f9a6c1139e823277d241355"
+    },
+    {
+      "file": "assets/reviewed/proton-award-2024.webp",
+      "kind": "image",
+      "bytes": 137316,
+      "sha256": "91e115783333fd0931fd4ac020e0e8d0bfb6f1b541c067df487c8f628841c369"
+    },
+    {
+      "file": "assets/reviewed/proton-grand-final-2024.webp",
+      "kind": "image",
+      "bytes": 103824,
+      "sha256": "003a2d006a473598dc5fa27e57ba33b06039aff3759a153c52ede5d8b4ffd368"
+    },
+    {
+      "file": "assets/reviewed/deans-list-award.webp",
+      "kind": "image",
+      "bytes": 172360,
+      "sha256": "2094998e795dd35bf131cea9c62bc930d1deb62248225dc769e089f1c9385afa"
+    },
+    {
+      "file": "assets/reviewed/intel-training.webp",
+      "kind": "image",
+      "bytes": 153372,
+      "sha256": "6fb638b1ad4a77ea515b6631032bf05579ca27182d667fb891ed88e8b5c427dd"
+    },
+    {
+      "file": "assets/reviewed/school-stem-demonstration.webp",
+      "kind": "image",
+      "bytes": 142986,
+      "sha256": "23a396c21d7fd0110b5232e5078264a5f40f89441380eaf1bd07d3c6315498e6"
+    },
+    {
+      "file": "assets/reviewed/career-fair-gala-2024.webp",
+      "kind": "image",
+      "bytes": 220980,
+      "sha256": "a1511528b2d7962b2a899c42646b51d66752b8f9b407093926f12b7ef1e62724"
+    },
+    {
+      "file": "assets/reviewed/career-fair-2024.webp",
+      "kind": "image",
+      "bytes": 151714,
+      "sha256": "683924f16e773de3ddaf7bad2f1e33ff25fd95beb3e42d437422e1c2fbcb69ea"
+    },
+    {
+      "file": "assets/reviewed/career-fair-2023.webp",
+      "kind": "image",
+      "bytes": 153450,
+      "sha256": "b527d386ea1f378b69690d7e8628a73642efa183592b4422c89de46ccc6112a8"
+    },
+    {
+      "file": "assets/reviewed/career-fair-committee.webp",
+      "kind": "image",
+      "bytes": 128212,
+      "sha256": "f56937b28a761963d9fce91c8b10ef69867e0edddaac4cfac9fafe9bff3f97a5"
+    },
+    {
+      "file": "assets/reviewed/career-fair-poster-2023.webp",
+      "kind": "image",
+      "bytes": 194424,
+      "sha256": "adffad953fa5a79a8070abf1e7493e9279ced81172e2bceee2a82a1753204f37"
+    },
+    {
+      "file": "assets/reviewed/ppsl-2023.webp",
+      "kind": "image",
+      "bytes": 161850,
+      "sha256": "da641727df50d239994ffb876979cab0c3e056311e441075402716c74ae418de"
+    },
+    {
+      "file": "assets/reviewed/school-outreach-parit-buntar.webp",
+      "kind": "image",
+      "bytes": 187104,
+      "sha256": "0ec77529510e5fdae58dfa11bce0c526169a5a120d2446efa886a53a56d74e27"
+    },
+    {
+      "file": "assets/reviewed/mathematics-outreach.webp",
+      "kind": "image",
+      "bytes": 182662,
+      "sha256": "67e3ab6e45bbd114680b010e90d04141a95ca9479e81277cccc547e520a41130"
+    },
+    {
+      "file": "assets/reviewed/deepavali-celebration.webp",
+      "kind": "image",
+      "bytes": 309474,
+      "sha256": "58010c4316076f391867ea1d6a73ceca9f9743b3f360ef5915a82426a29529f5"
+    },
+    {
+      "file": "assets/reviewed/deepavali-university.webp",
+      "kind": "image",
+      "bytes": 221850,
+      "sha256": "f694da9ceb811e4982bf9e62d9d8e9a1d7ffce7b2855049101f495f7943d9293"
+    },
+    {
+      "file": "assets/reviewed/team-gathering.webp",
+      "kind": "image",
+      "bytes": 241928,
+      "sha256": "bc74e42c4d71362612db4fb79373bc16c6d113bf667c81ec6d2dc3d2f8156a2e"
     }
   ]
 }

@@ -16,18 +16,37 @@ export function AboutLinks() {
   );
 }
 
-export function PhotoGallery({ group }: { group: AboutPhoto["group"] }) {
-  const photos = aboutPhotos.filter((photo) => photo.group === group);
+export function PhotoGallery({
+  group,
+  topic,
+}: {
+  group: AboutPhoto["group"];
+  topic?: AboutPhoto["topic"];
+}) {
+  const photos = aboutPhotos.filter(
+    (photo) => photo.group === group && (!topic || photo.topic === topic),
+  );
   if (!photos.length) return null;
   return (
-    <div className="about-photo-grid">
+    <div
+      className={
+        photos.length === 1 ? "about-photo-grid single" : "about-photo-grid"
+      }
+    >
       {photos.map((photo) => (
         <figure key={photo.file}>
-          <img
-            loading="lazy"
-            src={import.meta.env.BASE_URL + "assets/reviewed/" + photo.file}
-            alt={photo.alt}
-          />
+          <a
+            href={import.meta.env.BASE_URL + "assets/reviewed/" + photo.file}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View photo: ${photo.caption}`}
+          >
+            <img
+              loading="lazy"
+              src={import.meta.env.BASE_URL + "assets/reviewed/" + photo.file}
+              alt={photo.alt}
+            />
+          </a>
           <figcaption>{photo.caption}</figcaption>
         </figure>
       ))}
@@ -108,6 +127,7 @@ export default function Experience({
               <span>Digital design</span>
               <span>Verification</span>
             </div>
+            <PhotoGallery group="experience" topic="training" />
           </div>
         </article>
         <article>
@@ -119,6 +139,7 @@ export default function Experience({
               secretary for one year. My work included coordinating activities,
               organising events and supporting the club’s administration.
             </p>
+            <PhotoGallery group="experience" topic="clubs" />
           </div>
         </article>
         <article>
@@ -130,6 +151,7 @@ export default function Experience({
               the gala dinners. I helped with event arrangements, programme flow
               and communication on the day.
             </p>
+            <PhotoGallery group="experience" topic="events" />
           </div>
         </article>
         <article>
@@ -142,10 +164,10 @@ export default function Experience({
               work with other students and contribute to the university
               community.
             </p>
+            <PhotoGallery group="experience" topic="activities" />
           </div>
         </article>
       </div>
-      <PhotoGallery group="experience" />
       {!embedded && <AboutLinks />}
     </section>
   );
