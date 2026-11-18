@@ -77,6 +77,12 @@ try {
   await page.getByRole("button", { name: "Enter", exact: true }).click();
   await page.getByText("Input received", { exact: true }).waitFor();
   await open("projects/plc-sorting");
+  // A cold hosted iframe may display its HTML before its module installs controls.
+  // The initial resize message is sent after the demo has finished starting.
+  await page.waitForFunction(() => {
+    const frame = document.querySelector(".demo-frame");
+    return frame && frame.style.height !== "800px";
+  });
   await page.getByRole("button", { name: "Dark mode", exact: true }).click();
   const plc = page.frameLocator(".demo-frame");
   await plc.locator("#category").selectOption("plastic");
