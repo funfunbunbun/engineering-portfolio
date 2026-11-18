@@ -17,7 +17,6 @@ import GuidedTour from "./components/GuidedTour";
 import VehicleDemo from "./components/VehicleDemo";
 import DemoEmbed from "./components/DemoEmbed";
 import ProjectWorkbench from "./components/ProjectWorkbench";
-import Demos from "./pages/Demos";
 import { WeatherLab, NeuralLab } from "./components/IntelligentLabs";
 import AlgorithmExcerpt from "./components/AlgorithmExcerpt";
 import AdditionalDemo from "./components/AdditionalDemos";
@@ -68,7 +67,6 @@ function Header() {
           Home
         </NavLink>
         <NavLink to="/projects">Projects</NavLink>
-        <NavLink to="/demos">Demos</NavLink>
         <NavLink to="/about">About me</NavLink>
         <NavLink className="nav-contact" to="/contact">
           Let’s talk <Arrow diagonal />
@@ -247,9 +245,6 @@ function Home() {
           <div className="hero-actions">
             <Link className="button" to="/projects">
               View projects <Arrow />
-            </Link>
-            <Link className="text-link" to="/demos">
-              Try the demos <Arrow diagonal />
             </Link>
           </div>
           <div className="hero-note">
@@ -703,7 +698,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/demos" element={<Demos />} />
+          <Route path="/demos" element={<Navigate replace to="/projects" />} />
           <Route path="/projects/:id" element={<ProjectPage />} />
           <Route
             path="/experience"

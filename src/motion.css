@@ -229,3 +229,30 @@ html[data-theme="dark"] .vehicle-demo :is(h3, h4) {
     transition: none;
   }
 }
+
+/* Shared demo containers must follow the active theme, including empty areas. */
+html[data-theme="dark"]
+  :is(
+    .demo-shell,
+    .extra-demo,
+    .heart-demo,
+    .heart-layout,
+    .heart-controls,
+    .project-explanation .evidence-note
+  ) {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+html[data-theme="dark"]
+  :is(
+    .bench-totals b,
+    .bench-totals span,
+    .heart-controls label,
+    .project-explanation .evidence-note
+  ) {
+  color: var(--ink);
+}
+html[data-theme="dark"] .heart-controls .muted {
+  color: var(--muted);
+}

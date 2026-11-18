@@ -35,6 +35,13 @@ async function overflow(label) {
 }
 try {
   await open();
+  assert.equal(
+    await page
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: "Demos", exact: true })
+      .count(),
+    0,
+  );
   await page
     .getByRole("heading", { name: /Practical.*engineering.*solutions/ })
     .waitFor();
@@ -59,7 +66,13 @@ try {
   );
   assert.ok(links.includes("projects/nano-hmi"));
   assert.ok(!links.some((link) => link.includes("planting")));
-  assert.equal(await page.locator(".year-group").filter({hasText:/Year [1-4]/}).count(),0);
+  assert.equal(
+    await page
+      .locator(".year-group")
+      .filter({ hasText: /Year [1-4]/ })
+      .count(),
+    0,
+  );
   await page
     .getByRole("searchbox", { name: "Search projects" })
     .fill("zzzz-no-match");
@@ -167,6 +180,29 @@ try {
       await open(route);
       await overflow(width + " " + route);
       if (route.startsWith("projects/")) {
+        for (const selector of [
+          ".demo-shell",
+          ".heart-layout",
+          ".heart-controls",
+          ".evidence-note",
+        ]) {
+          for (const panel of await page.locator(selector).all()) {
+            assert.equal(
+              await panel.evaluate(
+                (element) => getComputedStyle(element).backgroundColor,
+              ),
+              "rgb(25, 41, 52)",
+              route + " dark panel: " + selector,
+            );
+          }
+        }
+        for (const total of await page.locator(".bench-totals b").all()) {
+          assert.equal(
+            await total.evaluate((element) => getComputedStyle(element).color),
+            "rgb(227, 237, 243)",
+            "Robot totals must remain readable in dark mode",
+          );
+        }
         const flow = page.locator(".project-flowchart img");
         await flow.scrollIntoViewIfNeeded();
         await flow.evaluate((image) => image.decode());

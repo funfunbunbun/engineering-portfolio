@@ -1,6 +1,6 @@
 # Project demos
 
-The Demos page links to all 16 current project pages. Each page includes a summary, an interactive demo or recording, and a Mermaid flowchart.
+Open a project from Projects to use its embedded demo. Each project includes a summary, an interactive demo or recording, and a Mermaid flowchart. The separate Demos page has been removed; its old URL redirects to Projects.
 
 - Vehicle detection: play the original annotated clip. Optionally load a compatible local ONNX model and detect the current frame. Browser inference does not calculate speed.
 - PLC sorting: select a material and start sorting. The material repeats; changing it applies to the next object. Pause, step and reset are available.
