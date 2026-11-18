@@ -17,3 +17,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
 import "./refresh.css";
 import "./motion.css";
+import "./review.css";

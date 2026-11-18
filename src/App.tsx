@@ -1,4 +1,5 @@
 import ProjectMechanism from "./components/ProjectMechanism";
+import ProjectDeck from "./components/ProjectDeck";
 import { projectYears, yearGroups } from "./data/projectYears";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -254,28 +255,7 @@ function Home() {
             </p>
           </div>
         </div>
-        <div className="hero-lab">
-          <div className="lab-toolbar">
-            <span>FPGA fan controller</span>
-            <span>PWM control</span>
-          </div>
-          <div className="lab-figure">
-            <ProjectVisual id="fpga-fan" hero />
-          </div>
-          <div className="lab-bottom">
-            <span className="lab-label">
-              Temperature sensing
-              <br />
-              <b>and fan speed control</b>
-            </span>
-            <Link to="/projects/fpga-fan" className="lab-try">
-              Try the fan controller <Arrow diagonal />
-            </Link>
-          </div>
-          <span className="lab-footnote">
-            Open the demo to adjust the duty cycle.
-          </span>
-        </div>
+        <ProjectDeck />
       </section>
       <div className="capability-strip">
         <span>Embedded systems</span>
@@ -349,6 +329,15 @@ function DetailContent({ project }: { project: Project }) {
       : project.id === "plc-sorting"
         ? "plc-hmi-sorting-machine"
         : null;
+  const hasEngineeringDetails = [
+    "fpga-fan",
+    "plc-sorting",
+    "vehicle-velocity",
+    "smart-classroom",
+    "heart-monitor",
+    "traffic-light",
+    "weather-expert",
+  ].includes(project.id);
   return (
     <section className="section-wrap detail-page">
       <Link to="/projects" className="back-link">
@@ -393,21 +382,30 @@ function DetailContent({ project }: { project: Project }) {
           <span className="eyebrow">Project demo</span>
           <p>Your inputs stay in this browser.</p>
         </div>
-        <div className="mode-switch" role="group" aria-label="Display mode">
-          <button
-            aria-pressed={!engineering}
-            onClick={() => setEngineering(false)}
-          >
-            Overview
-          </button>
-          <button
-            aria-pressed={engineering}
-            onClick={() => setEngineering(true)}
-          >
-            Engineering Mode
-          </button>
-        </div>
+        {hasEngineeringDetails && (
+          <div className="mode-switch" role="group" aria-label="Display mode">
+            <button
+              aria-pressed={!engineering}
+              onClick={() => setEngineering(false)}
+            >
+              Overview
+            </button>
+            <button
+              aria-pressed={engineering}
+              onClick={() => setEngineering(true)}
+            >
+              Engineering Mode
+            </button>
+          </div>
+        )}
       </div>
+      <p className="mode-description" role="status">
+        {!hasEngineeringDetails
+          ? "Use the demo controls below. Technical details are included on this page."
+          : engineering
+            ? "Engineering Mode is on. The demo includes additional rules, equations or state details."
+            : "Use the demo controls below. Choose Engineering Mode for rules, equations or state details."}
+      </p>
       <GuidedTour project={project} />
       <div className="demo-shell" id="interactive-demo">
         <ProjectWorkbench id={project.id} />

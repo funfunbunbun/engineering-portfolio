@@ -84,7 +84,7 @@ const coreProjects: Project[] = [
     tour: [
       {
         title: "Set the scene",
-        text: "This browser simulation represents a classroom using temperature, ambient light, occupancy, and carbon dioxide inputs. No live sensors are connected.",
+        text: "This browser simulation represents a classroom using temperature, ambient light, occupancy and an illustrative air-quality input. No live sensors are connected.",
       },
       {
         title: "Change an input",
@@ -92,7 +92,7 @@ const coreProjects: Project[] = [
       },
       {
         title: "Inspect the decision",
-        text: "Engineering Mode shows the exact rules and an event history. Emptying the room disables the fan and lights. High simulated carbon dioxide still triggers a ventilation alert.",
+        text: "Engineering Mode shows the demo rules and an event history. Emptying the room disables the fan and lights. High simulated air-quality readings trigger an alert and open the window while the room is occupied.",
       },
     ],
   },

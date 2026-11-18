@@ -45,6 +45,33 @@ try {
   await page
     .getByRole("heading", { name: /Practical.*engineering.*solutions/ })
     .waitFor();
+  const deck = page.getByRole("region", { name: "Featured projects" });
+  await deck.getByRole("button", { name: "Next featured project" }).click();
+  assert.match(await deck.getByRole("heading").innerText(), /Vehicle detection/);
+  assert.equal(await deck.getByRole("link", { name: "View project" }).getAttribute("href"), "#/projects/vehicle-velocity");
+  await deck.focus();
+  await page.keyboard.press("ArrowLeft");
+  assert.match(await deck.getByRole("heading").innerText(), /FPGA fan controller/);
+  await deck.getByRole("button", { name: "Show Smart classroom" }).click();
+  assert.match(await deck.getByRole("heading").innerText(), /Smart classroom/);
+  await deck.getByRole("link", { name: "View project" }).click();
+  await page.locator(".room-demo").waitFor();
+  await page.getByRole("button", { name: "Engineering Mode", exact: true }).click();
+  assert.match(await page.locator(".mode-description").innerText(), /Engineering Mode is on/);
+  await open();
+  await open("projects/robot-recycling");
+  assert.equal(await page.getByRole("group", { name: "Display mode" }).count(), 0);
+  await open();
+  await page.setViewportSize({ width: 375, height: 850 });
+  await overflow("Home carousel on mobile");
+  await deck.dispatchEvent("pointerdown", { pointerType: "touch", clientX: 280, clientY: 200 });
+  await deck.dispatchEvent("pointerup", { pointerType: "touch", clientX: 150, clientY: 205 });
+  assert.match(await deck.getByRole("heading").innerText(), /Vehicle detection/);
+  await deck.dispatchEvent("pointerdown", { pointerType: "touch", clientX: 200, clientY: 100 });
+  await deck.dispatchEvent("pointerup", { pointerType: "touch", clientX: 210, clientY: 240 });
+  assert.match(await deck.getByRole("heading").innerText(), /Vehicle detection/);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await deck.getByRole("button", { name: "Show FPGA fan controller" }).click();
   await page.getByRole("button", { name: "Dark mode", exact: true }).click();
   assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
   await page.reload();
@@ -182,6 +209,9 @@ try {
       if (route.startsWith("projects/")) {
         for (const selector of [
           ".demo-shell",
+          ".vehicle-demo",
+          ".room-demo",
+          ".sensor-controls",
           ".heart-layout",
           ".heart-controls",
           ".evidence-note",

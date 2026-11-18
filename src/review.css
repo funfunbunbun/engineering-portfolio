@@ -1,0 +1,120 @@
+/* Review refinements: a browsable project deck and more readable supporting text. */
+.project-deck.hero-lab {
+  min-width: 0;
+  isolation: isolate;
+  border: 1px solid #466074;
+  border-radius: 10px;
+  box-shadow: none;
+  touch-action: pan-y;
+  margin: 0 14px 14px 0;
+}
+html[data-theme="dark"] .project-deck.hero-lab { box-shadow: none; }
+.project-deck::before, .project-deck::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  border-radius: inherit;
+  background: var(--soft);
+  z-index: -1;
+  pointer-events: none;
+}
+.project-deck::before { transform: translate(7px, 7px); }
+.project-deck::after { transform: translate(14px, 14px); z-index: -2; }
+.deck-slide { background: #162737; border-radius: 9px 9px 0 0; animation: deck-enter 200ms ease-out; }
+.project-deck .lab-toolbar {
+  font-size: 12px;
+  letter-spacing: .02em;
+  padding: 20px 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: #bcd4e5;
+}
+.project-deck .hero-visual { height: 240px; }
+.deck-copy { padding: 24px; border-top: 1px solid #ffffff22; }
+.deck-copy h2 {
+  color: #f0f5f9;
+  font-size: clamp(24px, 2.3vw, 30px);
+  line-height: 1.25;
+  min-height: 2.5em;
+  margin-bottom: 14px;
+}
+.deck-copy p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #bcd4e5;
+  min-height: 4.95em;
+  margin-bottom: 18px;
+}
+.project-deck .lab-try { width: fit-content; font-size: 14px; min-height: 44px; }
+.deck-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 18px;
+  background: #162737;
+  border-top: 1px solid #ffffff22;
+  border-radius: 0 0 9px 9px;
+}
+.deck-navigation button {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid #526d80;
+  border-radius: 50%;
+  font-size: 22px;
+  color: #e3edf3;
+}
+.deck-navigation button:hover { background: #2b465b; }
+.deck-navigation button:focus-visible, .project-deck:focus-visible {
+  outline: 3px solid #80bdf0;
+  outline-offset: 3px;
+}
+.deck-positions { display: flex; }
+.deck-positions button { min-width: 24px; border: 0; border-radius: 6px; }
+.deck-positions button span { width: 7px; height: 7px; border-radius: 50%; background: #829eb2; }
+.deck-positions button[aria-pressed="true"] span { background: #e3edf3; width: 18px; border-radius: 4px; }
+.deck-count { font-size: 13px; color: #bcd4e5; white-space: nowrap; }
+.hero-copy > p { font-size: 17px; }
+.hero-note p { font-size: 15px; }
+.eyebrow { font-size: 12px; }
+.hero .eyebrow { font-size: 12px; }
+.filter { font-size: 13px; min-height: 44px; border-color: var(--line); background: var(--surface); }
+.filters { gap: 10px; }
+.card-copy { padding: 26px 6px 10px; gap: 8px; }
+.card-meta { flex-wrap: wrap; font-size: 12px; line-height: 1.6; gap: 8px 14px; }
+.status-label { font-size: 11px; white-space: normal; }
+.card-category { font-size: 11px; }
+.card-copy p { font-size: 15px; line-height: 1.75; max-width: none; }
+.tags > span { font-size: 12px; }
+.card-demo-cta, .text-link, .back-link { font-size: 14px; }
+.button, .button.small { font-size: 14px; }
+.mode-bar p, .mode-switch button, .tour-start > span { font-size: 13px; }
+.mode-description { font-size: 14px; color: var(--muted); margin: 0 0 22px; }
+.demo-shell :is(p, label, select, input, button, summary, .muted) { font-size: 14px; }
+.demo-shell :is(.evidence-note, .demo-disclaimer, .bench-note, .bench-readout small, .range-ends) { font-size: 13px; line-height: 1.7; }
+.project-explanation :is(p, .evidence-note), .project-background p { font-size: 15px; }
+.experience-timeline :is(p, li), .teaching-method p, .teaching-privacy, .beyond-card p { font-size: 15px; }
+.timeline-kind, .timeline-subtitle { font-size: 13px; }
+@keyframes deck-enter { from { opacity: .6; } to { opacity: 1; } }
+@media (max-width: 1050px) {
+  .hero { gap: 36px; }
+  .deck-navigation { padding-inline: 10px; gap: 4px; }
+  .deck-positions button { min-width: 22px; }
+}
+@media (max-width: 600px) {
+  .project-deck .lab-toolbar { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .project-deck .hero-visual { height: 210px; }
+  .deck-copy { padding: 22px; }
+  .deck-copy h2 { font-size: 25px; }
+  .deck-copy p { min-height: 6.6em; }
+}
+@media (max-width: 360px) {
+  .deck-copy h2 { min-height: 3.75em; }
+  .deck-copy p { min-height: 8.25em; }
+}
+@media (prefers-reduced-motion: reduce) { .deck-slide { animation: none; } }
