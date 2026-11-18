@@ -293,3 +293,5 @@ input:focus-visible {
     animation: none !important;
   }
 }
+
+html[data-theme="dark"] {color:#dce8f0;color-scheme:dark}html[data-theme="dark"] body{background:#192934;color:#dce8f0}html[data-theme="dark"] :is(.fan-panel,.signal-panel,.controls,.scene,.hmi,.status,.panel,.diagram,.readout,.state-panel,.machine-panel,.counts,.bin-counts){background:#213541;color:#dce8f0;border-color:#415969}html[data-theme="dark"] :is(button,select){background:#294859;color:#e4f0f7;border-color:#456575}html[data-theme="dark"] :is(p,label,small,.muted,.help,.legend){color:#afc5d4}

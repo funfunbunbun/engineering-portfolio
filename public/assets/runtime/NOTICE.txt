@@ -1,0 +1,7 @@
+ONNX Runtime Web 1.31.1
+Copyright (c) Microsoft Corporation. MIT License; see LICENSE.txt.
+The runtime module and WebAssembly binary are unmodified files from the pinned npm package.
+Upstream source: https://github.com/microsoft/onnxruntime
+Additional upstream third-party notices: https://github.com/microsoft/onnxruntime/blob/main/ThirdPartyNotices.txt
+
+No project model weights, private datasets or original project applications are distributed here.

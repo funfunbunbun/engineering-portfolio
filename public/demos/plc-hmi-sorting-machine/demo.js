@@ -1,13 +1,34 @@
-import { initialState, nextState } from "./model.js";
+﻿import { initialState, nextState } from "./model.js";
 
 let state = initialState();
-let timer;
+let running = false;
+let motion;
 const select = document.querySelector("#category");
+const object = document.querySelector("#object");
+const runButton = document.querySelector("#run");
+const scene = document.querySelector(".conveyor-scene");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const destinations = {
+  metal: [712, 62],
+  plastic: [712, 160],
+  other: [712, 219],
+};
+
+function transformFor(item) {
+  const [x, y] = {
+    idle: [100, 124],
+    sense: [350, 124],
+    route: [560, 124],
+    delivered: destinations[item.category],
+  }[item.phase];
+  return `translate(${x}px, ${y}px)`;
+}
+
 function render() {
   document.querySelectorAll("[data-state]").forEach((element) => {
-    element.classList.toggle("active", element.dataset.state === state.phase);
-    if (element.dataset.state === state.phase)
-      element.setAttribute("aria-current", "step");
+    const active = element.dataset.state === state.phase;
+    element.classList.toggle("active", active);
+    if (active) element.setAttribute("aria-current", "step");
     else element.removeAttribute("aria-current");
   });
   const sensing = state.phase === "sense";
@@ -17,82 +38,132 @@ function render() {
   document
     .querySelector("#sensor-beam")
     .setAttribute("stroke", sensing ? "#b2e4b9" : "#7998ad");
-  const destinations = {
-    metal: [712, 26],
-    plastic: [712, 124],
-    other: [712, 189],
-  };
-  const positions = {
-    idle: [100, 110],
-    sense: [350, 110],
-    route: [560, 110],
-    delivered: destinations[state.category],
-  };
-  const position = positions[state.phase];
-  const object = document.querySelector("#object");
-  object.setAttribute("transform", `translate(${position[0]} ${position[1]})`);
+  object.style.transform = transformFor(state);
   object.querySelector("text").textContent = state.category[0].toUpperCase();
-  object
-    .querySelector("rect")
-    .setAttribute(
-      "fill",
-      { metal: "#a4cfe6", plastic: "#d5c59b", other: "#b8c6b3" }[
-        state.category
-      ],
-    );
+  object.querySelector("rect").setAttribute(
+    "fill",
+    { metal: "#a4cfe6", plastic: "#d5c59b", other: "#b8c6b3" }[
+      state.category
+    ],
+  );
+  const material = state.category[0].toUpperCase() + state.category.slice(1);
   const messages = {
-    idle: "Ready. Choose an object and advance the sequence.",
-    sense: `Sensor detects the illustrative ${state.category} object.`,
-    route: `Routing decision: ${state.category} destination selected.`,
-    delivered: `Object delivered to the ${state.category} destination. Next step starts a new cycle.`,
+    idle: `${material} item ready.`,
+    sense: `${material} detected at the sensor.`,
+    route: `Moving to the ${state.category} bin.`,
+    delivered: `${material} item delivered.`,
   };
   document.querySelector("#status").textContent = messages[state.phase];
+  document.querySelector("#next-material").textContent =
+    select.value === state.category
+      ? `Repeating ${select.value} items.`
+      : `Next item: ${select.value}. Current item: ${state.category}.`;
   for (const [category, count] of Object.entries(state.counts))
     document.querySelector(`#count-${category}`).textContent = count;
-  select.disabled = state.phase !== "idle" || Boolean(timer);
+  runButton.textContent = running
+    ? "Pause sorting"
+    : motion
+      ? "Resume sorting"
+      : "Start sorting";
+  runButton.setAttribute("aria-pressed", String(running));
+  scene.classList.toggle("running", running);
 }
-function stop() {
-  if (timer) clearInterval(timer);
-  timer = undefined;
-  document.querySelector("#run").textContent = "Run sequence";
+
+function startMotion() {
+  // Re-read the selection for each new item; keep an in-flight material fixed.
+  const target = nextState(state, select.value);
+  const returning = target.phase === "idle";
+  const from = transformFor(state);
+  const to = returning ? from : transformFor(target);
+  const animation = object.animate(
+    [
+      { transform: from, opacity: 1 },
+      { transform: to, opacity: returning && !reducedMotion.matches ? 0 : 1 },
+    ],
+    {
+      duration: returning ? 500 : target.phase === "sense" ? 1450 : 1100,
+      delay: returning ? 450 : 150,
+      easing: reducedMotion.matches ? "steps(1, end)" : "linear",
+      fill: "forwards",
+    },
+  );
+  motion = animation;
+  animation.onfinish = () => {
+    if (motion !== animation) return;
+    // Use the latest material even if it changed during the brief bin dwell.
+    state = returning ? nextState(state, select.value) : target;
+    motion = undefined;
+    animation.cancel();
+    render();
+    if (running) startMotion();
+  };
 }
-function advance() {
-  state = nextState(state);
-  if (state.phase === "delivered") stop();
+
+function pause() {
+  running = false;
+  motion?.pause();
   render();
 }
+
+function cancelMotion() {
+  if (!motion) return;
+  motion.onfinish = null;
+  motion.cancel();
+  motion = undefined;
+}
+
 document.querySelector("#step").addEventListener("click", () => {
-  stop();
-  advance();
+  running = false;
+  cancelMotion();
+  state = nextState(state, select.value);
+  render();
 });
-document.querySelector("#run").addEventListener("click", () => {
-  if (timer) {
-    stop();
-    render();
+
+runButton.addEventListener("click", () => {
+  if (running) {
+    pause();
     return;
   }
-  document.querySelector("#run").textContent = "Pause sequence";
-  timer = setInterval(advance, 900);
+  running = true;
+  if (motion) motion.play();
+  else startMotion();
   render();
 });
+
 select.addEventListener("change", () => {
-  state = { ...state, category: select.value };
+  if (state.phase === "idle" && !motion)
+    state = { ...state, category: select.value };
   render();
 });
+
 document.querySelector("#reset").addEventListener("click", () => {
-  stop();
-  state = initialState();
-  select.value = "metal";
+  running = false;
+  cancelMotion();
+  state = initialState(select.value);
   render();
+});
+
+reducedMotion.addEventListener("change", () => {
+  // Change interpolation without advancing a paused simulation or its totals.
+  if (!motion) return;
+  motion.effect.updateTiming({
+    easing: reducedMotion.matches ? "steps(1, end)" : "linear",
+  });
+  if (reducedMotion.matches)
+    motion.effect.setKeyframes(
+      motion.effect.getKeyframes().map(({ offset, transform }) => ({
+        offset,
+        transform,
+        opacity: 1,
+      })),
+    );
 });
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    stop();
-    render();
-  }
+  if (document.hidden) pause();
 });
-window.addEventListener("pagehide", stop);
+window.addEventListener("pagehide", pause);
 render();
+
 // Share only layout height with the trusted portfolio parent.
 function reportHeight() {
   if (window.parent !== window)

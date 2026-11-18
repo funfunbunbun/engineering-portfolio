@@ -1,5 +1,5 @@
 {
-  "review": "Selected technical figures from user-supplied academic reports. Prepared for final publication review; no full documents or metadata included.",
+  "review": "Curated technical figures, a metadata-stripped project clip and portrait extracted from user-supplied documents. Runtime binaries match the pinned ONNX Runtime Web package. Original reports, models and private applications are excluded.",
   "assets": [
     {
       "file": "assets/reviewed/heart-block-diagram.webp",
@@ -64,12 +64,67 @@
     {
       "file": "assets/reviewed/planting-simulation.webp",
       "sha256": "79246f882f50422558a7cd574bf19389bb13de9b1d8f20219b6fac1718ae674a",
-      "bytes": 28664
+      "bytes": 28664,
+      "historical": true
     },
     {
       "file": "assets/reviewed/perceptron-architecture.webp",
       "sha256": "8a549d4d75d79d22ee5732b21f54b9c4c8bcc24c9c8556445fec2c33e04c8c52",
       "bytes": 7590
+    },
+    {
+      "file": "assets/reviewed/vehicle-demo-poster.webp",
+      "kind": "image",
+      "sha256": "8591b41d6527a62b42888d6cea73f78771389f6f9d60b6a1349e92708f76e5bb",
+      "bytes": 161046
+    },
+    {
+      "file": "assets/reviewed/heart-oscilloscope.webp",
+      "kind": "image",
+      "sha256": "f5c2df817040deab084c291fb9551b20f30f4c4b91b0ef141e6d5558344892ea",
+      "bytes": 216134
+    },
+    {
+      "file": "assets/reviewed/vinay-tutoring-portrait.webp",
+      "kind": "image",
+      "sha256": "8237071de73cc8ddde144d6676e3135a4c25d9b436435a589e7a5a48026d14b6",
+      "bytes": 89100
+    },
+    {
+      "file": "assets/reviewed/vehicle-speed-demo.mp4",
+      "kind": "video",
+      "sha256": "3e6ddc37c658a4fd4c38d06772128752c8ad2d496edc1f09b5765ef823205b77",
+      "bytes": 744047
+    },
+    {
+      "file": "assets/runtime/ort-wasm-simd-threaded.mjs",
+      "kind": "runtime",
+      "sha256": "30ed0b5cd1182ede931fea448afb567d4dc705ec957af09f108a2be5f770dac3",
+      "bytes": 24738
+    },
+    {
+      "file": "assets/runtime/ort-wasm-simd-threaded.wasm",
+      "kind": "runtime",
+      "sha256": "4b884c203b0fa48d057be3332c65513ff85aa3c5bddd6946acc0fab7ecda001d",
+      "bytes": 14848852
+    },
+    {
+      "file": "assets/reviewed/maths-t-worked-example.webp",
+      "kind": "image",
+      "bytes": 15780,
+      "sha256": "7a8e31e2c25b2e2a659ab49c7ef6a0565051b54c309a6d9291356c6e2481f0bd"
+    },
+    {
+      "file": "assets/reviewed/maths-t-substitution.webp",
+      "kind": "image",
+      "bytes": 11078,
+      "sha256": "eeb53b2df730400cefb1ff908b64ec00611c2aaa2a3f0dccb502df1c09c40cc6"
+    },
+    {
+      "file": "assets/reviewed/fan-oscilloscope.webp",
+      "kind": "image",
+      "bytes": 187460,
+      "sha256": "9aa04c584168bfe393af64849bba11f0a6963aa03f9a6c1139e823277d241355"
     }
   ]
 }

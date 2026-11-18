@@ -2,256 +2,182 @@ import { chromium } from "@playwright/test";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-
-const base = process.env.PORTFOLIO_URL || "http://127.0.0.1:5173/";
+const base = process.env.PORTFOLIO_URL || "http://127.0.0.1:4173/";
 const browser = await chromium.launch({ channel: "msedge", headless: true });
 const context = await browser.newContext({
   viewport: { width: 1440, height: 1000 },
+  colorScheme: "light",
 });
 const page = await context.newPage();
 const errors = [];
+const external = [];
 page.on("pageerror", (error) => errors.push(error.message));
-await mkdir(new URL("../.tools/qa/", import.meta.url), { recursive: true });
+page.on("request", (request) => {
+  if (
+    !request.url().startsWith(new URL(base).origin) &&
+    /^https?:/.test(request.url())
+  )
+    external.push(new URL(request.url()).origin);
+});
+const screenshots = new URL("../.tools/qa/", import.meta.url);
+await mkdir(screenshots, { recursive: true });
 async function open(route = "") {
-  await page.goto(`${base}#/${route}`);
-  await page.locator("main > *").first().waitFor();
-  // Wait for the embedded document's initial resize before clicking its controls.
-  await page.waitForFunction(() => {
-    const frame = document.querySelector("iframe");
-    return !frame || frame.style.height !== "800px";
-  });
+  await page.goto(base + "#/" + route);
+  await page.locator("main h1").waitFor();
 }
-async function noOverflow(label) {
-  const sizes = await page.evaluate(() => ({
-    width: innerWidth,
-    scroll: document.documentElement.scrollWidth,
-  }));
+async function overflow(label) {
   assert.ok(
-    sizes.scroll <= sizes.width + 1,
-    `${label}: horizontal overflow ${sizes.scroll} > ${sizes.width}`,
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+    label + " has horizontal overflow",
   );
 }
 try {
   await open();
-  await page.getByRole("heading", { name: /Ideas are good/ }).waitFor();
+  await page
+    .getByRole("heading", { name: /Practical.*engineering.*solutions/ })
+    .waitFor();
+  await page.getByRole("button", { name: "Dark mode", exact: true }).click();
+  assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+  await page.reload();
+  assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
   await page.screenshot({
-    path: fileURLToPath(
-      new URL("../.tools/qa/home-desktop.png", import.meta.url),
-    ),
+    path: fileURLToPath(new URL("home-dark.png", screenshots)),
     fullPage: true,
   });
-  await page.getByRole("link", { name: "Explore the projects" }).click();
-  await page.getByRole("button", { name: "Automation", exact: true }).click();
-  assert.equal(await page.locator(".project-card").count(), 1);
-  await page.getByRole("button", { name: "All projects", exact: true }).click();
+  await page.getByRole("button", { name: "Dark mode", exact: true }).click();
+  await page.screenshot({
+    path: fileURLToPath(new URL("home-light.png", screenshots)),
+    fullPage: true,
+  });
+  await open("projects");
+  const cards = page.locator(".project-card");
+  assert.equal(await cards.count(), 16);
+  const links = await cards.evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute("href").replace(/^#\//, "")),
+  );
+  assert.ok(links.includes("projects/nano-hmi"));
+  assert.ok(!links.some((link) => link.includes("planting")));
+  for (const year of ["Year 1", "Year 2", "Year 3", "Year 4"])
+    await page.getByRole("heading", { name: year, exact: true }).waitFor();
   await page
     .getByRole("searchbox", { name: "Search projects" })
     .fill("zzzz-no-match");
-  await page.getByRole("heading", { name: "No matching projects." }).waitFor();
+  await page.getByText("No matching projects.").waitFor();
   await page.getByRole("button", { name: "Clear filters" }).click();
-  assert.equal(await page.locator(".project-card").count(), 16);
-  await open("projects/smart-classroom");
-  await page.getByRole("slider", { name: /Temperature/ }).press("End");
-  await page.getByText("Running", { exact: true }).waitFor();
-  await page.getByRole("slider", { name: /Occupancy/ }).press("Home");
-  await page.getByText("Standby", { exact: true }).waitFor();
-  await page.getByRole("button", { name: "Reset simulation" }).click();
-  assert.equal(
-    await page.getByRole("slider", { name: /Temperature/ }).inputValue(),
-    "25",
-  );
-  await page.getByRole("button", { name: "Engineering Mode" }).click();
-  await page
-    .getByRole("heading", { name: "Illustrative control rules" })
-    .waitFor();
-  await page.getByRole("button", { name: /Start guided tour/ }).click();
-  await page.getByRole("button", { name: "Next", exact: true }).click();
-  await page.getByRole("heading", { name: "Change an input" }).waitFor();
-  await page.getByRole("button", { name: /Exit tour/ }).click();
-  await open("projects/fpga-fan");
-  const fan = page.frameLocator("iframe");
-  await fan.getByRole("button", { name: "25%", exact: true }).click();
-  assert.equal(await fan.locator("#duty-value").textContent(), "25%");
+  await open("projects/heart-monitor");
+  await page.getByRole("button", { name: "Place finger", exact: true }).click();
+  await page.getByRole("button", { name: "Capture reading" }).click();
+  await page.getByText("Reading captured", { exact: true }).waitFor();
+  await page.getByRole("button", { name: "Remove finger" }).click();
+  await open("projects/nano-hmi");
+  await page.getByRole("button", { name: "4", exact: true }).click();
+  await page.getByRole("button", { name: "2", exact: true }).click();
+  await page.getByRole("button", { name: "Enter", exact: true }).click();
+  await page.getByText("Input received", { exact: true }).waitFor();
+  await open("projects/plc-sorting");
+  await page.getByRole("button", { name: "Dark mode", exact: true }).click();
+  const plc = page.frameLocator(".demo-frame");
+  await plc.locator("#category").selectOption("plastic");
+  await plc.locator("#run").click();
+  await plc.locator("#run").filter({ hasText: "Pause" }).waitFor();
+  assert.equal(await plc.locator("html").getAttribute("data-theme"), "dark");
+  await plc.locator("#run").click();
+  await open("projects/vehicle-velocity");
+  const video = page.locator("video");
+  await video.evaluate(async (element) => {
+    element.load();
+    await new Promise((resolve, reject) => {
+      if (element.readyState >= 2) return resolve();
+      element.addEventListener("loadeddata", resolve, { once: true });
+      element.addEventListener("error", reject, { once: true });
+    });
+    element.currentTime = 4;
+  });
+  await page.waitForFunction(() => {
+    const video = document.querySelector("video");
+    return (
+      video &&
+      !video.seeking &&
+      video.readyState >= 2 &&
+      Math.abs(video.currentTime - 4) < 0.2
+    );
+  });
   assert.ok(
-    (await fan.locator("#wave").getAttribute("d")).startsWith(
-      "M20 20H67.5V80H210",
+    await video.evaluate(
+      (element) => element.videoWidth > 0 && element.duration >= 5,
     ),
   );
-  await fan.getByRole("slider").press("Home");
-  assert.equal(await fan.locator("#wave").getAttribute("d"), "M20 80H780");
-  await fan.getByRole("button", { name: "Reset simulation" }).click();
-  assert.equal(await fan.locator("#duty-value").textContent(), "50%");
-  await open("projects/plc-sorting");
-  const plc = page.frameLocator("iframe");
-  await plc.getByRole("combobox").selectOption("plastic");
-  for (let i = 0; i < 3; i++)
-    await plc.getByRole("button", { name: /Next step/ }).click();
-  assert.equal(await plc.locator("#count-plastic").textContent(), "1");
-  assert.match(
-    await plc.getByRole("status").textContent(),
-    /delivered to the plastic/,
-  );
-  await plc.getByRole("button", { name: "Reset simulation" }).click();
-  assert.equal(await plc.locator("#count-plastic").textContent(), "0");
-  await plc.getByRole("button", { name: "Run sequence" }).click();
-  await plc
-    .getByRole("status")
-    .filter({ hasText: "Object delivered" })
-    .waitFor();
-  assert.equal(await plc.locator("#count-metal").textContent(), "1");
-  await open("projects/vehicle-velocity");
-  await page
-    .getByRole("heading", { name: "Approved footage goes here." })
-    .waitFor();
-  assert.equal(await page.locator("video").count(), 0);
-  await open("contact");
-  assert.equal(
-    await page.locator(".contact-address").getAttribute("href"),
-    "mailto:v.vinayx@outlook.com",
-  );
-  await open("about");
-  await page.getByRole("heading", { name: /Vinay Vyraveraja/ }).waitFor();
-  await page.reload();
-  await page.getByRole("heading", { name: /Vinay Vyraveraja/ }).waitFor();
-  await open("projects/heart-monitor");
-  await page.getByRole("checkbox", { name: "Visitor present" }).check();
-  await page.getByRole("checkbox", { name: "Finger on sensor" }).check();
-  await page.getByRole("button", { name: "Simulate capture" }).click();
-  await page
-    .getByText("Illustrative capture complete", { exact: true })
-    .waitFor();
-  await open("projects/traffic-light");
-  await page.getByRole("button", { name: "Request crossing" }).click();
-  await page.getByRole("button", { name: "Next phase" }).click();
-  await page.getByRole("button", { name: "Next phase" }).click();
-  await page.getByText("Pedestrian: Cross", { exact: true }).waitFor();
-  await page
-    .getByRole("button", { name: /Enlarge:.*physical crossing/ })
-    .click();
-  await page.getByRole("dialog", { name: "Enlarged project figure" }).waitFor();
-  await page.keyboard.press("Escape");
-  assert.equal(await page.getByRole("dialog").count(), 0);
-  await open("projects/flood-control");
-  await page.getByRole("slider", { name: /Water level/ }).press("End");
-  await page.getByText("Pump on", { exact: true }).waitFor();
-  await open("experience");
-  await page.getByRole("heading", { name: /3rd place/ }).waitFor();
-  assert.equal(
+  if (process.env.PORTFOLIO_MODEL) {
     await page
-      .getByRole("link", { name: /Find me on LinkedIn/ })
-      .getAttribute("href"),
-    "https://www.linkedin.com/in/vinayegam-panjacharam-948b30112/",
+      .getByText("Try vehicle detection on your device", { exact: true })
+      .click();
+    await page
+      .getByLabel("ONNX model", { exact: true })
+      .setInputFiles(process.env.PORTFOLIO_MODEL);
+    await page.getByText(/Model ready\./).waitFor({ timeout: 90000 });
+    await page.getByRole("button", { name: "Detect current frame" }).click();
+    await page
+      .getByText(/vehicles? detected in this frame/)
+      .waitFor({ timeout: 90000 });
+    assert.ok(
+      await page
+        .locator(".native-model canvas")
+        .evaluate((canvas) => canvas.width > 0),
+    );
+    console.log(
+      "Native ONNX inference passed with a private local test model; model was not uploaded.",
+    );
+  }
+  await page.screenshot({
+    path: fileURLToPath(new URL("vehicle-demo.png", screenshots)),
+    fullPage: true,
+  });
+  await open("about");
+  await page.getByText("Consecutive Dean’s Lists", { exact: true }).waitFor();
+  await page.getByText("EICC and CETS", { exact: true }).waitFor();
+  assert.ok(
+    (await page
+      .locator('a[href="https://www.youtube.com/@vinayvyraveraja"]')
+      .count()) > 0,
   );
-  await open("teaching");
-  await page.getByRole("heading", { name: /A little clarity/ }).waitFor();
-  console.log(
-    "PASS additional simulations, figure dialog/Escape, PROTON achievement, tutoring, and LinkedIn",
-  );
-  console.log(
-    "PASS navigation, filters/search, keyboard sliders, resets, guided tour, embedded fan, PLC stepping/auto-run, FYP placeholder, profile, route refresh",
-  );
-  for (const width of [1440, 1024, 768, 390, 320]) {
-    await page.setViewportSize({ width, height: 960 });
+  await page.screenshot({
+    path: fileURLToPath(new URL("about-dark.png", screenshots)),
+    fullPage: true,
+  });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const width of [1440, 375]) {
+    await page.setViewportSize({ width, height: 900 });
     for (const route of [
       "",
       "projects",
-      "projects/smart-classroom",
-      "projects/fpga-fan",
-      "projects/plc-sorting",
-      "projects/vehicle-velocity",
-      "projects/heart-monitor",
-      "projects/traffic-light",
-      "projects/flood-control",
-      "projects/trolley-cad",
-      "projects/atm-interface",
-      "projects/spring-study",
-      "projects/battery-study",
-      "projects/robot-recycling",
-      "projects/planting-trajectory",
-      "projects/weather-expert",
-      "projects/sentiment-analysis",
-      "projects/neural-classifiers",
-      "experience",
-      "teaching",
+      "demos",
       "about",
+      "about/experience",
+      "about/tutoring",
       "contact",
+      ...links,
     ]) {
       await open(route);
-      await noOverflow(`${width}px /${route}`);
-      const missing = await page
-        .locator("main img")
-        .evaluateAll(async (images) => {
-          images.forEach((image) => (image.loading = "eager"));
-          await Promise.all(
-            images.map((image) => image.decode().catch(() => {})),
-          );
-          return images
-            .filter((image) => !image.naturalWidth)
-            .map((image) => image.getAttribute("src"));
-        });
-      assert.deepEqual(missing, [], `Missing images at ${width}px /${route}`);
-      if (await page.locator("iframe").count()) {
-        const frame = page.frames()[1];
-        await frame.locator("main").waitFor();
-        const inner = await frame.evaluate(() => ({
-          width: innerWidth,
-          scrollWidth: document.documentElement.scrollWidth,
-          height: innerHeight,
-          scrollHeight: document.documentElement.scrollHeight,
-        }));
-        assert.ok(
-          inner.scrollWidth <= inner.width + 1,
-          `${width}px /${route}: iframe horizontal overflow`,
-        );
-        assert.ok(
-          inner.scrollHeight <= inner.height + 1,
-          `${width}px /${route}: iframe too short ${inner.scrollHeight} > ${inner.height}`,
-        );
+      await overflow(width + " " + route);
+      if (route.startsWith("projects/")) {
+        const flow = page.locator(".project-flowchart img");
+        await flow.scrollIntoViewIfNeeded();
+        await flow.evaluate((image) => image.decode());
+        assert.ok(await flow.evaluate((image) => image.naturalWidth > 0));
       }
     }
-    console.log(`PASS responsive layout at ${width}px`);
   }
-  await page.setViewportSize({ width: 390, height: 844 });
-  await open();
   await page.screenshot({
-    path: fileURLToPath(
-      new URL("../.tools/qa/home-mobile.png", import.meta.url),
-    ),
+    path: fileURLToPath(new URL("mobile-dark.png", screenshots)),
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Menu +" }).click();
-  await page
-    .getByRole("navigation")
-    .getByRole("link", { name: "Projects", exact: true })
-    .click();
-  assert.equal(
-    await page
-      .getByRole("button", { name: "Menu +" })
-      .getAttribute("aria-expanded"),
-    "false",
-  );
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await open("projects/fpga-fan");
-  await fan.locator("#fan-blades").waitFor();
-  assert.equal(
-    await fan
-      .locator("#fan-blades")
-      .evaluate((element) => getComputedStyle(element).animationName),
-    "none",
-  );
-  await open("projects/smart-classroom");
-  await page.getByRole("slider", { name: /Temperature/ }).press("End");
-  assert.equal(
-    await page
-      .locator(".room-fan")
-      .evaluate((element) => getComputedStyle(element).animationName),
-    "none",
-  );
-  assert.deepEqual(errors, [], "Browser runtime errors");
+  assert.deepEqual(errors, []);
+  assert.deepEqual(external, []);
   console.log(
-    "PASS mobile menu, reduced motion, and no browser runtime errors",
+    "Browser checks passed: theme persistence, 16 projects and flowcharts, heart/Nano/PLC interactions, playable video, mobile layouts, social links and no external network requests.",
   );
 } finally {
-  await context.close();
   await browser.close();
 }

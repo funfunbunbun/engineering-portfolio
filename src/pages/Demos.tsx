@@ -1,19 +1,15 @@
+import { projectYears } from "../data/projectYears";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import { Arrow, ProjectVisual } from "../components/Visual";
 export default function Demos() {
   return (
     <section className="section-wrap page-section demo-index">
-      <span className="eyebrow">THE HANDS-ON INDEX / 16 EDUCATIONAL DEMOS</span>
-      <h1>
-        Don’t just read it.
-        <br />
-        <span>Try it.</span>
-      </h1>
+      <span className="eyebrow">16 projects</span>
+      <h1>Project demos</h1>
       <p className="page-intro">
-        Every project has something to explore. These browser models illustrate
-        an idea; the report figures and original project context sit alongside
-        them.
+        Try the simulations and recorded demonstrations from my projects. Open a
+        project to read its summary and see the original report figures.
       </p>
       <div className="demo-index-grid">
         {projects.map((project) => (
@@ -27,10 +23,11 @@ export default function Demos() {
               <span className="eyebrow">{project.category}</span>
             </div>
             <section>
-              <h2>{project.subtitle}</h2>
+              <span className="project-year">{projectYears[project.id]}</span>
+              <h2>{project.title}</h2>
               <p>
                 {project.id === "vehicle-velocity"
-                  ? "Adjust fictional distance and time; approved project footage is still pending."
+                  ? "Explore vehicle detection and speed estimation."
                   : project.description}
               </p>
               <span className="try-demo">

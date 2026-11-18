@@ -42,19 +42,6 @@ export const algorithmExcerpts: Partial<Record<ProjectId, AlgorithmExcerpt>> = {
 }`,
     note: "A general mathematical example, adapted for explanation. Actual DH tables, calibration, controller commands, addresses, and hardware integration remain private.",
   },
-  "planting-trajectory": {
-    title: "Interpolate one conceptual segment",
-    description:
-      "An illustrative smoothstep interpolation between abstract endpoints, showing the idea of easing into and out of a segment.",
-    code: `function segment(start, end, progress) {
-  const t = Math.max(0, Math.min(1, progress));
-  const blend = t * t * (3 - 2 * t);
-  return start.map((value, axis) =>
-    value + blend * (end[axis] - value)
-  );
-}`,
-    note: "This is a teaching sketch, not the original trajectory planner. It performs no inverse kinematics, collision checking, or hardware control.",
-  },
   "sentiment-analysis": {
     title: "The classification pipeline",
     description:

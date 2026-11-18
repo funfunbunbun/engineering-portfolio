@@ -1,3 +1,4 @@
+import { isReviewedAsset } from "./reviewed-assets.mjs";
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -45,6 +46,11 @@ for (const blob of blobs) {
   offset = end + 1;
   const data = bytes.subarray(offset, offset + size);
   offset += size + 1;
+  if (
+    blob.file.startsWith("public/") &&
+    isReviewedAsset(blob.file.slice(7), data)
+  )
+    continue;
   if (
     prohibitedFile.test(blob.file) ||
     /(?:^|\/)(?:\.tools|private|node_modules|\.env(?:\..*)?)(?:\/|$)/.test(

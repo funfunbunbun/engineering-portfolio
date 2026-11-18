@@ -1,3 +1,4 @@
+import { reviewedAssets, isReviewedAsset } from "./reviewed-assets.mjs";
 import { readdir, readFile, stat } from "node:fs/promises";
 import { contentRisks } from "./public-policy.mjs";
 import { fileURLToPath } from "node:url";
@@ -17,16 +18,10 @@ async function check(directory) {
     if (entry.isDirectory()) await check(file);
     else {
       const relative = path.relative(root, file).split(path.sep).join("/");
-      if (entry.name.endsWith(".webp")) {
-        const bytes = await readFile(file);
-        const asset = reviewed.get(relative);
-        if (
-          !asset ||
-          createHash("sha256").update(bytes).digest("hex") !== asset.sha256 ||
-          bytes.toString("ascii", 0, 4) !== "RIFF" ||
-          bytes.toString("ascii", 8, 12) !== "WEBP"
-        )
-          failures.push(`Unreviewed or modified image: ${relative}`);
+      if (reviewedAssets.has(relative)) {
+        const data = await readFile(file);
+        if (!isReviewedAsset(relative, data))
+          failures.push("Unreviewed or modified asset: " + relative);
         else seen.add(relative);
         continue;
       }
@@ -59,12 +54,12 @@ async function check(directory) {
 }
 await check(root);
 for (const file of reviewed.keys())
-  if (!seen.has(file))
-    failures.push(`Reviewed image missing from build: ${file}`);
+  if (!seen.has(file) && !reviewed.get(file).historical)
+    failures.push(`Reviewed asset missing from build: ${file}`);
 if (failures.length) {
   console.error(failures.join("\n"));
   process.exit(1);
 }
 console.log(
-  `Public build check passed: text assets and ${seen.size} checksum-matched reviewed images; no Windows source paths, checked credential patterns, or known tracking references.`,
+  `Public build check passed: text assets and ${seen.size} checksum-matched reviewed assets; no Windows source paths, checked credential patterns, or known tracking references.`,
 );

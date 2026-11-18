@@ -89,6 +89,22 @@ select:focus-visible {
   width: 100%;
   padding: 0 10px 10px;
 }
+.belt-motion {
+  animation: belt-travel 1s linear infinite;
+  animation-play-state: paused;
+}
+.running .belt-motion {
+  animation-play-state: running;
+}
+@keyframes belt-travel {
+  to { stroke-dashoffset: -27; }
+}
+.selection-note {
+  font-size: 11px;
+  color: #45677f;
+  margin: -8px 0 18px;
+  min-height: 18px;
+}
 .controls {
   display: flex;
   justify-content: space-between;
@@ -184,6 +200,9 @@ select:focus-visible {
   padding-top: 13px;
   margin-bottom: 0;
 }
+@media (prefers-reduced-motion: reduce) {
+  .belt-motion { animation: none; }
+}
 @media (max-width: 600px) {
   main {
     padding: 15px 20px 20px;
@@ -259,3 +278,5 @@ select:focus-visible {
     min-height: 200px;
   }
 }
+
+html[data-theme="dark"] {color:#dce8f0;color-scheme:dark}html[data-theme="dark"] body{background:#192934;color:#dce8f0}html[data-theme="dark"] :is(.fan-panel,.signal-panel,.controls,.scene,.hmi,.status,.panel,.diagram,.readout,.state-panel,.machine-panel,.counts,.bin-counts){background:#213541;color:#dce8f0;border-color:#415969}html[data-theme="dark"] :is(button,select){background:#294859;color:#e4f0f7;border-color:#456575}html[data-theme="dark"] :is(p,label,small,.muted,.help,.legend){color:#afc5d4}

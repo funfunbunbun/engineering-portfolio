@@ -38,3 +38,10 @@ CODEX_UNIVERSITY_PORTFOLIO_BRIEF.md
 .agents/
 .codex/
 .aws/
+
+# Exact reviewed project clip and pinned browser runtime only.
+!public/assets/reviewed/vehicle-speed-demo.mp4
+!public/assets/runtime/ort-wasm-simd-threaded.wasm
+
+# Unreviewed incoming photos remain private.
+incoming-photos/

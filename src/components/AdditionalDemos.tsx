@@ -1,3 +1,4 @@
+import HeartDemo from "./HeartDemo";
 import { useState } from "react";
 import type { ProjectId } from "../data/projects";
 
@@ -39,8 +40,8 @@ export function TrafficDemo({ engineering }: { engineering: boolean }) {
     <div className="extra-demo">
       <div className="demo-heading">
         <div>
-          <span className="eyebrow">EMBEDDED / CROSSING LAB</span>
-          <h3>One request. A clear sequence.</h3>
+          <span className="eyebrow">Arduino traffic light</span>
+          <h3>Pedestrian crossing sequence</h3>
         </div>
         <button className="button small ghost" onClick={() => setPhase(0)}>
           Reset simulation
@@ -112,112 +113,6 @@ export function TrafficDemo({ engineering }: { engineering: boolean }) {
     </div>
   );
 }
-export function HeartDemo({ engineering }: { engineering: boolean }) {
-  const [present, setPresent] = useState(false);
-  const [finger, setFinger] = useState(false);
-  const [captured, setCaptured] = useState(false);
-  const message = !present
-    ? "Waiting for a visitor"
-    : !finger
-      ? "Place a finger on the sensor"
-      : captured
-        ? "Illustrative capture complete"
-        : "Finger detected — ready to capture";
-  return (
-    <div className="extra-demo">
-      <div className="demo-heading">
-        <div>
-          <span className="eyebrow">EMBEDDED / SENSING SEQUENCE</span>
-          <h3>From presence to a prompt.</h3>
-        </div>
-        <button
-          className="button small ghost"
-          onClick={() => {
-            setPresent(false);
-            setFinger(false);
-            setCaptured(false);
-          }}
-        >
-          Reset simulation
-        </button>
-      </div>
-      <div className="heart-layout">
-        <div className="lcd-display">
-          <span>ILLUSTRATIVE LCD / NO LIVE SENSOR</span>
-          <strong role="status">{message}</strong>
-          <div className="pulse-illustration" aria-hidden="true">
-            <svg viewBox="0 0 400 90">
-              <path
-                d="M0 55h80l15-13 12 13h25l15-40 15 65 18-43 15 18h35l15-13 12 13h143"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-            </svg>
-          </div>
-          <small>Signal drawing only · no patient readings</small>
-        </div>
-        <div className="heart-controls">
-          <label>
-            <input
-              type="checkbox"
-              checked={present}
-              onChange={(e) => {
-                setPresent(e.target.checked);
-                setFinger(false);
-                setCaptured(false);
-              }}
-            />{" "}
-            Visitor present
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={finger}
-              disabled={!present}
-              onChange={(e) => {
-                setFinger(e.target.checked);
-                setCaptured(false);
-              }}
-            />{" "}
-            Finger on sensor
-          </label>
-          <button
-            className="button small"
-            disabled={!present || !finger || captured}
-            onClick={() => setCaptured(true)}
-          >
-            Simulate capture
-          </button>
-          <p>
-            Explore the interaction between sensors and the display. No real
-            heart-rate or oxygen values are calculated.
-          </p>
-        </div>
-      </div>
-      {engineering && (
-        <div className="engineering-panel">
-          <div>
-            <h4>Report architecture</h4>
-            <code>presence + optical sensing → VisionFive 2 → 8051 → LCD</code>
-            <p>
-              The original block diagram is shown below. This browser
-              interaction is a simplified state model.
-            </p>
-          </div>
-          <div>
-            <h4>Scope</h4>
-            <p>
-              No camera, health-data collection, diagnostic thresholds, or
-              clinical interpretation. All inputs are deliberate simulation
-              controls.
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 export function FloodDemo({ engineering }: { engineering: boolean }) {
   const [level, setLevel] = useState(30);
   const pumping = level >= 60;
@@ -225,8 +120,8 @@ export function FloodDemo({ engineering }: { engineering: boolean }) {
     <div className="extra-demo">
       <div className="demo-heading">
         <div>
-          <span className="eyebrow">CIRCUITS / LEVEL LAB</span>
-          <h3>Watch the level. Follow the rule.</h3>
+          <span className="eyebrow">Flood-control demo</span>
+          <h3>Water level and pump control</h3>
         </div>
         <button className="button small ghost" onClick={() => setLevel(30)}>
           Reset simulation

@@ -1,5 +1,5 @@
 {
-  "name": "vm-engineering-portfolio",
+  "name": "vinay-engineering-portfolio",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -13,9 +13,11 @@
     "test:browser": "node scripts/browser-check.mjs",
     "test:models": "node --test projects/fpga-pwm-fan-controller/model.test.js projects/plc-hmi-sorting-machine/model.test.js",
     "check:repo": "node scripts/check-repo.mjs",
-    "check:history": "node scripts/check-history.mjs"
+    "check:history": "node scripts/check-history.mjs",
+    "diagrams": "node scripts/render-flowcharts.mjs"
   },
   "dependencies": {
+    "onnxruntime-web": "^1.31.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-router-dom": "^7.18.5"
@@ -30,6 +32,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
     "jsdom": "^31.0.1",
+    "mermaid": "^12.3.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
     "vitest": "^5.1.0"

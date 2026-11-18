@@ -14,7 +14,7 @@ export type ProjectId =
   | "spring-study"
   | "battery-study"
   | "robot-recycling"
-  | "planting-trajectory"
+  | "nano-hmi"
   | "weather-expert"
   | "sentiment-analysis"
   | "neural-classifiers";
@@ -38,37 +38,37 @@ const coreProjects: Project[] = [
   {
     id: "vehicle-velocity",
     number: "01",
-    title: "Seeing speed.",
-    subtitle: "Vehicle velocity estimation",
+    title: "Vehicle detection and speed estimation",
+    subtitle: "YOLO, Raspberry Pi 5 and Hailo-8",
     category: "Computer Vision",
     tags: ["YOLO", "Raspberry Pi 5", "Computer Vision"],
-    status: "Concept illustration",
+    status: "Documented project",
     description:
-      "A visual introduction to turning video observations into vehicle speed estimates.",
+      "A final-year traffic-monitoring project using YOLO, a Raspberry Pi 5 and Hailo-8 acceleration to detect and track vehicles and estimate their speed.",
     problem: "How can a camera help estimate the speed of a moving vehicle?",
     approach:
-      "Explore the conceptual chain from video input to detection, tracking, spatial calibration, and distance over time. Recorded results will be added after review.",
+      "The system processes camera footage, detects vehicles, follows tracks over time and uses perspective mapping to estimate road-plane motion. Results are presented through a web dashboard. The project investigated YOLOv8 and YOLO26.",
     limitations:
-      "No footage, detections, measured accuracy, or runtime results are supplied. Camera geometry, calibration, occlusion, frame timing, and tracking errors affect monocular speed estimation.",
+      "The embedded clip shows recorded project output. Local ONNX inference detects vehicles in one frame; it does not calculate speed or reproduce the full Raspberry Pi system. Estimates depend on camera geometry, calibration, timestamps and tracking quality.",
     tour: [
       {
-        title: "Start with a frame",
-        text: "This showcase introduces a university project on vehicle velocity estimation using YOLO and Raspberry Pi 5. The current view is an illustration awaiting approved project footage.",
+        title: "Camera input",
+        text: "The project uses camera footage to monitor moving vehicles with YOLO on a Raspberry Pi 5 system.",
       },
       {
-        title: "Follow the pipeline",
-        text: "A detector locates vehicles. Tracking associates observations over time. Spatial calibration is needed to relate image positions to real distances.",
+        title: "Detection and tracking",
+        text: "A detector finds vehicles in each frame. Tracking links detections over time, while perspective mapping relates image motion to positions on the road.",
       },
       {
-        title: "Understand the estimate",
-        text: "Speed is distance divided by elapsed time. Calibration, perspective, occlusion, and timing can affect the estimate. No measured results are claimed here.",
+        title: "Recorded output",
+        text: "Play the short project recording to see tracking and speed annotations. These are recorded estimates, not a live measurement from this website.",
       },
     ],
   },
   {
     id: "smart-classroom",
     number: "02",
-    title: "A room that responds.",
+    title: "Smart classroom",
     subtitle: "IoT Smart Classroom",
     category: "IoT",
     tags: ["IoT", "Embedded Systems", "Control Systems"],
@@ -80,7 +80,7 @@ const coreProjects: Project[] = [
     approach:
       "Adjust simulated sensor inputs and inspect the resulting fan, lighting, and ventilation decisions. The rules are educational examples, not recovered firmware.",
     limitations:
-      "All sensor values and events are generated in this browser. Thresholds are illustrative, with no live classroom connection or measured energy-saving claim.",
+      "The room and sensor values are simulated. The demo illustrates simple lighting and fan rules without connecting to a classroom.",
     tour: [
       {
         title: "Set the scene",
@@ -99,7 +99,7 @@ const coreProjects: Project[] = [
   {
     id: "fpga-fan",
     number: "03",
-    title: "Small pulses. Big control.",
+    title: "FPGA fan controller",
     subtitle: "FPGA PWM fan controller",
     category: "Embedded Systems",
     tags: ["FPGA", "Embedded Systems", "Control Systems"],
@@ -110,7 +110,7 @@ const coreProjects: Project[] = [
     approach:
       "Select a duty cycle and compare the signal waveform with a conceptual fan illustration. The independent project repository supplies this embedded demo.",
     limitations:
-      "Fan animation is illustrative. RPM is not measured and is not assumed to scale linearly with duty cycle. No specific FPGA timing or temperature-sensor implementation is claimed.",
+      "The waveform timing and fan animation are illustrative. Original prototype photos and oscilloscope results appear below.",
     tour: [
       {
         title: "Meet the signal",
@@ -129,7 +129,7 @@ const coreProjects: Project[] = [
   {
     id: "plc-sorting",
     number: "04",
-    title: "Sense. Decide. Sort.",
+    title: "PLC sorting machine",
     subtitle: "PLC & HMI sorting machine",
     category: "Automation",
     tags: ["PLC", "HMI", "Automation"],
@@ -141,7 +141,7 @@ const coreProjects: Project[] = [
     approach:
       "Choose an illustrative object category, advance the conveyor sequence, and inspect the state transitions. This is an educational model, not the original PLC program.",
     limitations:
-      "Categories, conveyor geometry, and transition timing are illustrative. No live PLC, safety logic, or verified machine behavior is reproduced.",
+      "The moving conveyor illustrates a simplified PLC sequence. Material categories and movement timings are demonstration values.",
     tour: [
       {
         title: "Choose an object",

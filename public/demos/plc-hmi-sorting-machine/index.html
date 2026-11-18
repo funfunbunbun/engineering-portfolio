@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="An educational conveyor sorting simulation by Vinay Vyraveraja."
+      content="An educational conveyor sorting simulation by Vinay."
     />
-    <title>PLC Conveyor Sequence Lab</title>
+    <title>PLC sorting simulation</title>
     <link rel="stylesheet" href="./style.css" />
-  </head>
+  <script>function applyTheme(){let value;try{value=localStorage.getItem('portfolio-theme')}catch{}document.documentElement.dataset.theme=value==='dark'||value==='light'?value:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}applyTheme();addEventListener('storage',applyTheme);addEventListener('portfolio-theme',applyTheme);</script>
+</head>
   <body>
     <main>
       <div class="heading">
         <div>
-          <h1>Follow the sequence.</h1>
-          <p>An illustrative sensor-to-sorter state machine.</p>
+          <h1>PLC sorting simulation</h1>
+          <p>Choose a material and watch the conveyor sort it.</p>
         </div>
         <button id="reset" class="ghost">Reset simulation</button>
       </div>
       <div class="conveyor-scene">
         <div class="scene-top">
-          <span>CONVEYOR / EDUCATIONAL MODEL</span
+          <span>CONVEYOR SORTING</span
           ><span id="sensor" class="sensor">SENSOR: CLEAR</span>
         </div>
         <svg viewBox="0 0 800 230" role="img" aria-labelledby="conveyor-title">
@@ -40,6 +41,7 @@
             stroke-width="40"
             stroke-linecap="round"
           />
+          <path class="belt-motion" d="M55 145H595" stroke="#456b83" stroke-width="28" stroke-dasharray="3 24" />
           <g stroke="#67899e" fill="none">
             <circle cx="65" cy="145" r="14" />
             <circle cx="110" cy="145" r="14" />
@@ -87,7 +89,7 @@
             <text x="713" y="149">PLASTIC</text>
             <text x="713" y="211">OTHER</text>
           </g>
-          <g id="object" transform="translate(100 110)">
+          <g id="object" transform="translate(100 124)">
             <rect
               x="-17"
               y="-30"
@@ -121,18 +123,19 @@
       </div>
       <div class="controls">
         <div>
-          <label for="category">Object category</label
-          ><select id="category">
+          <label for="category">Material</label
+          ><select id="category" aria-describedby="next-material">
             <option value="metal">Metal</option>
             <option value="plastic">Plastic</option>
             <option value="other">Other</option>
           </select>
         </div>
         <div class="buttons">
-          <button id="step" class="primary">Next step →</button
-          ><button id="run">Run sequence</button>
+          <button id="step">Next step</button
+          ><button id="run" class="primary" aria-pressed="false">Start sorting</button>
         </div>
       </div>
+      <p id="next-material" class="selection-note">Repeating metal items.</p>
       <div class="state-strip" aria-label="Sequence states">
         <span data-state="idle" class="active">01 Idle</span
         ><span data-state="sense">02 Sense</span
@@ -141,7 +144,7 @@
       </div>
       <div class="status-row">
         <p id="status" role="status">
-          Ready. Choose an object and advance the sequence.
+          Metal item ready.
         </p>
         <div class="counters" aria-label="Delivered totals">
           <span>Metal <b id="count-metal">0</b></span
@@ -150,9 +153,9 @@
         </div>
       </div>
       <p class="note">
-        Categories and timing are illustrative. No original PLC logic, machine
-        performance, or safety behavior is represented. Reset clears the
-        sequence and totals.
+        The conveyor repeats the selected material. Change it at any time to
+        sort a different material next. Pause stops movement; Next step advances
+        one stage. Reset clears the totals. This is a simulation.
       </p>
     </main>
     <script type="module" src="./demo.js"></script>

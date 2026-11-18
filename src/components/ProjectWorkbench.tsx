@@ -1,11 +1,10 @@
+import NanoDemo from "./NanoDemo";
 import { useState } from "react";
 import type { ProjectId } from "../data/projects";
 import {
   springExtension,
   idealCircuit,
   virtualSpeed,
-  trajectoryPoint,
-  intersectsObstacle,
   scoreWords,
   wordWeights,
   transact,
@@ -88,7 +87,7 @@ function Spring() {
   const bottom = 120 + extension * 220;
   return (
     <Bench
-      title="Feel the relationship."
+      title="Spring load and extension"
       label="HOOKE’S LAW"
       reset={() => {
         setForce(4);
@@ -151,7 +150,7 @@ function Battery() {
   const circuit = idealCircuit(cells, resistance);
   return (
     <Bench
-      title="Build an ideal series circuit."
+      title="Ideal battery circuit"
       label="CIRCUIT CONCEPT"
       reset={() => {
         setCells(2);
@@ -213,7 +212,7 @@ function Trolley() {
   });
   return (
     <Bench
-      title="Take the assembly apart."
+      title="Trolley assembly"
       label="CAD COMPONENTS"
       reset={() => {
         setSeparation(0);
@@ -300,7 +299,7 @@ function Terminal() {
   }
   return (
     <Bench
-      title="Follow a terminal transaction."
+      title="ATM menu simulation"
       label="IN-MEMORY MENU"
       reset={() => {
         setBalance(100);
@@ -370,7 +369,7 @@ function Robot() {
   const target = category === "metal" ? 270 : 320;
   return (
     <Bench
-      title="Sense, pick, and sort."
+      title="Robot sorting sequence"
       label="ROBOT SEQUENCE"
       reset={() => {
         setState({ phase: 0, metal: 0, other: 0 });
@@ -456,94 +455,6 @@ function Robot() {
   );
 }
 
-function Trajectory() {
-  const [progress, setProgress] = useState(0);
-  const [lift, setLift] = useState(80);
-  const position = trajectoryPoint(progress / 100, lift);
-  const collision = intersectsObstacle(lift);
-  return (
-    <Bench
-      title="Make room for the path."
-      label="2D TRAJECTORY SKETCH"
-      reset={() => {
-        setProgress(0);
-        setLift(80);
-      }}
-      note="An illustrative 2D curve and obstacle check, separate from the original six-axis/3D assignment. It does not perform real robot collision checking or inverse kinematics."
-    >
-      <div className="bench-layout">
-        <div className="bench-graphic">
-          <svg
-            viewBox="0 0 380 300"
-            role="img"
-            aria-label="Illustrative curve over an obstacle"
-          >
-            <path d="M25 255h330" opacity=".4" />
-            <rect
-              className="path-obstacle"
-              x="145"
-              y="155"
-              width="70"
-              height="80"
-            />
-            <path
-              d={`M50 205Q180 ${220 - 2 * lift} 310 205`}
-              className={collision ? "unsafe-path" : "safe-path"}
-            />
-            <circle
-              className="path-dot"
-              cx={position.x}
-              cy={position.y}
-              r="9"
-            />
-            <text x="38" y="235">
-              PICK
-            </text>
-            <text x="285" y="235">
-              PLANT
-            </text>
-          </svg>
-          <span>SYMBOLIC TASK SPACE</span>
-        </div>
-        <div>
-          <Range
-            id="path-progress"
-            label="Path progress"
-            value={progress}
-            min={0}
-            max={100}
-            unit="%"
-            set={setProgress}
-          />
-          <Range
-            id="path-lift"
-            label="Path lift"
-            value={lift}
-            min={0}
-            max={100}
-            unit="%"
-            set={setLift}
-          />
-          <p
-            className={collision ? "path-feedback crossing" : "path-feedback"}
-            role="status"
-          >
-            {collision
-              ? "Curve intersects the illustrated obstacle."
-              : "Curve clears the illustrated obstacle."}
-          </p>
-          <button
-            className="button small ghost"
-            onClick={() => setProgress((old) => (old + 10) % 110)}
-          >
-            Advance 10%
-          </button>
-        </div>
-      </div>
-    </Bench>
-  );
-}
-
 function Sentiment() {
   const [text, setText] = useState(
     "The design is useful but the setup is slow.",
@@ -551,8 +462,8 @@ function Sentiment() {
   const result = scoreWords(text);
   return (
     <Bench
-      title="See how words become features."
-      label="TRANSPARENT FEATURE TOY"
+      title="Sentiment feature example"
+      label="Simplified text classifier"
       reset={() => setText("The design is useful but the setup is slow.")}
       note="Handwritten word weights illustrate feature extraction. This is not the original TF-IDF/MLP model, does not understand context or negation, and has no trained-model accuracy claim. Text stays in browser memory."
     >
@@ -606,7 +517,7 @@ function Velocity() {
   const [seconds, setSeconds] = useState(2);
   return (
     <Bench
-      title="Distance over time."
+      title="Speed calculation"
       label="VIRTUAL SPEED CALCULATOR"
       reset={() => {
         setDistance(20);
@@ -655,7 +566,7 @@ export const workbenchIds: ProjectId[] = [
   "trolley-cad",
   "atm-interface",
   "robot-recycling",
-  "planting-trajectory",
+  "nano-hmi",
   "sentiment-analysis",
   "vehicle-velocity",
 ];
@@ -671,8 +582,8 @@ export default function ProjectWorkbench({ id }: { id: ProjectId }) {
       return <Terminal />;
     case "robot-recycling":
       return <Robot />;
-    case "planting-trajectory":
-      return <Trajectory />;
+    case "nano-hmi":
+      return <NanoDemo />;
     case "sentiment-analysis":
       return <Sentiment />;
     case "vehicle-velocity":

@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="An educational PWM fan simulation by Vinay Vyraveraja."
+      content="An educational PWM fan simulation by Vinay."
     />
     <title>PWM Fan Signal Lab</title>
     <link rel="stylesheet" href="./style.css" />
-  </head>
+  <script>function applyTheme(){let value;try{value=localStorage.getItem('portfolio-theme')}catch{}document.documentElement.dataset.theme=value==='dark'||value==='light'?value:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}applyTheme();addEventListener('storage',applyTheme);addEventListener('portfolio-theme',applyTheme);</script>
+</head>
   <body>
     <main>
       <div class="heading">
         <div>
-          <h1>Control the pulse.</h1>
-          <p>A digital signal. A different duty cycle.</p>
+          <h1>FPGA fan controller</h1>
+          <p>Adjust the PWM duty cycle to change the simulated fan speed.</p>
         </div>
         <button id="reset" class="ghost">Reset simulation</button>
       </div>

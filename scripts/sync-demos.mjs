@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
-// Deliberate, small allowlist: no reports, videos, .git history, or arbitrary files.
+// Deliberate source allowlist; originals and Git history stay private.
 const slugs = ["fpga-pwm-fan-controller", "plc-hmi-sorting-machine"];
 const files = ["index.html", "style.css", "demo.js", "model.js"];
 for (const slug of slugs) {
@@ -22,6 +22,6 @@ for (const slug of slugs) {
 }
 await writeFile(
   path.join(root, "public/demos/README.txt"),
-  "Original educational browser demos by Vinay Vyraveraja. No academic source documents or media are included.\n",
+  "Original educational browser demos by Vinay. No academic source documents or media are included.\n",
 );
 console.log("Synced 8 explicitly allowlisted demo source files.");

@@ -1,3 +1,4 @@
+import { projectYears, yearGroups } from "./data/projectYears";
 import { useEffect, useRef, useState } from "react";
 import {
   Link,
@@ -23,7 +24,15 @@ import ProjectEvidence, {
   ProjectBackground,
 } from "./components/ProjectEvidence";
 import { projectContext } from "./data/projectContext";
-import Experience, { Teaching, BeyondProjects } from "./pages/Experience";
+import Experience, {
+  Teaching,
+  BeyondProjects,
+  PhotoGallery,
+  AboutLinks,
+} from "./pages/Experience";
+import ThemeToggle from "./components/ThemeToggle";
+import ProjectFlowchart from "./components/ProjectFlowchart";
+import { Navigate } from "react-router-dom";
 
 function Header() {
   const [menu, setMenu] = useState(false);
@@ -31,18 +40,14 @@ function Header() {
   useEffect(() => setMenu(false), [location]);
   return (
     <header className="header">
-      <Link
-        to="/"
-        className="brand"
-        aria-label="VM Engineering Technologies home"
-      >
+      <Link to="/" className="brand" aria-label="Vinay home">
         <span className="brand-mark">
-          VM<span>↗</span>
+          V<span>↗</span>
         </span>
         <span>
-          ENGINEERING
+          Vinay
           <br />
-          <b>TECHNOLOGIES</b>
+          <b>Engineering portfolio</b>
         </span>
       </Link>
       <button
@@ -63,13 +68,12 @@ function Header() {
         </NavLink>
         <NavLink to="/projects">Projects</NavLink>
         <NavLink to="/demos">Demos</NavLink>
-        <NavLink to="/experience">Experience</NavLink>
-        <NavLink to="/teaching">Tutoring</NavLink>
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/about">About me</NavLink>
         <NavLink className="nav-contact" to="/contact">
           Let’s talk <Arrow diagonal />
         </NavLink>
       </nav>
+      <ThemeToggle />
     </header>
   );
 }
@@ -79,23 +83,17 @@ function Footer() {
     <footer className="footer">
       <div>
         <Link to="/" className="footer-brand">
-          VM Engineering Technologies
-          <span>Engineering ideas, made understandable.</span>
+          Vinay<span>Mechatronics graduate · Universiti Sains Malaysia</span>
         </Link>
-        <a href={`mailto:${profile.email}`} className="footer-email">
+        <a href={"mailto:" + profile.email} className="footer-email">
           {profile.email}
           <Arrow diagonal />
         </a>
       </div>
       <div className="footer-bottom">
-        <span>
-          © {new Date().getFullYear()} {profile.name}
-        </span>
-        <span>Academic projects · Educational simulations</span>
-        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
-          LinkedIn ↗
-        </a>
-        <Link to="/projects">Back to the work ↑</Link>
+        <span>© {new Date().getFullYear()} Vinay</span>
+        <AboutLinks />
+        <Link to="/projects">Projects ↑</Link>
       </div>
     </footer>
   );
@@ -145,7 +143,7 @@ function ProjectCards({ all = false }: { all?: boolean }) {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search the work…"
+              placeholder="Search projects"
             />
           </label>
         )}
@@ -153,43 +151,54 @@ function ProjectCards({ all = false }: { all?: boolean }) {
       <p className="sr-only" aria-live="polite">
         {filtered.length} projects shown
       </p>
-      <div className="project-grid">
-        {(all ? filtered : filtered.slice(0, 6)).map((p) => (
-          <Link
-            to={`/projects/${p.id}`}
-            className={`project-card visual-${p.id}`}
-            key={p.id}
-          >
-            <div className="card-image">
-              <span className="card-index">PROJECT / {p.number}</span>
-              <span className="card-category">{p.category}</span>
-              <ProjectVisual id={p.id} />
-              <span className="card-open">
-                <Arrow diagonal />
-              </span>
-            </div>
-            <div className="card-copy">
-              <div className="card-meta">
-                <span>{p.subtitle}</span>
-                <span className="status-label">
-                  <i />
-                  {p.status}
-                </span>
-              </div>
-              <h3>{p.title}</h3>
-              <p>{p.description}</p>
-              <div className="tags">
-                {p.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-              <span className="card-demo-cta">
-                Try interactive demo <Arrow />
-              </span>
-            </div>
-          </Link>
-        ))}
-      </div>
+      {(all ? yearGroups : ["Selected projects"]).map((year) => (
+        <section className="project-year-group" key={year}>
+          {all && filtered.some((p) => projectYears[p.id] === year) && (
+            <h2 className="year-group">{year}</h2>
+          )}
+          <div className="project-grid">
+            {(all
+              ? filtered.filter((p) => projectYears[p.id] === year)
+              : filtered.slice(0, 6)
+            ).map((p) => (
+              <Link
+                to={`/projects/${p.id}`}
+                className={`project-card visual-${p.id}`}
+                key={p.id}
+              >
+                <div className="card-image">
+                  <span className="card-index">{projectYears[p.id]}</span>
+                  <span className="card-category">{p.category}</span>
+                  <ProjectVisual id={p.id} />
+                  <span className="card-open">
+                    <Arrow diagonal />
+                  </span>
+                </div>
+                <div className="card-copy">
+                  <span className="project-year">{projectYears[p.id]}</span>
+                  <div className="card-meta">
+                    <span>{p.subtitle}</span>
+                    <span className="status-label">
+                      <i />
+                      {p.status}
+                    </span>
+                  </div>
+                  <h3>{p.title}</h3>
+                  <p>{p.description}</p>
+                  <div className="tags">
+                    {p.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                  <span className="card-demo-cta">
+                    Try interactive demo <Arrow />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
       {!filtered.length && (
         <div className="empty-results">
           <h3>No matching projects.</h3>
@@ -219,135 +228,75 @@ function Home() {
     <>
       <section className="hero section-wrap">
         <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="status-dot" /> THE INTERACTIVE ENGINEERING
-            PORTFOLIO
-          </div>
+          <div className="eyebrow">Welcome to my portfolio</div>
           <h1>
-            Ideas are good.
+            Practical
             <br />
-            <span>Working things</span>
+            <span>engineering</span>
             <br />
-            are better.
+            solutions.
           </h1>
-          <p>
-            I’m {profile.name}. Explore engineering through academic projects
-            you can see, understand, and interact with.
-          </p>
+          <p>{profile.biography}</p>
+          <p>A collection of projects I’ve worked on over the years.</p>
           <div className="hero-actions">
             <Link className="button" to="/projects">
-              Explore the projects <Arrow />
+              View projects <Arrow />
             </Link>
             <Link className="text-link" to="/demos">
               Try the demos <Arrow diagonal />
             </Link>
           </div>
           <div className="hero-note">
-            <span>BUILT TO BE EXPLORED</span>
             <p>
-              Adjust an input. Follow a signal.
-              <br />
-              See the engineering behind the outcome.
+              These are my projects over the years. Try the demos and see if
+              they solve something for you!
             </p>
           </div>
         </div>
         <div className="hero-lab">
           <div className="lab-toolbar">
-            <span>
-              <i /> CONCEPT LAB
-            </span>
-            <span>01 / PWM SIGNAL</span>
+            <span>FPGA fan controller</span>
+            <span>PWM control</span>
           </div>
           <div className="lab-figure">
             <ProjectVisual id="fpga-fan" hero />
-            <div className="lab-coordinate x">X: SIGNAL</div>
-            <div className="lab-coordinate y">Y: RESPONSE</div>
           </div>
           <div className="lab-bottom">
             <span className="lab-label">
-              A little input.
+              Temperature sensing
               <br />
-              <b>A visible difference.</b>
+              <b>and fan speed control</b>
             </span>
             <Link to="/projects/fpga-fan" className="lab-try">
               Try the fan controller <Arrow diagonal />
             </Link>
           </div>
           <span className="lab-footnote">
-            Concept illustration · Open the demo to adjust duty cycle
+            Open the demo to adjust the duty cycle.
           </span>
         </div>
       </section>
       <div className="capability-strip">
-        <span>EMBEDDED SYSTEMS</span>
+        <span>Embedded systems</span>
         <i>+</i>
-        <span>CONTROL & AUTOMATION</span>
+        <span>Control & automation</span>
         <i>+</i>
-        <span>IoT</span>
+        <span>Robotics</span>
         <i>+</i>
-        <span>COMPUTER VISION</span>
+        <span>Computer vision</span>
       </div>
       <section className="section-wrap work-section">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">01 / SELECTED UNIVERSITY WORK</span>
-            <h2>
-              Less scrolling.
-              <br />
-              <span>More experimenting.</span>
-            </h2>
+            <span className="eyebrow">University projects</span>
+            <h2>Selected projects</h2>
           </div>
           <p>
-            Open a project, turn a control, and follow the logic. Each
-            experience clearly separates an educational model from approved
-            project evidence.
+            Read about the projects, see the original work and try the browser
+            demos.
           </p>
         </div>
         <ProjectCards />
-      </section>
-      <section className="approach-section section-wrap">
-        <div>
-          <span className="eyebrow">02 / BEHIND THE INTERACTION</span>
-          <h2>
-            Engineering, with
-            <br />
-            the thinking left in.
-          </h2>
-          <p>
-            The interesting part is how a system gets from an input to an
-            outcome. These demos make that journey visible.
-          </p>
-          <Link to="/about" className="text-link">
-            A little about me <Arrow diagonal />
-          </Link>
-        </div>
-        <div className="approach-steps">
-          {[
-            [
-              "01",
-              "Start with the problem",
-              "Understand what the system is trying to do.",
-            ],
-            [
-              "02",
-              "Get hands-on",
-              "Change a parameter and observe the response.",
-            ],
-            [
-              "03",
-              "Look under the hood",
-              "Switch to Engineering Mode for rules, signals, and assumptions.",
-            ],
-          ].map(([n, t, d]) => (
-            <div key={n}>
-              <span>{n}</span>
-              <div>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
       <BeyondProjects />
       <ContactBanner />
@@ -359,15 +308,11 @@ function ContactBanner() {
   return (
     <section className="contact-banner section-wrap">
       <div>
-        <span className="eyebrow">LET’S CONNECT</span>
-        <h2>
-          Have a question
-          <br />
-          or an idea?
-        </h2>
+        <span className="eyebrow">Contact</span>
+        <h2>Let’s talk</h2>
       </div>
       <Link className="button light" to="/contact">
-        Start a conversation <Arrow diagonal />
+        Contact me <Arrow diagonal />
       </Link>
     </section>
   );
@@ -376,16 +321,11 @@ function ContactBanner() {
 function ProjectsPage() {
   return (
     <section className="section-wrap page-section">
-      <span className="eyebrow">THE PROJECT INDEX</span>
       <div className="section-heading">
-        <h1>
-          Explore. Adjust.
-          <br />
-          <span>Understand.</span>
-        </h1>
+        <h1>Projects</h1>
         <p>
-          A collection of university engineering concepts, brought into the
-          browser. Start with a field that interests you.
+          My engineering projects from university, with summaries, report
+          figures and demos.
         </p>
       </div>
       <ProjectCards all />
@@ -416,7 +356,7 @@ function DetailContent({ project }: { project: Project }) {
       <div className="detail-heading">
         <div>
           <span className="eyebrow">
-            PROJECT {project.number} / {project.category.toUpperCase()}
+            {projectYears[project.id]} / {project.category}
           </span>
           <h1>{project.title}</h1>
           <p>{project.subtitle}</p>
@@ -434,14 +374,12 @@ function DetailContent({ project }: { project: Project }) {
       <button
         className="detail-demo-link"
         onClick={() =>
-          document
-            .getElementById("interactive-demo")
-            ?.scrollIntoView({
-              behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-                .matches
-                ? "instant"
-                : "smooth",
-            })
+          document.getElementById("interactive-demo")?.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+              .matches
+              ? "instant"
+              : "smooth",
+          })
         }
       >
         Jump to interactive demo ↓
@@ -449,7 +387,7 @@ function DetailContent({ project }: { project: Project }) {
       <ProjectBackground id={project.id} />
       <div className="mode-bar">
         <div>
-          <span className="eyebrow">EXPLORE THE SYSTEM</span>
+          <span className="eyebrow">Project demo</span>
           <p>Your inputs stay in this browser.</p>
         </div>
         <div className="mode-switch" role="group" aria-label="Display mode">
@@ -512,7 +450,7 @@ function DetailContent({ project }: { project: Project }) {
                   <p>
                     {project.id === "fpga-fan"
                       ? "The period remains fixed at an illustrative 10 ms (100 Hz). Only high-time changes. These are demonstration values, not verified FPGA settings."
-                      : "Next step triggers one transition. Run sequence uses a 900 ms illustrative delay per transition. Object categories are examples."}
+                      : "Start sorting repeats the selected material. Changing the selection applies to the next object. Pause holds the current position; Next step advances one stage."}
                   </p>
                 </div>
                 <div>
@@ -535,23 +473,24 @@ function DetailContent({ project }: { project: Project }) {
           </>
         )}
       </div>
+      <ProjectFlowchart id={project.id} />
       <ProjectEvidence id={project.id} />
       <AlgorithmExcerpt id={project.id} />
       <div className="project-explanation">
         <div>
-          <span className="eyebrow">THE QUESTION</span>
+          <span className="eyebrow">Project objective</span>
           <h2>{project.problem}</h2>
         </div>
         <div>
           <h3>The approach</h3>
           <p>{project.approach}</p>
-          <h3>Assumptions & evidence</h3>
+          <h3>Demo limitations</h3>
           <p>{project.limitations}</p>
           <p className="evidence-note">{projectContext[project.id].evidence}</p>
         </div>
       </div>
       <div className="next-project">
-        <span className="eyebrow">KEEP EXPLORING</span>
+        <span className="eyebrow">Next project</span>
         {(() => {
           const next =
             projects[(projects.indexOf(project) + 1) % projects.length];
@@ -580,42 +519,61 @@ function ProjectPage() {
 function About() {
   return (
     <>
-      <section className="section-wrap about-page page-section">
-        <div>
-          <span className="eyebrow">THE PERSON BEHIND THE PROJECTS</span>
-          <h1>
-            Hi, I’m
-            <br />
-            <span>{profile.name}.</span>
-          </h1>
-          <p className="about-bio">{profile.biography}</p>
-          <p>
-            This portfolio brings together my university engineering interests
-            through small, explorable experiences.
-          </p>
-          <Link className="button" to="/projects">
-            See the work <Arrow />
-          </Link>
-        </div>
-        <div className="about-diagram">
-          <span className="eyebrow">MY AREAS OF INTEREST</span>
-          <div className="interest-core">
-            VM<span>ENGINEERING</span>
-          </div>
-          <div className="interest-list">
-            <span>Embedded systems</span>
-            <span>Control systems</span>
-            <span>IoT & sensing</span>
-            <span>Automation</span>
-            <span>Computer vision</span>
-          </div>
-          <p>
-            From a signal to a system.
-            <br />
-            From an idea to something you can explore.
-          </p>
-        </div>
+      <section className="section-wrap page-section about-intro">
+        <span className="eyebrow">About me</span>
+        <img
+          className="about-portrait"
+          src={
+            import.meta.env.BASE_URL +
+            "assets/reviewed/vinay-tutoring-portrait.webp"
+          }
+          alt="Vinay"
+        />
+        <h1>Hi, I’m Vinay.</h1>
+        <p className="about-bio">{profile.biography}</p>
+        <p>
+          I enjoy building things, learning how they work and helping other
+          people understand them.
+        </p>
+        <nav className="about-navigation" aria-label="About me sections">
+          <a
+            href="#/about#achievements"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("achievements")?.scrollIntoView();
+            }}
+          >
+            Achievements
+          </a>
+          <Link to="/about/experience">Experience</Link>
+          <Link to="/about/tutoring">Tutoring</Link>
+        </nav>
+        <AboutLinks />
       </section>
+      <section className="section-wrap about-achievements" id="achievements">
+        <h2>Achievements</h2>
+        <div className="about-achievement-grid">
+          <article>
+            <span className="achievement-number">7</span>
+            <h3>Consecutive Dean’s Lists</h3>
+            <p>
+              I graduated from Universiti Sains Malaysia with first-class
+              honours in mechatronics.
+            </p>
+          </article>
+          <article>
+            <span className="achievement-number">3rd</span>
+            <h3>PROTON Business Case Study Challenge</h3>
+            <p>
+              I contributed to the team that placed third in the 2024 challenge,
+              working on automotive business case analysis and presentation.
+            </p>
+          </article>
+        </div>
+        <PhotoGallery group="achievement" />
+      </section>
+      <Experience embedded />
+      <Teaching embedded />
       <ContactBanner />
     </>
   );
@@ -627,13 +585,9 @@ function Contact() {
   return (
     <section className="section-wrap contact-page page-section">
       <span className="eyebrow">CONTACT / SAY HELLO</span>
-      <h1>
-        Good things start
-        <br />
-        <span>with a conversation.</span>
-      </h1>
+      <h1>Let’s talk</h1>
       <p>
-        Curious about a project or have an engineering idea?
+        If you’d like to discuss a project or ask about tutoring,
         <br />
         Send me a message.
       </p>
@@ -673,15 +627,23 @@ function Contact() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Connect on LinkedIn <Arrow diagonal />
+        LinkedIn <Arrow diagonal />
+      </a>
+      <a
+        className="text-link linkedin-contact"
+        href={profile.youtube}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        YouTube <Arrow diagonal />
       </a>
       <div className="contact-signoff">
         <span className="brand-mark">
-          VM<span>↗</span>
+          V<span>↗</span>
         </span>
         <div>
           <strong>{profile.name}</strong>
-          <span>VM Engineering Technologies</span>
+          <span>Mechatronics graduate</span>
         </div>
       </div>
     </section>
@@ -691,14 +653,9 @@ function Contact() {
 function NotFound() {
   return (
     <section className="section-wrap page-section">
-      <span className="eyebrow">404 / NO SIGNAL</span>
-      <h1>
-        This page is
-        <br />
-        <span>off the circuit.</span>
-      </h1>
+      <h1>Page not found</h1>
       <Link className="button" to="/projects">
-        Back to the projects <Arrow />
+        View projects <Arrow />
       </Link>
     </section>
   );
@@ -715,7 +672,7 @@ export default function App() {
     const project = projects.find(
       (p) => location.pathname === `/projects/${p.id}`,
     );
-    document.title = `${project?.subtitle ?? (location.pathname === "/" ? "Interactive engineering portfolio" : location.pathname.slice(1).replace(/^./, (c) => c.toUpperCase()))} | VM Engineering Technologies`;
+    document.title = `${project?.subtitle ?? (location.pathname === "/" ? "Engineering portfolio" : location.pathname.slice(1).replace(/^./, (c) => c.toUpperCase()))} | Vinay`;
   }, [location.pathname]);
   return (
     <>
@@ -736,8 +693,16 @@ export default function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/demos" element={<Demos />} />
           <Route path="/projects/:id" element={<ProjectPage />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/teaching" element={<Teaching />} />
+          <Route
+            path="/experience"
+            element={<Navigate replace to="/about/experience" />}
+          />
+          <Route path="/about/experience" element={<Experience />} />
+          <Route
+            path="/teaching"
+            element={<Navigate replace to="/about/tutoring" />}
+          />
+          <Route path="/about/tutoring" element={<Teaching />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

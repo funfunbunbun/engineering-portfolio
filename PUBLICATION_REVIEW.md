@@ -1,60 +1,13 @@
 # Publication review
 
-## Current scope — expanded by the user on 2026-11-17
+The portfolio displays the name **Vinay**, the approved Outlook address, LinkedIn profile and YouTube channel. It includes first-class graduation, seven consecutive Dean’s Lists, the confirmed third-place PROTON team contribution, and the user’s stated club, event, tutoring and training experience.
 
-The user explicitly expanded the original university-only MVP to include the other academic reports, PROTON achievement, tutoring experience, clubs, industrial training, LinkedIn, and selected report pictures/figures. The public site is a personal educational portfolio; it does not process sales, payments, bookings, or student data.
+There are 16 project pages. University work is grouped by year; the spring and battery studies are pre-university, and the Nano HMI is independent. The paddy trajectory page and current public image were removed. Original private repositories are not published.
 
-## Confirmed personal content
+The selected FYP clip is silent H.264, trimmed from the user’s annotated recording with its diagnostic header removed. It shows recorded detections and speed estimates. Document images are metadata-free WebP copies; selected handwritten teaching explanations exclude textbook question panels, student work and contact information. The portrait was extracted from the user’s tutoring document. New photos attached only in chat still need accessible original files and are not included.
 
-- Display name: **Vinay Vyraveraja**. Do not expand the name elsewhere in the site.
-- Contact: **v.vinayx@outlook.com**; short biography retained.
-- The LinkedIn profile URL was supplied by the user. It is linked without importing unverified profile content.
-- PROTON result: **3rd place, team contributor**, directly confirmed by the user. The award is not assigned to a year because that was not confirmed. Presentation files cover 2024 and 2025.
-- Career Fair 2023 ceremony/protocol involvement, historical EICC membership, and earlier STEM Club involvement are supported by the supplied résumé.
-- Industrial training is described only through public-facing learning themes: digital design, Verilog, simulation, timing, verification, and teamwork.
-- Tutoring is presented as experience and subject focus. No rates, booking flow, testimonials, or invented student outcomes are included.
+The YOLO model was tested locally in ONNX Runtime Web. No model weights, training files or original applications are hosted. Visitors may load a compatible ONNX model on their own device; no file is uploaded. The sentiment demo remains a labelled word-feature example because the original model and vectorizer require a validated export.
 
-## Public project list
+The media manifest restricts images, the selected MP4 and pinned runtime assets by exact path, signature, byte count and SHA-256. Historical image entries preserve Git-history validation without keeping removed images in the current site. Raw reports, API configuration, credentials, personal records, calibration, datasets, checkpoints and archives remain excluded.
 
-Sixteen academic projects are described in [the inventory](./PROJECT_INVENTORY.md). The user additionally authorized Robotics and Principles of Intelligent Systems work, with explicit source-code and credential restrictions. Documented builds, proposed use cases, educational simulations, and unverified brief-only concepts are distinguished. No real deployment, clinical accuracy, hardware performance, or commercial results are invented.
-
-## Exact media selection
-
-The fourteen compressed figure extracts in [the checksum manifest](./media-manifest.json) are the only report-derived images prepared for publication:
-
-| Figure | Source |
-| --- | --- |
-| Heart-monitor block diagram | Heartbeat/SpO₂ report, PDF page 18 |
-| Fan controller block diagram | Fan report, page 6 |
-| Fan prototype photograph, cropped | Fan report, page 20 |
-| Traffic model isometric photograph | Traffic-light report, page 20 |
-| Traffic model top-view photograph | Traffic-light report, page 20 |
-| Conveyor sensor photograph | Sorting report, page 27 |
-| Conveyor diverter photograph | Sorting report, page 27 |
-| Flood-control circuit photograph, cropped | Flood report, page 19 |
-| Trolley CAD rendering | CAD report, PDF page 44 |
-| ATM menu flowchart | ATM interface report, PDF page 9 |
-| Robotic recycling architecture | Robotics mini-project report, Figure 4.9 |
-| Robotic recycling process flow | Robotics mini-project report, Figure 4.8 |
-| Planting trajectory simulation | Robotics Assignment 2, 3D trajectory plot |
-| Perceptron architecture | Intelligent Systems mini-project, Figure 4 |
-
-Selections exclude cover sheets, student names and IDs, contact details, device-identifier photos, full reports, original firmware, logbooks, class recordings, payment data, rosters, textbook pages, and question banks. Images are re-encoded without source metadata. No PROTON logos or third-party stock images are copied from the presentations. Figures are attributed to their academic report and page on the site.
-
-The user requested use of their document figures. Final approval must confirm that these selected team-project images may be made public; local review cannot establish all coauthor or third-party rights. Weather UI screenshots and source-code screenshots are excluded.
-
-## Selected code
-
-Five short algorithm explanations were written for the portfolio; none is a full original source-file copy. They cover a symbolic transform, generic interpolation, positive certainty-factor combination, an AND decision, and a classification pipeline. See [the code-publication policy](./CODE_PUBLICATION_POLICY.md) for exact inclusions and exclusions. Original applications, configuration, credentials, personal data, calibration, datasets, and saved models remain private.
-
-## Validation and hosting review
-
-- TypeScript, 23 React/core interaction tests, five publication-policy tests, production build, and checksum verification of all fourteen images pass. All 16 projects now have educational interactions, listed in [the demo guide](./DEMO_GUIDE.md).
-- Browser validation covers existing and additional demos, image enlargement and Escape, achievements, tutoring, LinkedIn, static route refresh, and responsive layouts.
-- Public text and tracked-file scans check for local source paths, prohibited originals, and common credential patterns. Scans supplement human review.
-- Published destination: **public** [funfunbunbun/engineering-portfolio](https://github.com/funfunbunbun/engineering-portfolio).
-- Verified live website: https://funfunbunbun.github.io/engineering-portfolio/ — HTTPS enforced.
-- The prepared Pages workflow runs only by manual dispatch. A normal push does not deploy automatically.
-- The newly written website frontend source and existing local Git history will also be public on the free plan. Original project applications and histories are excluded. The fourteen independent project repositories remain local unless separately approved.
-
-**Published on 2026-11-18 after explicit approval:** the user approved the current portfolio and requested more demos followed by public publication. The reviewed frontend, fourteen selected images, five adapted algorithm examples, and educational browser models were deployed successfully. Original software, secrets, private records, datasets, calibration, and independent repositories remain excluded. Both CI jobs passed; live checks verified assets, image hashes, all 16 demo pages, new controls/resets, mobile navigation, and layouts at 320, 390, 768, and 1440 px. [Deployment record](https://github.com/funfunbunbun/engineering-portfolio/actions/runs/44194757221).
+Validation includes TypeScript, application and simulation tests, production build checks, desktop/mobile browser checks, actual video playback, private local ONNX inference, and tracked-file and history scans before publication. The existing public-publication approval applies to this requested revision.

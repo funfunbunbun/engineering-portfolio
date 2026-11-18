@@ -1,7 +1,7 @@
 import type { ProjectContext } from "./projectContext";
 export const advancedContext: Record<
   | "robot-recycling"
-  | "planting-trajectory"
+  | "nano-hmi"
   | "weather-expert"
   | "sentiment-analysis"
   | "neural-classifiers",
@@ -31,22 +31,15 @@ export const advancedContext: Record<
       },
     ],
   },
-  "planting-trajectory": {
-    setting: "USM EEM343 Robotics · trajectory assignment",
+  "nano-hmi": {
+    setting: "Independent embedded-interface project",
     background:
-      "A six-degree-of-freedom arm on a mobile platform is used as a paddy-planting scenario. The task is to construct a trajectory between pickup and planting locations through via points while accounting for a modeled obstacle.",
+      "A touchscreen-style desktop HMI built with Tkinter communicates with an Arduino Nano over USB serial. The host buffers typed values, sends confirmed entries and reports the device response.",
     application:
-      "Used as an academic motion-planning exercise. Paddy planting supplies a concrete scenario for geometric path reasoning, not evidence of agricultural deployment.",
+      "A bench interface for studying PC-to-microcontroller communication and keypad-style control. The original graphical interface runs on the PC, while the Nano handles serial commands and outputs.",
     evidence:
-      "The selected plot is the original assignment simulation. Its coordinates describe the modeled exercise, not live machine calibration.",
-    figures: [
-      {
-        file: "planting-simulation.webp",
-        alt: "Three-dimensional simulated planting path with via points and a rectangular obstacle.",
-        caption: "The assignment’s simulated path around a modeled obstacle.",
-        source: "Robotics Assignment 2 · 3D trajectory plot",
-      },
-    ],
+      "Based on the project documentation. The portfolio uses a separate browser simulation, without the original firmware, protected menus or hardware settings.",
+    figures: [],
   },
   "weather-expert": {
     setting:

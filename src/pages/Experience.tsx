@@ -1,52 +1,69 @@
 import { Link } from "react-router-dom";
 import { Arrow } from "../components/Visual";
 import profile from "../data/profile.json";
+import { aboutPhotos, type AboutPhoto } from "../data/aboutMedia";
+
+export function AboutLinks() {
+  return (
+    <div className="about-socials">
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+        LinkedIn ↗
+      </a>
+      <a href={profile.youtube} target="_blank" rel="noopener noreferrer">
+        YouTube ↗
+      </a>
+    </div>
+  );
+}
+
+export function PhotoGallery({ group }: { group: AboutPhoto["group"] }) {
+  const photos = aboutPhotos.filter((photo) => photo.group === group);
+  if (!photos.length) return null;
+  return (
+    <div className="about-photo-grid">
+      {photos.map((photo) => (
+        <figure key={photo.file}>
+          <img
+            loading="lazy"
+            src={import.meta.env.BASE_URL + "assets/reviewed/" + photo.file}
+            alt={photo.alt}
+          />
+          <figcaption>{photo.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
 
 export function BeyondProjects() {
   return (
     <section className="section-wrap beyond-section">
       <div className="section-heading">
-        <div>
-          <span className="eyebrow">BEYOND THE BUILD</span>
-          <h2>
-            Engineering is
-            <br />
-            <span>a people thing, too.</span>
-          </h2>
-        </div>
+        <h2>About me</h2>
         <p>
-          Competitions, teaching, student activities, and industry learning add
-          another dimension to the work.
+          My time at university also included teaching, competitions, student
+          clubs and event work.
         </p>
       </div>
       <div className="beyond-grid">
         {[
           {
-            number: "01",
-            title: "Ideas under pressure.",
-            label: "PROTON · 3RD PLACE",
-            text: "Team contributor in the PROTON Business Case Study Challenge.",
-            route: "/experience",
+            title: "Achievements",
+            text: "Seven consecutive Dean’s Lists, first-class honours and a third-place team result in the PROTON challenge.",
+            route: "/about",
           },
           {
-            number: "02",
-            title: "Make it click.",
-            label: "TUTORING",
-            text: "Helping learners work through mathematics, science, and the reasoning behind an answer.",
-            route: "/teaching",
+            title: "Experience",
+            text: "Industrial training, EICC, CETS, career fairs and student activities.",
+            route: "/about/experience",
           },
           {
-            number: "03",
-            title: "Learn with others.",
-            label: "CLUBS & INDUSTRIAL TRAINING",
-            text: "Student involvement, event protocol, and structured technical learning.",
-            route: "/experience",
+            title: "Tutoring",
+            text: "SPM Form 4 and 5 STEM subjects, and Form 6 Mathematics T and Physics.",
+            route: "/about/tutoring",
           },
         ].map((item) => (
-          <Link className="beyond-card" to={item.route} key={item.number}>
-            <span className="eyebrow">
-              {item.number} / {item.label}
-            </span>
+          <Link className="beyond-card" to={item.route} key={item.title}>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
             <Arrow diagonal />
@@ -57,263 +74,189 @@ export function BeyondProjects() {
   );
 }
 
-export default function Experience() {
+export default function Experience({
+  embedded = false,
+}: {
+  embedded?: boolean;
+}) {
   return (
-    <section className="section-wrap page-section experience-page">
-      <span className="eyebrow">EXPERIENCE / ACHIEVEMENTS & INVOLVEMENT</span>
-      <h1>
-        More than
-        <br />
-        <span>the technical part.</span>
-      </h1>
-      <p className="page-intro">
-        A few experiences that bring together technical thinking, communication,
-        and working with people.
-      </p>
-      <section className="achievement-feature" aria-label="PROTON achievement">
-        <div className="award-art" aria-hidden="true">
-          <span>03</span>
-          <svg viewBox="0 0 250 120">
-            <path
-              d="M15 100h60V65h55V30h55v70h50"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <path d="m130 20 20-15 20 15" fill="none" stroke="currentColor" />
-            <circle cx="150" cy="47" r="8" stroke="currentColor" fill="none" />
-          </svg>
-          <small>BUSINESS CASE / TEAM CONTRIBUTION</small>
-        </div>
-        <div>
-          <span className="eyebrow">ACHIEVEMENT / PROTON</span>
-          <h2>
-            3rd place.
-            <br />
-            <span>A shared effort.</span>
-          </h2>
-          <p className="achievement-role">
-            PROTON Business Case Study Challenge · Team contributor
-          </p>
-          <p>
-            Contributed to a team case-study effort connecting engineering
-            context with automotive strategy. Our case studies explored EV
-            adoption and digital transformation in automotive retail.
-          </p>
-          <div className="tags">
-            <span>Case analysis</span>
-            <span>Teamwork</span>
-            <span>Technical communication</span>
-          </div>
-        </div>
-      </section>
-      <div className="experience-heading">
-        <span className="eyebrow">LEARNING IN PRACTICE</span>
-        <h2>
-          Inside the community.
-          <br />
-          <span>Alongside industry.</span>
-        </h2>
-      </div>
+    <section
+      className={
+        "section-wrap experience-page " +
+        (embedded ? "about-experience" : "page-section")
+      }
+      id="experience"
+    >
+      {!embedded && (
+        <Link to="/about" className="back-link">
+          ← About me
+        </Link>
+      )}
+      {embedded ? <h2>Experience</h2> : <h1>Experience</h1>}
       <div className="experience-timeline">
         <article>
-          <span className="timeline-kind">INDUSTRIAL TRAINING</span>
+          <span className="timeline-kind">Industrial training</span>
           <div>
-            <h3>Digital design & verification learning</h3>
-            <p className="timeline-subtitle">MOHE–Intel ELITE programme</p>
+            <h3>MOHE–Intel ELITE programme</h3>
             <p>
-              Structured technical learning in Verilog, simulation, testbenches,
-              timing, and verification, with teamwork throughout the training.
+              Training in digital design and verification, including Verilog,
+              simulation, testbenches and timing. I worked through technical
+              exercises and team activities during the programme.
             </p>
             <div className="tags">
               <span>Verilog</span>
-              <span>Simulation</span>
+              <span>Digital design</span>
               <span>Verification</span>
-              <span>Timing</span>
             </div>
           </div>
         </article>
         <article>
-          <span className="timeline-kind">STUDENT INVOLVEMENT</span>
+          <span className="timeline-kind">Club leadership</span>
           <div>
-            <h3>Career Fair 2023</h3>
-            <p className="timeline-subtitle">
-              Ceremony & Protocol Department · November 2022–May 2023
-            </p>
+            <h3>EICC and CETS</h3>
             <p>
-              Student event involvement in ceremony and protocol, contributing
-              to the coordination behind a university career fair.
+              I was the director of CETS 1.0 and 2.0, and served as EICC
+              secretary for one year. My work included coordinating activities,
+              organising events and supporting the club’s administration.
             </p>
           </div>
         </article>
         <article>
-          <span className="timeline-kind">CLUBS</span>
+          <span className="timeline-kind">University events</span>
           <div>
-            <h3>EICC & STEM club involvement</h3>
+            <h3>Career Fair 2023 and 2024</h3>
             <p>
-              EICC membership and earlier Form 6 STEM Club involvement as a
-              monitor and committee member brought opportunities to contribute
-              to student activities and work with others.
+              I was part of the ceremony department and served as an emcee for
+              the gala dinners. I helped with event arrangements, programme flow
+              and communication on the day.
             </p>
-            <div className="tags">
-              <span>Student community</span>
-              <span>Organisation</span>
-              <span>Communication</span>
-            </div>
+          </div>
+        </article>
+        <article>
+          <span className="timeline-kind">Student activities</span>
+          <div>
+            <h3>PPSL, Deepavali and Kaalvi Yaathirai</h3>
+            <p>
+              I took part in PPSL for the 2023 intake, campus Deepavali
+              activities and Kaalvi Yaathirai. These gave me opportunities to
+              work with other students and contribute to the university
+              community.
+            </p>
           </div>
         </article>
       </div>
-      <div className="experience-links">
-        <Link className="button" to="/teaching">
-          Explore the tutoring side <Arrow />
-        </Link>
-        <a
-          className="text-link"
-          href={profile.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Find me on LinkedIn <Arrow diagonal />
-        </a>
-      </div>
+      <PhotoGallery group="experience" />
+      {!embedded && <AboutLinks />}
     </section>
   );
 }
 
-export function Teaching() {
+function TeachingIllustration() {
   return (
-    <section className="section-wrap page-section teaching-page">
-      <span className="eyebrow">TUTORING / CLEAR THINKING, STEP BY STEP</span>
+    <div className="teaching-art">
+      <svg
+        viewBox="0 0 480 310"
+        role="img"
+        aria-label="Vinay explaining a graph to a student at a whiteboard"
+      >
+        <rect
+          x="160"
+          y="25"
+          width="275"
+          height="160"
+          rx="9"
+          fill="#203747"
+          stroke="#a8cee3"
+        />
+        <path
+          d="M202 147h182M230 156V56M241 139q55-6 102-64"
+          fill="none"
+          stroke="#b5d9c6"
+          strokeWidth="3"
+        />
+        <text x="278" y="61" fill="#dcebf4" fontSize="18">
+          y = x²
+        </text>
+        <g stroke="#bdd8ea" strokeWidth="5" strokeLinecap="round" fill="none">
+          <circle cx="112" cy="123" r="22" />
+          <path d="M112 147v81m0-59 48 17 38-45m-86 29-31 33m31 25-24 55m24-55 30 55" />
+          <circle cx="352" cy="219" r="18" />
+          <path d="M352 240v40m0-29-38 12m38-10 32 10" />
+        </g>
+        <g stroke="#bdd8ea" fill="none" strokeWidth="2">
+          <rect x="94" y="117" width="16" height="10" rx="3" />
+          <rect x="115" y="117" width="16" height="10" rx="3" />
+          <path d="M110 121h5" />
+        </g>
+        <text x="87" y="305" fill="#dcebf4" fontSize="15">
+          Vinay
+        </text>
+        <text x="322" y="305" fill="#dcebf4" fontSize="15">
+          Student
+        </text>
+        <path
+          d="M286 273h131m-116 0v28m102-28v28"
+          stroke="#a8cee3"
+          strokeWidth="4"
+        />
+      </svg>
+      <p>
+        I like using diagrams and worked examples to explain a problem one step
+        at a time.
+      </p>
+    </div>
+  );
+}
+
+export function Teaching({ embedded = false }: { embedded?: boolean }) {
+  return (
+    <section
+      className={
+        "section-wrap teaching-page " +
+        (embedded ? "about-teaching" : "page-section")
+      }
+      id="tutoring"
+    >
+      {!embedded && (
+        <Link to="/about" className="back-link">
+          ← About me
+        </Link>
+      )}
       <div className="teaching-hero">
         <div>
-          <h1>
-            A little clarity.
-            <br />
-            <span>A lot more confidence.</span>
-          </h1>
+          {embedded ? <h2>Tutoring</h2> : <h1>Tutoring</h1>}
           <p>
-            I enjoy breaking an unfamiliar problem into smaller steps,
-            connecting an equation to an idea, and helping a learner understand
-            why an answer works.
+            I teach Malaysian secondary-school and Form 6 subjects. I enjoy
+            helping students understand the reasoning behind an answer and
+            practise until they can work through a similar question themselves.
           </p>
-          <p>
-            My subject focus includes secondary-school mathematics, additional
-            mathematics, science, and STPM Mathematics (T).
-          </p>
-        </div>
-        <div
-          className="teaching-art"
-          aria-label="Illustration of a quadratic graph"
-        >
-          <span className="eyebrow">UNDERSTAND THE SHAPE</span>
-          <svg
-            viewBox="0 0 420 300"
-            role="img"
-            aria-label="Illustrative parabola y equals x squared"
+          <div className="teaching-topics compact">
+            <article>
+              <h3>SPM · Form 4 and 5</h3>
+              <p>STEM subjects, including mathematics and science.</p>
+            </article>
+            <article>
+              <h3>Form 6</h3>
+              <p>Mathematics T and Physics.</p>
+            </article>
+          </div>
+          <a
+            className="text-link"
+            href={profile.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <path d="M45 240h330M210 270V30" stroke="#577f9c" />
-            <path
-              d="M75 50Q210 430 345 50"
-              stroke="#bbddf5"
-              strokeWidth="2"
-              fill="none"
-            />
-            <circle cx="210" cy="240" r="5" fill="#b7ddca" />
-            <text
-              x="230"
-              y="80"
-              fill="#bdd8ea"
-              fontSize="24"
-              fontFamily="monospace"
-            >
-              y = x²
-            </text>
-            <text x="356" y="258" fill="#a1bdce" fontSize="12">
-              x
-            </text>
-            <text x="192" y="35" fill="#a1bdce" fontSize="12">
-              y
-            </text>
-          </svg>
-          <p>
-            Connect the equation.
-            <br />
-            See the pattern.
-          </p>
+            My YouTube channel <Arrow diagonal />
+          </a>
         </div>
+        <TeachingIllustration />
       </div>
-      <div className="teaching-topics">
-        {[
-          [
-            "01",
-            "Mathematics",
-            "Build a foundation in algebra, functions, geometry, and structured problem-solving.",
-          ],
-          [
-            "02",
-            "Additional mathematics",
-            "Work through equations, coordinate relationships, and multi-step reasoning.",
-          ],
-          [
-            "03",
-            "Science & STPM topics",
-            "Connect mathematical tools with scientific ideas and higher-level mathematics.",
-          ],
-        ].map(([n, t, d]) => (
-          <article key={n}>
-            <span className="eyebrow">{n} / SUBJECT FOCUS</span>
-            <h3>{t}</h3>
-            <p>{d}</p>
-          </article>
-        ))}
-      </div>
-      <div className="teaching-method">
-        <span className="eyebrow">HOW I LIKE TO EXPLAIN THINGS</span>
-        <h2>
-          Start with the idea.
-          <br />
-          <span>Then build the method.</span>
-        </h2>
-        <ol>
-          <li>
-            <span>01</span>
-            <div>
-              <h3>Find the starting point</h3>
-              <p>
-                Identify what the learner knows and what the question is asking.
-              </p>
-            </div>
-          </li>
-          <li>
-            <span>02</span>
-            <div>
-              <h3>Make the steps visible</h3>
-              <p>
-                Use a worked example, a diagram, or a simpler version of the
-                problem.
-              </p>
-            </div>
-          </li>
-          <li>
-            <span>03</span>
-            <div>
-              <h3>Let understanding do the work</h3>
-              <p>
-                Try a related question and explain the reasoning in the
-                learner’s own words.
-              </p>
-            </div>
-          </li>
-        </ol>
-      </div>
-      <p className="teaching-privacy">
-        This page describes tutoring experience. Student records, payments,
-        class recordings, and third-party textbooks or question banks are not
-        published.
-      </p>
-      <Link className="button" to="/contact">
-        Get in touch <Arrow diagonal />
-      </Link>
+      <PhotoGallery group="teaching" />
+      {!embedded && (
+        <Link className="button" to="/contact">
+          Contact me about tutoring <Arrow diagonal />
+        </Link>
+      )}
     </section>
   );
 }

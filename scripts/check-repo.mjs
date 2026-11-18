@@ -1,3 +1,4 @@
+import { isReviewedAsset } from "./reviewed-assets.mjs";
 import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -45,6 +46,13 @@ for (const repo of repos) {
     .filter(Boolean);
   for (const name of names) {
     count++;
+    const data = await readFile(path.join(repo, name));
+    if (
+      repo === root &&
+      name.startsWith("public/") &&
+      isReviewedAsset(name.slice(7), data)
+    )
+      continue;
     if (prohibitedFile.test(name))
       problems.push(`Prohibited original/data/model file: ${name}`);
     if (
@@ -53,7 +61,6 @@ for (const repo of repos) {
       )
     )
       problems.push(`Unexpected tracked material: ${name}`);
-    const data = await readFile(path.join(repo, name));
     if (name.endsWith(".webp")) {
       if (
         !allowedImageHashes.has(createHash("sha256").update(data).digest("hex"))

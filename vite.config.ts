@@ -3,6 +3,14 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    conditions: [
+      "onnxruntime-web-use-extern-wasm",
+      "module",
+      "browser",
+      "development|production",
+    ],
+  },
   base: process.env.PAGES_BASE_PATH || "./",
   server: { host: "127.0.0.1" },
   test: {

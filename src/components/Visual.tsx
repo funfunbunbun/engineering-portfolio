@@ -95,7 +95,7 @@ export function ProjectVisual({
             fontFamily="monospace"
             letterSpacing="2"
           >
-            CONCEPT / VIDEO → VELOCITY
+            Vehicle detection and speed estimation
           </text>
           <text
             x="350"
@@ -104,7 +104,7 @@ export function ProjectVisual({
             fontSize="10"
             fontFamily="monospace"
           >
-            ILLUSTRATION · NO TRACKING DATA
+            YOLO · Raspberry Pi 5
           </text>
         </g>
       )}
@@ -391,7 +391,7 @@ export function ProjectVisual({
           </text>
         </g>
       )}
-      {(id === "robot-recycling" || id === "planting-trajectory") && (
+      {id === "robot-recycling" && (
         <g stroke="currentColor" strokeWidth="3">
           <path d="M95 260h130m-65 0V140l100-70 100 90-35 50" fill="none" />
           <circle cx="160" cy="140" r="17" fill="#24465d" />
@@ -402,32 +402,8 @@ export function ProjectVisual({
             stroke="#a6d2df"
             fill="none"
           />
-          {id === "robot-recycling" ? (
-            <>
-              <rect x="400" y="210" width="65" height="55" fill="#284b60" />
-              <rect x="480" y="210" width="65" height="55" fill="#35584f" />
-              <text
-                x="405"
-                y="192"
-                stroke="none"
-                fill="currentColor"
-                fontSize="9"
-                fontFamily="monospace"
-              >
-                SORT / MATERIAL
-              </text>
-            </>
-          ) : (
-            <>
-              <path
-                d="M240 250q65-170 150-100t140 95"
-                stroke="#add1bb"
-                strokeDasharray="6 7"
-                fill="none"
-              />
-              <path d="M390 245V140h35v105" fill="#5d705e" opacity=".6" />
-            </>
-          )}
+          <rect x="400" y="210" width="65" height="55" fill="#284b60" />
+          <rect x="480" y="210" width="65" height="55" fill="#35584f" />
           <text
             x="75"
             y="36"
@@ -436,7 +412,56 @@ export function ProjectVisual({
             fontSize="10"
             fontFamily="monospace"
           >
-            SENSE / PLAN / MOVE
+            Robotic recycling cell
+          </text>
+        </g>
+      )}
+      {id === "nano-hmi" && (
+        <g stroke="currentColor" strokeWidth="2">
+          <rect x="55" y="100" width="125" height="135" rx="8" fill="#284b60" />
+          {[0, 1, 2].flatMap((row) =>
+            [0, 1, 2].map((column) => (
+              <rect
+                key={row + ":" + column}
+                x={70 + column * 33}
+                y={123 + row * 33}
+                width="23"
+                height="23"
+                rx="3"
+                fill="#89afc5"
+              />
+            )),
+          )}
+          <path d="M190 165h50m-10-8 10 8-10 8M350 165h45m-10-8 10 8-10 8" />
+          <rect
+            x="255"
+            y="120"
+            width="82"
+            height="100"
+            rx="5"
+            fill="#277a7f"
+            strokeDasharray="3 4"
+          />
+          <text x="275" y="174" fill="#e1f0f3" stroke="none" fontSize="16">
+            Nano
+          </text>
+          <rect
+            x="410"
+            y="100"
+            width="145"
+            height="118"
+            rx="6"
+            fill="#19384c"
+          />
+          <path d="M465 220v20h35v-20m-53 20h70" />
+          <text x="453" y="167" fill="#b3d8ed" stroke="none" fontSize="28">
+            42
+          </text>
+          <text x="65" y="275" stroke="none" fill="currentColor" fontSize="12">
+            Touch input
+          </text>
+          <text x="435" y="275" stroke="none" fill="currentColor" fontSize="12">
+            PC display
           </text>
         </g>
       )}

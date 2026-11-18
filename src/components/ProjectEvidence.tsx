@@ -7,16 +7,12 @@ export function ProjectBackground({ id }: { id: ProjectId }) {
   return (
     <section className="project-background" aria-label="Project background">
       <div>
-        <span className="eyebrow">CONTEXT / {context.setting}</span>
-        <h2>
-          Where the idea
-          <br />
-          <span>meets the real world.</span>
-        </h2>
+        <span className="eyebrow">{context.setting}</span>
+        <h2>Project summary</h2>
       </div>
       <div>
         <p>{context.background}</p>
-        <h3>Where it fits</h3>
+        <h3>Application</h3>
         <p>{context.application}</p>
       </div>
     </section>
@@ -44,8 +40,8 @@ export default function ProjectEvidence({ id }: { id: ProjectId }) {
     >
       <div className="section-heading">
         <div>
-          <span className="eyebrow">FROM THE ORIGINAL REPORT</span>
-          <h2>The work, in view.</h2>
+          <span className="eyebrow">From the project report</span>
+          <h2>Project figures</h2>
         </div>
         <p>
           Selected figures from the academic project. These show the documented

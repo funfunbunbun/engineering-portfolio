@@ -1,19 +1,40 @@
 import type { Project } from "./projects";
-function entry(project: Omit<Project, "tour">): Project {
-  return {
-    ...project,
-    tour: [
-      { title: "Meet the project", text: project.description },
-      { title: "Follow the approach", text: project.approach },
-      { title: "Know the limits", text: project.limitations },
-    ],
-  };
-}
 export const advancedProjects: Project[] = [
-  entry({
-    id: "robot-recycling",
+  {
+    id: "nano-hmi",
     number: "12",
-    title: "Pick with a purpose.",
+    title: "Arduino Nano touchscreen HMI",
+    subtitle: "Touchscreen-style PC interface and Nano serial communication",
+    category: "Embedded Systems",
+    tags: ["Arduino Nano", "Serial communication", "Software"],
+    status: "Interactive simulation",
+    description:
+      "A desktop touchscreen-style interface that sends confirmed inputs to an Arduino Nano and displays its responses.",
+    problem:
+      "How can a PC interface pass validated inputs to a small embedded controller?",
+    approach:
+      "The documented project uses a Python/Tkinter interface, USB serial and classic Nano firmware. Inputs are buffered until Enter, with a response displayed by the host application. The browser demo shows a simplified input, controller and PC display sequence.",
+    limitations:
+      "This browser demo does not open a serial port or drive keypad outputs. It does not reproduce protected menus, device credentials, electrical settings or machine calibration.",
+    tour: [
+      {
+        title: "Project summary",
+        text: "A desktop touchscreen-style interface that sends confirmed inputs to an Arduino Nano and displays its responses.",
+      },
+      {
+        title: "Approach",
+        text: "The documented project uses a Python/Tkinter interface, USB serial and classic Nano firmware. Inputs are buffered until Enter, with a response displayed by the host application. The browser demo shows a simplified input, controller and PC display sequence.",
+      },
+      {
+        title: "Demo limitations",
+        text: "This browser demo does not open a serial port or drive keypad outputs. It does not reproduce protected menus, device credentials, electrical settings or machine calibration.",
+      },
+    ],
+  },
+  {
+    id: "robot-recycling",
+    number: "13",
+    title: "Robotic recycling cell",
     subtitle: "Robotic recycling cell",
     category: "Robotics",
     tags: ["Robotics", "MATLAB", "Sensing"],
@@ -25,29 +46,26 @@ export const advancedProjects: Project[] = [
     approach:
       "The report documents a Flexiv Rizon 4S collaborative arm, gripper, material sensors, and a parallel MATLAB simulation. Selected diagrams show the path from sensing to a pick-and-place decision.",
     limitations:
-      "The portfolio explains the academic system. Robot addresses, serials, calibration tables, actual joint/pose commands, and executable hardware control are excluded.",
-  }),
-  entry({
-    id: "planting-trajectory",
-    number: "13",
-    title: "Plan the path.",
-    subtitle: "Paddy-planting robot trajectory",
-    category: "Robotics",
-    tags: ["Robotics", "MATLAB", "Motion Planning"],
-    status: "Interactive simulation",
-    description:
-      "A robotics assignment exploring a planting path through via points around a modeled obstacle.",
-    problem:
-      "How can a robot move from a pickup location to a planting location while respecting an obstacle?",
-    approach:
-      "The assignment plans straight and curved trajectory segments for a six-degree-of-freedom arm on a mobile platform. A simulation plot shows the academic path and via-point structure.",
-    limitations:
-      "The plot represents an assignment simulation, not a field-deployed agricultural robot. Physical calibration, collision validation, and real controller commands are not published.",
-  }),
-  entry({
+      "The browser shows a simplified sorting sequence. It does not reproduce the full robot kinematics or control physical equipment.",
+    tour: [
+      {
+        title: "Project summary",
+        text: "A university recycling-cell project connecting material sensing, robot motion, and sorting logic.",
+      },
+      {
+        title: "Approach",
+        text: "The report documents a Flexiv Rizon 4S collaborative arm, gripper, material sensors, and a parallel MATLAB simulation. Selected diagrams show the path from sensing to a pick-and-place decision.",
+      },
+      {
+        title: "Demo limitations",
+        text: "The portfolio explains the academic system. Robot addresses, serials, calibration tables, actual joint/pose commands, and executable hardware control are excluded.",
+      },
+    ],
+  },
+  {
     id: "weather-expert",
     number: "14",
-    title: "Reason through the weather.",
+    title: "Weather expert system",
     subtitle: "Certainty-factor weather expert system",
     category: "Intelligent Systems",
     tags: ["Intelligent Systems", "Python", "Rule-Based AI"],
@@ -59,12 +77,26 @@ export const advancedProjects: Project[] = [
     approach:
       "The report describes a Python rule-based system using temperature, humidity, wind, and cloud-related attributes. The browser lab isolates one safe part: combining two positive rule-support scores for the same hypothesis.",
     limitations:
-      "This is an offline explanation of certainty-factor reasoning. A score is not a calibrated rain probability, forecast, or weather alert. No weather-service connection, location history, or API credential is included.",
-  }),
-  entry({
+      "The demo combines sample rule-confidence values. It does not fetch weather data or provide a live forecast.",
+    tour: [
+      {
+        title: "Project summary",
+        text: "An explainable weather-reasoning project that combines rule support using certainty factors.",
+      },
+      {
+        title: "Approach",
+        text: "The report describes a Python rule-based system using temperature, humidity, wind, and cloud-related attributes. The browser lab isolates one safe part: combining two positive rule-support scores for the same hypothesis.",
+      },
+      {
+        title: "Demo limitations",
+        text: "This is an offline explanation of certainty-factor reasoning. A score is not a calibrated rain probability, forecast, or weather alert. No weather-service connection, location history, or API credential is included.",
+      },
+    ],
+  },
+  {
     id: "sentiment-analysis",
     number: "15",
-    title: "From words to a signal.",
+    title: "Sentiment analysis",
     subtitle: "TF-IDF & MLP sentiment analysis",
     category: "Intelligent Systems",
     tags: ["Intelligent Systems", "Python", "PyTorch", "NLP"],
@@ -75,12 +107,26 @@ export const advancedProjects: Project[] = [
     approach:
       "The reviewed report and small model/preprocessing modules support a pipeline from review preprocessing to TF-IDF vectorization, an MLP, and held-out evaluation. The portfolio shows the workflow and a minimal algorithm sketch.",
     limitations:
-      "No original review text, account data, full interface code, large dataset, saved model, or serialized vectorizer is published. No live trained-model inference or performance score is claimed here.",
-  }),
-  entry({
+      "The browser example uses a small hand-written word-weight table. It illustrates feature scoring and does not run the trained TF-IDF/MLP classifier.",
+    tour: [
+      {
+        title: "Project summary",
+        text: "A text-classification assignment using TF-IDF features and a multilayer perceptron to distinguish positive and negative reviews.",
+      },
+      {
+        title: "Approach",
+        text: "The reviewed report and small model/preprocessing modules support a pipeline from review preprocessing to TF-IDF vectorization, an MLP, and held-out evaluation. The portfolio shows the workflow and a minimal algorithm sketch.",
+      },
+      {
+        title: "Demo limitations",
+        text: "No original review text, account data, full interface code, large dataset, saved model, or serialized vectorizer is published. No live trained-model inference or performance score is claimed here.",
+      },
+    ],
+  },
+  {
     id: "neural-classifiers",
     number: "16",
-    title: "Learning a boundary.",
+    title: "Neural classifiers",
     subtitle: "Perceptron & multilayer neural classifiers",
     category: "Intelligent Systems",
     tags: ["Intelligent Systems", "MATLAB", "Neural Networks"],
@@ -91,6 +137,20 @@ export const advancedProjects: Project[] = [
     approach:
       "The mini-project compares perceptron initialization and explores multilayer classifiers with dimensionality reduction. The browser lab uses an illustrative fixed-weight AND gate to make the decision boundary visible.",
     limitations:
-      "The browser weights are educational examples, not the trained project parameters. Full training data, model files, raw metrics, and training scripts are excluded.",
-  }),
+      "The demo uses an illustrative AND-gate perceptron. It does not load the original training datasets or reproduce the full multilayer experiments.",
+    tour: [
+      {
+        title: "Project summary",
+        text: "A MATLAB mini-project spanning a simple AND perceptron and multiclass neural-network classification.",
+      },
+      {
+        title: "Approach",
+        text: "The mini-project compares perceptron initialization and explores multilayer classifiers with dimensionality reduction. The browser lab uses an illustrative fixed-weight AND gate to make the decision boundary visible.",
+      },
+      {
+        title: "Demo limitations",
+        text: "The browser weights are educational examples, not the trained project parameters. Full training data, model files, raw metrics, and training scripts are excluded.",
+      },
+    ],
+  },
 ];

@@ -1,16 +1,54 @@
 [
-  { "slug": "fpga-pwm-fan-controller", "projectId": "fpga-fan" },
-  { "slug": "plc-hmi-sorting-machine", "projectId": "plc-sorting" },
-  { "slug": "heart-monitor", "projectId": "heart-monitor" },
-  { "slug": "traffic-light", "projectId": "traffic-light" },
-  { "slug": "flood-control", "projectId": "flood-control" },
-  { "slug": "trolley-cad", "projectId": "trolley-cad" },
-  { "slug": "atm-interface", "projectId": "atm-interface" },
-  { "slug": "spring-study", "projectId": "spring-study" },
-  { "slug": "battery-study", "projectId": "battery-study" },
-  { "slug": "robot-recycling", "projectId": "robot-recycling" },
-  { "slug": "planting-trajectory", "projectId": "planting-trajectory" },
-  { "slug": "weather-expert", "projectId": "weather-expert" },
-  { "slug": "sentiment-analysis", "projectId": "sentiment-analysis" },
-  { "slug": "neural-classifiers", "projectId": "neural-classifiers" }
+  {
+    "slug": "fpga-pwm-fan-controller",
+    "projectId": "fpga-fan"
+  },
+  {
+    "slug": "plc-hmi-sorting-machine",
+    "projectId": "plc-sorting"
+  },
+  {
+    "slug": "heart-monitor",
+    "projectId": "heart-monitor"
+  },
+  {
+    "slug": "traffic-light",
+    "projectId": "traffic-light"
+  },
+  {
+    "slug": "flood-control",
+    "projectId": "flood-control"
+  },
+  {
+    "slug": "trolley-cad",
+    "projectId": "trolley-cad"
+  },
+  {
+    "slug": "atm-interface",
+    "projectId": "atm-interface"
+  },
+  {
+    "slug": "spring-study",
+    "projectId": "spring-study"
+  },
+  {
+    "slug": "battery-study",
+    "projectId": "battery-study"
+  },
+  {
+    "slug": "robot-recycling",
+    "projectId": "robot-recycling"
+  },
+  {
+    "slug": "weather-expert",
+    "projectId": "weather-expert"
+  },
+  {
+    "slug": "sentiment-analysis",
+    "projectId": "sentiment-analysis"
+  },
+  {
+    "slug": "neural-classifiers",
+    "projectId": "neural-classifiers"
+  }
 ]

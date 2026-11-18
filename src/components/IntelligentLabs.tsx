@@ -10,7 +10,7 @@ export function WeatherLab({ engineering }: { engineering: boolean }) {
       <div className="demo-heading">
         <div>
           <span className="eyebrow">OFFLINE / RULE CONFIDENCE LAB</span>
-          <h3>Two rules. One hypothesis.</h3>
+          <h3>Weather certainty factors</h3>
         </div>
         <button
           className="button small ghost"
@@ -111,7 +111,7 @@ export function NeuralLab({ engineering }: { engineering: boolean }) {
       <div className="demo-heading">
         <div>
           <span className="eyebrow">ILLUSTRATIVE / AND PERCEPTRON</span>
-          <h3>A boundary you can see.</h3>
+          <h3>Perceptron decision boundary</h3>
         </div>
         <button
           className="button small ghost"

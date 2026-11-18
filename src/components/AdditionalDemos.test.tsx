@@ -1,26 +1,36 @@
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
-import { expect, it } from "vitest";
-import { HeartDemo, TrafficDemo, FloodDemo } from "./AdditionalDemos";
+import { render, screen, fireEvent, act } from "@testing-library/react";
+import { expect, it, vi } from "vitest";
+import HeartDemo from "./HeartDemo";
+import { TrafficDemo, FloodDemo } from "./AdditionalDemos";
 
-it("requires presence and finger contact before the illustrative capture, and resets", () => {
-  render(<HeartDemo engineering />);
-  expect(
-    screen.getByRole("button", { name: "Simulate capture" }),
-  ).toBeDisabled();
-  expect(
-    screen.getByRole("checkbox", { name: "Finger on sensor" }),
-  ).toBeDisabled();
-  fireEvent.click(screen.getByRole("checkbox", { name: "Visitor present" }));
-  fireEvent.click(screen.getByRole("checkbox", { name: "Finger on sensor" }));
-  fireEvent.click(screen.getByRole("button", { name: "Simulate capture" }));
-  expect(screen.getByText("Illustrative capture complete")).toBeInTheDocument();
-  fireEvent.click(screen.getByRole("button", { name: "Reset simulation" }));
-  expect(
-    screen.getByRole("checkbox", { name: "Visitor present" }),
-  ).not.toBeChecked();
-  expect(
-    screen.getByRole("button", { name: "Simulate capture" }),
-  ).toBeDisabled();
+it("captures only after finger contact and clears the reading on removal", () => {
+  vi.useFakeTimers();
+  try {
+    render(<HeartDemo engineering />);
+    expect(
+      screen.getByRole("button", { name: "Capture reading" }),
+    ).toBeDisabled();
+    fireEvent.change(screen.getByLabelText("Simulated heartbeat"), {
+      target: { value: "slow" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Place finger" }));
+    expect(
+      screen.getByRole("button", { name: "Capture reading" }),
+    ).toBeDisabled();
+    act(() => vi.advanceTimersByTime(650));
+    fireEvent.click(screen.getByRole("button", { name: "Capture reading" }));
+    expect(screen.getByRole("status")).toHaveTextContent("Reading captured");
+    expect(screen.getByRole("status")).toHaveTextContent("Bradycardia range");
+    fireEvent.click(screen.getByRole("button", { name: "Remove finger" }));
+    expect(screen.getByRole("status")).toHaveTextContent(
+      "Place a finger to begin",
+    );
+    expect(
+      screen.getByRole("button", { name: "Capture reading" }),
+    ).toBeDisabled();
+  } finally {
+    vi.useRealTimers();
+  }
 });
 it("never allows the pedestrian to cross while traffic has green or amber", () => {
   render(<TrafficDemo engineering />);

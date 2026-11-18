@@ -13,19 +13,6 @@ it("validates terminal actions and clears the session on reset", () => {
   fireEvent.click(screen.getByRole("button", { name: "Reset simulation" }));
   expect(screen.getByText("100.00")).toBeInTheDocument();
 });
-it("moves the path into and out of the illustrated obstacle", () => {
-  render(<ProjectWorkbench id="planting-trajectory" />);
-  fireEvent.change(screen.getByRole("slider", { name: /Path lift/ }), {
-    target: { value: "10" },
-  });
-  expect(screen.getByText(/Curve.*illustrated obstacle/)).toHaveTextContent(
-    "intersects",
-  );
-  fireEvent.click(screen.getByRole("button", { name: "Reset simulation" }));
-  expect(screen.getByText(/Curve.*illustrated obstacle/)).toHaveTextContent(
-    "clears",
-  );
-});
 it("restores the CAD groups and resets the exploded view", () => {
   render(<ProjectWorkbench id="trolley-cad" />);
   fireEvent.click(screen.getByRole("checkbox", { name: "Basket" }));

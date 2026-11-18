@@ -16,13 +16,13 @@ export type ProjectContext = {
 export const projectContext: Record<ProjectId, ProjectContext> = {
   ...advancedContext,
   "vehicle-velocity": {
-    setting: "Final-year computer-vision project",
+    setting: "Final-year project · USM mechatronics",
     background:
-      "A final-year project exploring vehicle velocity estimation with YOLO on Raspberry Pi 5. The portfolio brief supplies this context; the original report and footage have not yet been located.",
+      "A camera-based traffic-monitoring system built around a Raspberry Pi 5 and Hailo-8 accelerator. It combines YOLO vehicle detection, tracking and perspective mapping to estimate vehicle speed, with output presented through a web dashboard.",
     application:
-      "Potential application: understanding vehicle motion in recorded road scenes. No road deployment or calibrated performance is claimed.",
+      "Traffic observation and low-cost monitoring are the motivating applications. The final-year work investigated YOLOv8 and YOLO26, video processing and system validation.",
     evidence:
-      "Brief-based concept. Approved footage and technical source material are still pending.",
+      "Summary paraphrased from the final thesis abstract. The clip below is original recorded project output.",
     figures: [],
   },
   "smart-classroom": {
@@ -44,6 +44,13 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     evidence:
       "Report architecture and selected figures have been reviewed. The interactive waveform uses illustrative timings.",
     figures: [
+      {
+        file: "fan-oscilloscope.webp",
+        alt: "Oscilloscope display from the fan controller report appendix.",
+        caption:
+          "An original oscilloscope readout from fan-controller testing.",
+        source: "FPGA fan controller report, page 32",
+      },
       {
         file: "fan-control-diagram.webp",
         alt: "Report block diagram linking temperature sensing, comparators, a buffer, FPGA GPIO, and the motor circuit.",
@@ -88,8 +95,14 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     application:
       "Proposed setting: a self-service check-up station. This was an academic prototype; no clinical deployment, certification, or diagnostic accuracy is claimed.",
     evidence:
-      "The report supports the architecture. The browser demo illustrates presence/finger/display states and does not measure or interpret anyone’s health.",
+      "The report describes the sensor, processing and LCD architecture. The browser simplifies this to finger placement and a simulated capture.",
     figures: [
+      {
+        file: "heart-oscilloscope.webp",
+        alt: "Oscilloscope capture from the heartbeat monitor report.",
+        caption: "Original oscilloscope readout during sensor testing.",
+        source: "Heartbeat and SpO₂ report, page 47",
+      },
       {
         file: "heart-block-diagram.webp",
         alt: "Ultrasonic and heartbeat sensors connect to VisionFive processing, an 8051 microcontroller, and an LCD.",

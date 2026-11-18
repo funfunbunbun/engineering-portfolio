@@ -70,7 +70,7 @@ export default function Classroom({ engineering }: { engineering: boolean }) {
       <div className="demo-heading">
         <div>
           <span className="eyebrow">CLASSROOM / SENSOR LAB</span>
-          <h3>Make yourself at home.</h3>
+          <h3>Classroom lighting and fan control</h3>
         </div>
         <button
           className="button small ghost"
