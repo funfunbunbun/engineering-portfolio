@@ -1,3 +1,4 @@
+import ProjectMechanism from "./components/ProjectMechanism";
 import { projectYears, yearGroups } from "./data/projectYears";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -391,6 +392,7 @@ function DetailContent({ project }: { project: Project }) {
         Jump to interactive demo ↓
       </button>
       <ProjectBackground id={project.id} />
+      <ProjectMechanism id={project.id} />
       <div className="mode-bar">
         <div>
           <span className="eyebrow">Project demo</span>

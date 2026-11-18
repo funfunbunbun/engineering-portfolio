@@ -82,7 +82,8 @@
       "file": "assets/reviewed/heart-oscilloscope.webp",
       "kind": "image",
       "sha256": "f5c2df817040deab084c291fb9551b20f30f4c4b91b0ef141e6d5558344892ea",
-      "bytes": 216134
+      "bytes": 216134,
+      "historical": true
     },
     {
       "file": "assets/reviewed/vinay-tutoring-portrait.webp",
@@ -222,6 +223,42 @@
       "bytes": 241928,
       "sha256": "bc74e42c4d71362612db4fb79373bc16c6d113bf667c81ec6d2dc3d2f8156a2e",
       "historical": true
+    },
+    {
+      "file": "assets/reviewed/heart-prototype-board.webp",
+      "kind": "image",
+      "sha256": "44d44329bb190acbe8dfbcbfa4c06fbe230db0404d785794cab8da00ef8f5265",
+      "bytes": 126722
+    },
+    {
+      "file": "assets/reviewed/heart-lcd-states.webp",
+      "kind": "image",
+      "sha256": "b58783624c583787e1cbb955b1d62a8b4d8c689d8d7eedf2ce284a819191e83d",
+      "bytes": 33642
+    },
+    {
+      "file": "assets/reviewed/trolley-exploded-parts.webp",
+      "kind": "image",
+      "sha256": "c8b140c0ee15a4b25ec323d88b799f1a3ef728cf1886b0d33650a5baa6e759e5",
+      "bytes": 18128
+    },
+    {
+      "file": "assets/reviewed/trolley-bill-of-materials.webp",
+      "kind": "image",
+      "sha256": "4bf6b7d3f330a0abd83fdc6019626643cf190b9a46aae9ef618713b4d2d72173",
+      "bytes": 15512
+    },
+    {
+      "file": "assets/reviewed/trolley-physical-model.webp",
+      "kind": "image",
+      "sha256": "67a137f099145f53da2f25ea8d5045da2d0e1c9c22c12273a4cf3fe5f89cac81",
+      "bytes": 71916
+    },
+    {
+      "file": "assets/reviewed/cobot-pickup-photo.webp",
+      "kind": "image",
+      "sha256": "a2aa14f79520d13a02ed308d0e9dc559942fc5701a57fdb288148ceb729fcebe",
+      "bytes": 56806
     }
   ]
 }

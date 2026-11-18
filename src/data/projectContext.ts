@@ -26,14 +26,21 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     figures: [],
   },
   "smart-classroom": {
-    setting: "Academic IoT capstone concept",
+    setting: "USM EEM425 capstone project",
     background:
-      "A classroom is a useful setting for exploring how occupancy and environmental inputs can drive lighting and fan decisions. The portfolio brief lists this project as an academic capstone.",
+      "A smart classroom prototype using an ESP32, environmental and occupancy sensing, controlled lighting and ventilation, and RFID attendance/status functions. The report documents a servo-operated window and dashboard synchronization.",
     application:
-      "Intended setting: classroom comfort and room-resource control. The browser rules are teaching examples, with no live classroom connection.",
+      "Demonstrated through school outreach. The system explores room comfort, energy use and attendance/status monitoring.",
     evidence:
-      "Brief-based context. The original capstone source has not been reviewed.",
-    figures: [],
+      "Hardware and control descriptions are supported by the capstone final report. The browser is a simplified model; MQ-135 readings are not presented as calibrated CO₂ measurements.",
+    figures: [
+      {
+        file: "school-stem-demonstration.webp",
+        alt: "The smart classroom capstone demonstrated to school students.",
+        caption: "School demonstration of the smart classroom capstone.",
+        source: "User-supplied outreach photograph",
+      },
+    ],
   },
   "fpga-fan": {
     setting: "USM mechatronics laboratory project",
@@ -98,10 +105,19 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
       "The report describes the sensor, processing and LCD architecture. The browser simplifies this to finger placement and a simulated capture.",
     figures: [
       {
-        file: "heart-oscilloscope.webp",
-        alt: "Oscilloscope capture from the heartbeat monitor report.",
-        caption: "Original oscilloscope readout during sensor testing.",
-        source: "Heartbeat and SpO₂ report, page 47",
+        file: "heart-lcd-states.webp",
+        alt: "Four LCD emulator readouts showing finger detection and heart-rate range messages.",
+        caption:
+          "LCD emulator states used in the report: finger detected and low, high or normal BPM.",
+        source:
+          "Heartbeat and SpO₂ report, PDF page 44 · LCD emulator examples",
+      },
+      {
+        file: "heart-prototype-board.webp",
+        alt: "The RISC-V VisionFive 2 board and wired breadboard interface in the heartbeat monitor prototype.",
+        caption:
+          "VisionFive 2 board connected to the prototype interface circuitry.",
+        source: "Heartbeat and SpO₂ report, PDF page 42 · prototype photograph",
       },
       {
         file: "heart-block-diagram.webp",
@@ -160,6 +176,27 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     evidence:
       "The report supports the CAD workflow and assembly rendering. Manufacturing tolerances and structural performance are not verified.",
     figures: [
+      {
+        file: "trolley-physical-model.webp",
+        alt: "A photograph of the miniature trolley with a metal basket, frame, wheels and pink handle.",
+        caption:
+          "The physical miniature trolley used as the modelling reference.",
+        source:
+          "Miniature trolley CAD report, PDF page 46 · reference photograph",
+      },
+      {
+        file: "trolley-bill-of-materials.webp",
+        alt: "The trolley assembly bill of materials with item names and quantities.",
+        caption: "Bill of materials listing the assembly parts and quantities.",
+        source:
+          "Miniature trolley CAD report, PDF page 51 · final assembly drawing",
+      },
+      {
+        file: "trolley-exploded-parts.webp",
+        alt: "A CAD view showing the trolley basket, frame, handle, wheels and small parts separated before assembly.",
+        caption: "Separated components before assembly in SolidWorks.",
+        source: "Miniature trolley CAD report, PDF page 28 · assembly step 1",
+      },
       {
         file: "trolley-assembly.webp",
         alt: "Rendered CAD assembly of a miniature trolley with basket, handle, seat, frame, and wheels.",

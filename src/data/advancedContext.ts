@@ -17,6 +17,14 @@ export const advancedContext: Record<
       "Architecture and process diagrams are selected from the academic report. Hardware addresses, calibration details, controller projects, and motion-command source remain private.",
     figures: [
       {
+        file: "cobot-pickup-photo.webp",
+        alt: "Close view of the cobot gripper lifting an object at the recycling-cell sorting station.",
+        caption:
+          "The cobot gripper picking up an object beside the sorting bins.",
+        source:
+          "Robotics mini-project report · Figure 14, Pick-Up Non-Metal Objects",
+      },
+      {
         file: "robot-system-diagram.webp",
         alt: "Report block diagram connecting object sensing and MATLAB simulation to robot control, motion execution, and sorted output.",
         caption:

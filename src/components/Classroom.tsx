@@ -7,6 +7,7 @@ export default function Classroom({ engineering }: { engineering: boolean }) {
     "Simulation ready. Adjust a sensor to begin.",
   ]);
   const decisions = decideRoom(room);
+  const windowOpen = decisions.ventilation && room.occupancy > 0;
   function update(key: keyof Room, value: number) {
     const next = { ...room, [key]: value };
     const before = decideRoom(room);
@@ -58,8 +59,8 @@ export default function Classroom({ engineering }: { engineering: boolean }) {
     },
     {
       key: "co2",
-      label: "Carbon dioxide",
-      unit: "ppm",
+      label: "Air quality",
+      unit: "demo units",
       min: 400,
       max: 2000,
       step: 50,
@@ -92,10 +93,20 @@ export default function Classroom({ engineering }: { engineering: boolean }) {
           }
         >
           <div className={`ceiling-light ${decisions.lights ? "on" : ""}`} />
-          <div className="room-window">
+          <div
+            className={`room-window ${windowOpen ? "window-open" : ""}`}
+            aria-label={
+              windowOpen
+                ? "Classroom window open"
+                : "Classroom window closed"
+            }
+          >
             <span />
             <span />
           </div>
+          <span className="window-state">
+            Window {windowOpen ? "open · ventilating" : "closed"}
+          </span>
           <div className="room-board">
             VM <span>LEARNING LAB</span>
           </div>
@@ -180,10 +191,12 @@ export default function Classroom({ engineering }: { engineering: boolean }) {
               <br />
               lights = occupied AND light &lt; 300 lux
               <br />
-              ventilation alert = CO₂ &gt; 1,000 ppm
+              air-quality alert = demo input &gt; 1,000
             </code>
             <p>
-              Thresholds are educational examples. The alert remains active in
+              The original project uses an MQ-135 gas/air-quality sensor; this
+              scale is illustrative, not calibrated CO₂ ppm. The window opens
+              above 1,000 demo units when occupied. The alert remains active in
               an empty room if CO₂ is high.
             </p>
           </div>

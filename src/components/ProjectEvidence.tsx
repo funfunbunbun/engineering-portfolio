@@ -40,7 +40,7 @@ export default function ProjectEvidence({ id }: { id: ProjectId }) {
     >
       <div className="section-heading">
         <div>
-          <span className="eyebrow">From the project report</span>
+          <span className="eyebrow">Project evidence</span>
           <h2>Project figures</h2>
         </div>
         <p>

@@ -1,5 +1,7 @@
+import FloodMotion from "./FloodMotion";
+import TrafficMotion from "./TrafficMotion";
 import HeartDemo from "./HeartDemo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ProjectId } from "../data/projects";
 
 const crossingStates = [
@@ -36,6 +38,14 @@ const crossingStates = [
 export function TrafficDemo({ engineering }: { engineering: boolean }) {
   const [phase, setPhase] = useState(0);
   const state = crossingStates[phase];
+  useEffect(() => {
+    if (phase === 0) return;
+    const timer = setTimeout(
+      () => setPhase((p) => (p + 1) % crossingStates.length),
+      phase === 3 ? 5000 : 2000,
+    );
+    return () => clearTimeout(timer);
+  }, [phase]);
   return (
     <div className="extra-demo">
       <div className="demo-heading">
@@ -47,6 +57,10 @@ export function TrafficDemo({ engineering }: { engineering: boolean }) {
           Reset simulation
         </button>
       </div>
+      <TrafficMotion
+        traffic={state.traffic}
+        crossing={state.pedestrian === "Cross"}
+      />
       <div className="crossing-scene">
         <div
           className="traffic-unit"
@@ -114,73 +128,7 @@ export function TrafficDemo({ engineering }: { engineering: boolean }) {
   );
 }
 export function FloodDemo({ engineering }: { engineering: boolean }) {
-  const [level, setLevel] = useState(30);
-  const pumping = level >= 60;
-  return (
-    <div className="extra-demo">
-      <div className="demo-heading">
-        <div>
-          <span className="eyebrow">Flood-control demo</span>
-          <h3>Water level and pump control</h3>
-        </div>
-        <button className="button small ghost" onClick={() => setLevel(30)}>
-          Reset simulation
-        </button>
-      </div>
-      <div className="flood-layout">
-        <div
-          className="tank"
-          aria-label={`Illustrative water level ${level} percent`}
-        >
-          <div className="tank-water" style={{ height: `${level}%` }} />
-          <div className="tank-threshold" />
-          <span className="tank-readout">{level}%</span>
-          <span className="tank-threshold-label">MODEL THRESHOLD / 60%</span>
-        </div>
-        <div className="flood-controls">
-          <label htmlFor="water-level">
-            Water level <output htmlFor="water-level">{level}%</output>
-          </label>
-          <input
-            id="water-level"
-            type="range"
-            min="0"
-            max="100"
-            value={level}
-            onChange={(e) => setLevel(Number(e.target.value))}
-          />
-          <div className={`pump-status ${pumping ? "on" : ""}`} role="status">
-            <i />
-            {pumping ? "Pump on" : "Pump standby"}
-          </div>
-          <p>
-            The slider sets the level directly. Pump status illustrates the
-            decision; it does not simulate a change in actual water volume.
-          </p>
-        </div>
-      </div>
-      {engineering && (
-        <div className="engineering-panel">
-          <div>
-            <h4>Illustrative browser rule</h4>
-            <code>pump = ON when level ≥ 60%</code>
-            <p>
-              This simple threshold differs from the report’s analog sensing and
-              timer-based drive. It is not a reconstruction of the original
-              circuit.
-            </p>
-          </div>
-          <div>
-            <h4>Original project context</h4>
-            <p>
-              The university circuit combined conductive water sensing and an
-              NE555-based control stage for an underground drainage concept.
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+  return <FloodMotion />;
 }
 export default function AdditionalDemo({
   id,

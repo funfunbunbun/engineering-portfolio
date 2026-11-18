@@ -1,5 +1,6 @@
+import SpeedCrossing from "./SpeedCrossing";
 import NanoDemo from "./NanoDemo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ProjectId } from "../data/projects";
 import {
   springExtension,
@@ -357,6 +358,18 @@ function Terminal() {
 function Robot() {
   const [state, setState] = useState({ phase: 0, metal: 0, other: 0 });
   const [category, setCategory] = useState("metal");
+  const [activeCategory, setActiveCategory] = useState("metal");
+  const [running, setRunning] = useState(false);
+  function advance() {
+    const material = state.phase === 0 ? category : activeCategory;
+    if (state.phase === 0) setActiveCategory(category);
+    setState((old) => robotStep(old, material === "metal"));
+  }
+  useEffect(() => {
+    if (!running) return;
+    const timer = setTimeout(advance, 850);
+    return () => clearTimeout(timer);
+  }, [running, state.phase, category, activeCategory]);
   const steps = [
     "Ready",
     "Detect object",
@@ -366,16 +379,18 @@ function Robot() {
     "Return",
   ];
   const moving = state.phase >= 3 && state.phase <= 4;
-  const target = category === "metal" ? 270 : 320;
+  const target = activeCategory === "metal" ? 270 : 320;
   return (
     <Bench
       title="Robot sorting sequence"
       label="ROBOT SEQUENCE"
       reset={() => {
+        setRunning(false);
+        setActiveCategory("metal");
         setState({ phase: 0, metal: 0, other: 0 });
         setCategory("metal");
       }}
-      note="Manual, conceptual sequence with symbolic positions. No physical robot model, calibrated poses, controller commands, or real safety logic is reproduced."
+      note="Looping conceptual sequence with symbolic positions. No physical robot model, calibrated poses, controller commands, or real safety logic is reproduced."
     >
       <div className="bench-layout">
         <div className="bench-graphic">
@@ -424,7 +439,7 @@ function Robot() {
           <select
             id="robot-category"
             value={category}
-            disabled={state.phase !== 0}
+
             onChange={(event) => setCategory(event.target.value)}
           >
             <option value="metal">Metal</option>
@@ -432,12 +447,23 @@ function Robot() {
           </select>
           <button
             className="button small"
-            onClick={() =>
-              setState((old) => robotStep(old, category === "metal"))
-            }
+            onClick={() => {
+              setRunning(false);
+              advance();
+            }}
           >
             Next robot step
           </button>
+          <button
+            className="button small ghost"
+            onClick={() => setRunning((v) => !v)}
+          >
+            {running ? "Pause robot" : "Run robot loop"}
+          </button>
+          <p>
+            Current item: {activeCategory}. Next item: {category}. A new choice
+            takes effect at the next pickup.
+          </p>
           <p className="bench-help" role="status">
             {steps[state.phase]}
           </p>
@@ -587,7 +613,7 @@ export default function ProjectWorkbench({ id }: { id: ProjectId }) {
     case "sentiment-analysis":
       return <Sentiment />;
     case "vehicle-velocity":
-      return <Velocity />;
+      return <SpeedCrossing />;
     default:
       return null;
   }
