@@ -220,7 +220,8 @@
       "file": "assets/reviewed/team-gathering.webp",
       "kind": "image",
       "bytes": 241928,
-      "sha256": "bc74e42c4d71362612db4fb79373bc16c6d113bf667c81ec6d2dc3d2f8156a2e"
+      "sha256": "bc74e42c4d71362612db4fb79373bc16c6d113bf667c81ec6d2dc3d2f8156a2e",
+      "historical": true
     }
   ]
 }

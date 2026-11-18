@@ -1,4 +1,12 @@
-export type PhotoTopic = "training" | "clubs" | "events" | "activities" | "capstone" | "proton" | "ppsl";
+export type PhotoTopic =
+  | "training"
+  | "clubs"
+  | "events"
+  | "activities"
+  | "capstone"
+  | "proton"
+  | "ppsl"
+  | "deans";
 export type AboutPhoto = {
   file: string;
   alt: string;
@@ -37,6 +45,7 @@ export const aboutPhotos: AboutPhoto[] = [
     alt: "Vinay receiving a Dean’s List certificate at an award ceremony.",
     caption: "Receiving a Dean’s List award.",
     group: "achievement",
+    topic: "deans",
   },
   {
     file: "intel-training.webp",
@@ -76,7 +85,7 @@ export const aboutPhotos: AboutPhoto[] = [
   {
     file: "career-fair-committee.webp",
     alt: "The Career Fair committee in red event shirts.",
-    caption: "Career Fair committee.",
+    caption: "Career Fair, career talk team.",
     group: "experience",
     topic: "events",
   },
@@ -110,23 +119,16 @@ export const aboutPhotos: AboutPhoto[] = [
   },
   {
     file: "deepavali-celebration.webp",
-    alt: "Friends gathered outside a temple during Deepavali celebrations.",
-    caption: "Deepavali celebrations with friends.",
+    alt: "The Kaalvi Yaathirai group outside a temple.",
+    caption: "Kaalvi Yaathirai.",
     group: "experience",
     topic: "activities",
   },
   {
     file: "deepavali-university.webp",
     alt: "A university group photo during Deepavali activities.",
-    caption: "Deepavali activities at university.",
+    caption: "Deepavali 2023.",
     group: "experience",
     topic: "activities",
-  },
-  {
-    file: "team-gathering.webp",
-    alt: "Vinay at a group dinner.",
-    caption: "PROTON team dinner.",
-    group: "experience",
-    topic: "proton",
   },
 ];

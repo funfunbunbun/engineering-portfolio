@@ -78,7 +78,20 @@ function Header() {
   );
 }
 
-function Footer(){return <footer className="footer"><a className="footer-email" href={"mailto:"+profile.email}>{profile.email}<Arrow diagonal/></a><div className="footer-bottom"><AboutLinks/><Link to="/projects">Projects ↑</Link></div></footer>;}
+function Footer() {
+  return (
+    <footer className="footer">
+      <a className="footer-email" href={"mailto:" + profile.email}>
+        {profile.email}
+        <Arrow diagonal />
+      </a>
+      <div className="footer-bottom">
+        <AboutLinks />
+        <Link to="/projects">Projects ↑</Link>
+      </div>
+    </footer>
+  );
+}
 
 function ProjectCards({ all = false }: { all?: boolean }) {
   const [category, setCategory] = useState("All projects");
@@ -547,14 +560,6 @@ function About() {
         <h2>Achievements</h2>
         <div className="about-achievement-grid">
           <article>
-            <span className="achievement-number">7</span>
-            <h3>Consecutive Dean’s Lists</h3>
-            <p>
-              I graduated from Universiti Sains Malaysia with first-class
-              honours in mechatronics.
-            </p>
-          </article>
-          <article>
             <span className="achievement-number">3rd</span>
             <h3>PROTON Business Case Study Challenge</h3>
             <p>
@@ -564,6 +569,18 @@ function About() {
           </article>
         </div>
         <PhotoGallery group="achievement" />
+        <section className="deans-section">
+          <h2>Dean’s List</h2>{" "}
+          <article>
+            <span className="achievement-number">7</span>
+            <h3>Consecutive Dean’s Lists</h3>
+            <p>
+              I graduated from Universiti Sains Malaysia with first-class
+              honours in mechatronics.
+            </p>
+          </article>
+          <PhotoGallery group="achievement" topic="deans" />
+        </section>
       </section>
       <Experience embedded />
       <Teaching embedded />

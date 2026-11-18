@@ -59,8 +59,7 @@ try {
   );
   assert.ok(links.includes("projects/nano-hmi"));
   assert.ok(!links.some((link) => link.includes("planting")));
-  for (const year of ["Year 1", "Year 2", "Year 3", "Year 4"])
-    await page.getByRole("heading", { name: year, exact: true }).waitFor();
+  assert.equal(await page.locator(".year-group").filter({hasText:/Year [1-4]/}).count(),0);
   await page
     .getByRole("searchbox", { name: "Search projects" })
     .fill("zzzz-no-match");

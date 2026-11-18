@@ -24,7 +24,11 @@ export function PhotoGallery({
   topic?: AboutPhoto["topic"];
 }) {
   const photos = aboutPhotos.filter(
-    (photo) => photo.group === group && (!topic || photo.topic === topic),
+    (photo) =>
+      photo.group === group &&
+      (topic
+        ? photo.topic === topic
+        : photo.group !== "achievement" || photo.topic !== "deans"),
   );
   if (!photos.length) return null;
   return (
@@ -112,7 +116,17 @@ export default function Experience({
         </Link>
       )}
       {embedded ? <h2>Experience</h2> : <h1>Experience</h1>}
-      <div className="experience-timeline"><article><span className="timeline-kind">Capstone</span><div><h3>Smart classroom school outreach</h3><p>We demonstrated our smart classroom capstone project at a school.</p><PhotoGallery group="experience" topic="capstone" /></div></article>
+      <div className="experience-timeline">
+        <article>
+          <span className="timeline-kind">Capstone</span>
+          <div>
+            <h3>Smart classroom school outreach</h3>
+            <p>
+              We demonstrated our smart classroom capstone project at a school.
+            </p>
+            <PhotoGallery group="experience" topic="capstone" />
+          </div>
+        </article>
         <article>
           <span className="timeline-kind">Industrial training</span>
           <div>
@@ -139,7 +153,10 @@ export default function Experience({
               secretary for one year. My work included coordinating activities,
               organising events and supporting the club’s administration.
             </p>
-            <h4>CETS 1.0 and 2.0</h4><PhotoGallery group="experience" topic="clubs" /><h4>Deepavali and school outreach</h4><PhotoGallery group="experience" topic="activities" />
+            <h4>CETS 1.0 and 2.0</h4>
+            <PhotoGallery group="experience" topic="clubs" />
+            <h4>Deepavali and school outreach</h4>
+            <PhotoGallery group="experience" topic="activities" />
           </div>
         </article>
         <article>
@@ -157,14 +174,13 @@ export default function Experience({
         <article>
           <span className="timeline-kind">Student activities</span>
           <div>
-            <h3>PPSL and the PROTON team</h3>
+            <h3>PPSL orientation committee</h3>
             <p>
-              I took part in PPSL for the 2023 intake. Through EICC, I also joined Deepavali
-              activities and Kaalvi Yaathirai. These gave me opportunities to
-              work with other students and contribute to the university
-              community.
+              I was part of PPSL, the orientation committee for the 2023 intake.
+              We helped welcome new students and supported their introduction to
+              university life.
             </p>
-            <PhotoGallery group="experience" topic="ppsl" /><h4>PROTON team</h4><PhotoGallery group="experience" topic="proton" />
+            <PhotoGallery group="experience" topic="ppsl" />
           </div>
         </article>
       </div>
