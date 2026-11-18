@@ -152,8 +152,15 @@ function ProjectCards({ all = false }: { all?: boolean }) {
         {filtered.length} projects shown
       </p>
       {(all ? yearGroups : ["Selected projects"]).map((year) => (
-        <section className="project-year-group" key={year}>
-          {all && filtered.some((p) => projectYears[p.id] === year) && (
+        <section
+          className={
+            year
+              ? "project-year-group"
+              : "project-year-group ungrouped-projects"
+          }
+          key={year}
+        >
+          {all && year && filtered.some((p) => projectYears[p.id] === year) && (
             <h2 className="year-group">{year}</h2>
           )}
           <div className="project-grid">
@@ -167,7 +174,9 @@ function ProjectCards({ all = false }: { all?: boolean }) {
                 key={p.id}
               >
                 <div className="card-image">
-                  <span className="card-index">{projectYears[p.id]}</span>
+                  {projectYears[p.id] && (
+                    <span className="card-index">{projectYears[p.id]}</span>
+                  )}
                   <span className="card-category">{p.category}</span>
                   <ProjectVisual id={p.id} />
                   <span className="card-open">
@@ -175,7 +184,9 @@ function ProjectCards({ all = false }: { all?: boolean }) {
                   </span>
                 </div>
                 <div className="card-copy">
-                  <span className="project-year">{projectYears[p.id]}</span>
+                  {projectYears[p.id] && (
+                    <span className="project-year">{projectYears[p.id]}</span>
+                  )}
                   <div className="card-meta">
                     <span>{p.subtitle}</span>
                     <span className="status-label">
@@ -356,7 +367,8 @@ function DetailContent({ project }: { project: Project }) {
       <div className="detail-heading">
         <div>
           <span className="eyebrow">
-            {projectYears[project.id]} / {project.category}
+            {projectYears[project.id] && `${projectYears[project.id]} / `}
+            {project.category}
           </span>
           <h1>{project.title}</h1>
           <p>{project.subtitle}</p>

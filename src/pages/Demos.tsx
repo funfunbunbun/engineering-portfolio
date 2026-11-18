@@ -23,7 +23,9 @@ export default function Demos() {
               <span className="eyebrow">{project.category}</span>
             </div>
             <section>
-              <span className="project-year">{projectYears[project.id]}</span>
+              {projectYears[project.id] && (
+                <span className="project-year">{projectYears[project.id]}</span>
+              )}
               <h2>{project.title}</h2>
               <p>
                 {project.id === "vehicle-velocity"

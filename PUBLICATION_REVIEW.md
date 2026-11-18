@@ -2,7 +2,7 @@
 
 The portfolio displays the name **Vinay**, the approved Outlook address, LinkedIn profile and YouTube channel. It includes first-class graduation, seven consecutive Dean’s Lists, the confirmed third-place PROTON team contribution, and the user’s stated club, event, tutoring and training experience.
 
-There are 16 project pages. University work is grouped by year; the spring and battery studies are pre-university, and the Nano HMI is independent. The paddy trajectory page and current public image were removed. Original private repositories are not published.
+There are 16 project pages. University work is grouped by year; the spring and battery studies are listed without a year or pre-university label, and the Nano HMI is under Freelance. The paddy trajectory page and current public image were removed. Original private repositories are not published.
 
 The selected FYP clip is silent H.264, trimmed from the user’s annotated recording with its diagnostic header removed. It shows recorded detections and speed estimates. Document images are metadata-free WebP copies; selected handwritten teaching explanations exclude textbook question panels, student work and contact information. The portrait was extracted from the user’s tutoring document. New photos attached only in chat still need accessible original files and are not included.
 

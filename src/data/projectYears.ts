@@ -4,8 +4,8 @@ export const projectYears: Record<ProjectId, string> = {
   "flood-control": "Year 1",
   "trolley-cad": "Year 1",
   "atm-interface": "Year 1",
-  "spring-study": "Pre-university",
-  "battery-study": "Pre-university",
+  "spring-study": "",
+  "battery-study": "",
   "fpga-fan": "Year 2",
   "plc-sorting": "Year 2",
   "heart-monitor": "Year 2",
@@ -15,13 +15,13 @@ export const projectYears: Record<ProjectId, string> = {
   "sentiment-analysis": "Year 3",
   "neural-classifiers": "Year 3",
   "vehicle-velocity": "Year 4",
-  "nano-hmi": "Independent project",
+  "nano-hmi": "Freelance",
 };
 export const yearGroups = [
   "Year 1",
   "Year 2",
   "Year 3",
   "Year 4",
-  "Pre-university",
-  "Independent project",
+  "",
+  "Freelance",
 ];

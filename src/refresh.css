@@ -282,6 +282,11 @@ body {
   color: var(--muted);
   margin-bottom: 12px;
 }
+.ungrouped-projects:has(.project-card) {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
 .native-model {
   margin-top: 32px;
   border-top: 1px solid var(--line);

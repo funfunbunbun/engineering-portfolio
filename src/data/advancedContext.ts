@@ -32,7 +32,7 @@ export const advancedContext: Record<
     ],
   },
   "nano-hmi": {
-    setting: "Independent embedded-interface project",
+    setting: "Freelance embedded-interface project",
     background:
       "A touchscreen-style desktop HMI built with Tkinter communicates with an Arduino Nano over USB serial. The host buffers typed values, sends confirmed entries and reports the device response.",
     application:

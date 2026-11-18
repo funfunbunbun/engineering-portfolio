@@ -186,7 +186,7 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     ],
   },
   "spring-study": {
-    setting: "Pre-university physics investigation · 2020/21",
+    setting: "Physics investigation",
     background:
       "A comparative investigation of spring deformation using different materials. Applied load and extension were used to discuss elastic behavior and Hooke’s law.",
     application:
@@ -196,7 +196,7 @@ export const projectContext: Record<ProjectId, ProjectContext> = {
     figures: [],
   },
   "battery-study": {
-    setting: "Pre-university chemistry investigation",
+    setting: "Chemistry investigation",
     background:
       "An investigation of an aluminium–alkaline electrochemical cell and how electrolyte conditions relate to electrical output.",
     application:

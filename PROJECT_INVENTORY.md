@@ -13,9 +13,9 @@ Current portfolio: 16 project pages. The paddy trajectory project has been remov
 | Flood detection and pump control | Year 1 |
 | Miniature trolley CAD | Year 1 |
 | C++ ATM interface | Year 1 |
-| Spring deformation study | Pre-university |
-| Aluminium–alkaline battery | Pre-university |
-| Arduino Nano touchscreen HMI | Independent project |
+| Spring deformation study | — |
+| Aluminium–alkaline battery | — |
+| Arduino Nano touchscreen HMI | Freelance |
 | Robotic recycling cell | Year 3 |
 | Weather expert system | Year 3 |
 | Sentiment analysis | Year 3 |
