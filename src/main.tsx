@@ -19,3 +19,4 @@ import "./refresh.css";
 import "./motion.css";
 import "./review.css";
 import "./showcase.css";
+import "./polish.css";

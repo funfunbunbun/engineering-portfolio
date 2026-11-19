@@ -3,6 +3,7 @@ import { projectContext } from "../data/projectContext";
 import { projectPurpose } from "../data/projectPurpose";
 import { projectRecordings } from "../data/projectRecordings";
 import { projects, type ProjectId } from "../data/projects";
+import Icon from "./Icon";
 
 export default function ProjectShowcase({ id }: { id: ProjectId }) {
   const context = projectContext[id];
@@ -40,9 +41,9 @@ export default function ProjectShowcase({ id }: { id: ProjectId }) {
                 <source src={asset(current.video)} type="video/mp4" />
               </video>
             ) : (
-              <button className="showcase-enlarge" onClick={() => setEnlarged(true)} aria-label={`Enlarge: ${caption}`}>
+              <button className="showcase-enlarge" onClick={() => setEnlarged(true)} aria-label={`Enlarge: ${caption}`} title="Enlarge image">
                 <img src={imageSrc} alt={current?.alt ?? `${project.title}: illustrated project workflow`} fetchPriority="high" style={current?.image === "vehicle-roadside-deployment.webp" ? { objectPosition: "50% 0%" } : undefined} />
-                <span>Enlarge image ↗</span>
+                <span className="enlarge-badge" aria-hidden="true"><Icon name="expand" /></span>
               </button>
             )}
             {media.length > 1 && (
@@ -78,7 +79,7 @@ export default function ProjectShowcase({ id }: { id: ProjectId }) {
       </aside>
       {enlarged && (
         <dialog ref={dialog} className="figure-dialog" aria-label="Enlarged project figure" onCancel={() => setEnlarged(false)}>
-          <button className="button small" autoFocus onClick={() => { dialog.current?.close(); setEnlarged(false); }}>Close figure ×</button>
+          <button className="figure-close" aria-label="Close figure" title="Close figure" autoFocus onClick={() => { dialog.current?.close(); setEnlarged(false); }}><Icon name="close" /></button>
           <img src={imageSrc} alt={current?.alt ?? `${project.title}: illustrated workflow`} />
           <p>{caption}</p>
         </dialog>

@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
 import { Arrow } from "../components/Visual";
+import Icon from "../components/Icon";
 import profile from "../data/profile.json";
 import { aboutPhotos, type AboutPhoto } from "../data/aboutMedia";
 
 export function AboutLinks() {
   return (
     <div className="about-socials">
-      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
-        LinkedIn ↗
+      <a href={profile.linkedin} className="social-link" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+        <Icon name="linkedin" />
+        <span className="icon-tooltip" aria-hidden="true">LinkedIn</span>
       </a>
-      <a href={profile.youtube} target="_blank" rel="noopener noreferrer">
-        YouTube ↗
+      <a href={profile.youtube} className="social-link" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer">
+        <Icon name="youtube" />
+        <span className="icon-tooltip" aria-hidden="true">YouTube</span>
       </a>
     </div>
   );

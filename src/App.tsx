@@ -545,22 +545,7 @@ function Contact() {
             ? "Email address copied to your clipboard."
             : "Your mail app handles the message. This website does not collect or store it."}
       </p>
-      <a
-        className="text-link linkedin-contact"
-        href={profile.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        LinkedIn <Arrow diagonal />
-      </a>
-      <a
-        className="text-link linkedin-contact"
-        href={profile.youtube}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        YouTube <Arrow diagonal />
-      </a>
+      <AboutLinks />
       <div className="contact-signoff">
         <span className="brand-mark">
           V<span>↗</span>

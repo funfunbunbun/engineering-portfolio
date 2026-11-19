@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Icon from "./Icon";
 export default function SpeedCrossing() {
   const [speed, setSpeed] = useState(36),
     [distance, setDistance] = useState(10),
@@ -98,6 +99,7 @@ export default function SpeedCrossing() {
           />
         </label>
         <button className="button small" onClick={() => setRunning((v) => !v)}>
+          <Icon name={running ? "pause" : "play"} />
           {running ? "Pause vehicle" : "Run vehicle"}
         </button>
         <button
@@ -107,6 +109,7 @@ export default function SpeedCrossing() {
             setElapsed(0);
           }}
         >
+          <Icon name="reset" />
           Reset vehicle
         </button>
       </div>
@@ -127,7 +130,7 @@ export default function SpeedCrossing() {
       <code>speed (km/h) = distance (m) ÷ crossing time (s) × 3.6</code>
       <p className="muted">
         Illustrative animation with chosen distance and speed, separate from the
-        recording below. A real camera needs road-plane calibration; screen
+        project recording. A real camera needs road-plane calibration; screen
         pixels alone are not metres. YOLO supplies detections, while tracking
         and geometry provide the motion estimate.
       </p>
